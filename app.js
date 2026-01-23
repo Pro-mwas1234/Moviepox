@@ -1,7 +1,7 @@
 class App {
     async init() {
         try {
-            console.log('🎬 Initializing Equanta...');
+            console.log('🎬 Initializing Moviepox...');
 
             await window.loadConfig();
             const apiInit = await window.tmdbAPI.initialize();
@@ -18,7 +18,7 @@ class App {
 
             await this.loadAllContent();
 
-            console.log('✅ Equanta ready!');
+            console.log('✅ moviepox ready!');
         } catch (error) {
             console.error('Init error:', error);
             alert('Initialization failed. Please run via a local server (not file://)');
