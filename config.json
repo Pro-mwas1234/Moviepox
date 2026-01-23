@@ -40,7 +40,7 @@
     }
       {
       "id": 6,
-      "name": "Server 6 - Vidsrc",
+      "name": "Server 6 -movieapi",
       "movie_url": "https://moviesapi.club/movie/",
       "tv_url": "https://moviesapi.club/tv",
       "tv_format": "{url}{tmdb_id}/{season}/{episode}"
