@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Equanta - Stream Movies & TV Shows</title>
+<!-- Primary SEO -->
+<title>Equanta — Stream Movies & TV Shows</title>
+<meta name="description" content="Equanta is a fast, responsive Netflix-style site with trending movies, TV series, anime, and regional picks. Play instantly with multiple servers.">
+<link rel="canonical" href="https://moviefix.run.place/">
+
+<!-- Open Graph (Facebook, LinkedIn, etc.) -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://moviefix.run.place/">
+<meta property="og:title" content="Equanta — Stream Movies & TV Shows">
+<meta property="og:description" content="embed streaming with trending, regional, anime, and multi-server playback.">
+<meta property="og:image" content="https://moviefix.run.place/share.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Equanta — Stream Movies & TV Shows">
+<meta name="twitter:description" content="embed streaming UI with trending, regional, anime, and multi-server playback.">
+<meta name="twitter:image" content="https://moviefix.run.place/share.png">
+    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="responsive.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <h1>EQUANTA</h1>
+            </div>
+            <div class="nav-search">
+                <input type="text" id="searchInput" placeholder="Search movies, series, anime...">
+                <div id="searchDropdown" class="search-dropdown"></div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main id="mainContent">
+        <!-- Hero Banner -->
+        <div id="heroBanner" class="hero-banner"></div>
+
+        <!-- Trending Movies -->
+        <div class="content-section">
+            <div class="section-header">
+                <h2 class="section-title">Trending Movies</h2>
+            </div>
+            <div class="slider-container">
+                <button class="slider-btn slider-btn-left" data-slider="trendingMovies">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="15 18 9 12 15 6"></polyline>
+                    </svg>
+                </button>
+                <div id="trendingMovies" class="content-slider"></div>
+                <button class="slider-btn slider-btn-right" data-slider="trendingMovies">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="9 18 15 12 9 6"></polyline>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Trending TV Series -->
+        <div class="content-section">
+            <div class="section-header">
+                <h2 class="section-title">Trending TV Series</h2>
+            </div>
+            <div class="slider-container">
+                <button class="slider-btn slider-btn-left" data-slider="trendingSeries">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="15 18 9 12 15 6"></polyline>
+                    </svg>
+                </button>
+                <div id="trendingSeries" class="content-slider"></div>
+                <button class="slider-btn slider-btn-right" data-slider="trendingSeries">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="9 18 15 12 9 6"></polyline>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Top Movies in Your Area -->
+        <div class="content-section">
+            <div class="section-header">
+                <h2 class="section-title" id="regionalTitle">Top Movies in Your Area</h2>
+            </div>
+            <div class="slider-container">
+                <button class="slider-btn slider-btn-left" data-slider="regionalMovies">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="15 18 9 12 15 6"></polyline>
+                    </svg>
+                </button>
+                <div id="regionalMovies" class="content-slider"></div>
+                <button class="slider-btn slider-btn-right" data-slider="regionalMovies">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="9 18 15 12 9 6"></polyline>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Anime Section -->
+        <div class="content-section">
+            <div class="section-header">
+                <h2 class="section-title">Popular Anime</h2>
+            </div>
+            <div class="slider-container">
+                <button class="slider-btn slider-btn-left" data-slider="animeContent">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="15 18 9 12 15 6"></polyline>
+                    </svg>
+                </button>
+                <div id="animeContent" class="content-slider"></div>
+                <button class="slider-btn slider-btn-right" data-slider="animeContent">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="9 18 15 12 9 6"></polyline>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Hollywood Section -->
+        <div class="content-section">
+            <div class="section-header">
+                <h2 class="section-title">Hollywood Blockbusters</h2>
+            </div>
+            <div class="slider-container">
+                <button class="slider-btn slider-btn-left" data-slider="hollywoodContent">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="15 18 9 12 15 6"></polyline>
+                    </svg>
+                </button>
+                <div id="hollywoodContent" class="content-slider"></div>
+                <button class="slider-btn slider-btn-right" data-slider="hollywoodContent">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="9 18 15 12 9 6"></polyline>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Bollywood Section -->
+        <div class="content-section">
+            <div class="section-header">
+                <h2 class="section-title">Bollywood Movies</h2>
+            </div>
+            <div class="slider-container">
+                <button class="slider-btn slider-btn-left" data-slider="bollywoodContent">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="15 18 9 12 15 6"></polyline>
+                    </svg>
+                </button>
+                <div id="bollywoodContent" class="content-slider"></div>
+                <button class="slider-btn slider-btn-right" data-slider="bollywoodContent">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="9 18 15 12 9 6"></polyline>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Tollywood Section -->
+        <div class="content-section">
+            <div class="section-header">
+                <h2 class="section-title">Tollywood Movies</h2>
+            </div>
+            <div class="slider-container">
+                <button class="slider-btn slider-btn-left" data-slider="tollywoodContent">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="15 18 9 12 15 6"></polyline>
+                    </svg>
+                </button>
+                <div id="tollywoodContent" class="content-slider"></div>
+                <button class="slider-btn slider-btn-right" data-slider="tollywoodContent">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="9 18 15 12 9 6"></polyline>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <!-- Movie/Series Detail Modal -->
+    <div id="detailModal" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" id="closeModal">&times;</button>
+            <div id="detailContent"></div>
+        </div>
+    </div>
+
+    <!-- Video Player Modal -->
+    <div id="playerModal" class="player-modal">
+        <div class="player-container">
+            <button class="player-close" id="closePlayer">&times;</button>
+            <div class="player-wrapper">
+                <iframe id="videoPlayer" allowfullscreen></iframe>
+            </div>
+            <div class="player-controls">
+                
+                <!-- TV Show Season/Episode Selector -->
+                <div id="tvControls" class="tv-controls" style="display: none;">
+                    <div class="control-group">
+                        <label>Season:</label>
+                        <select id="seasonSelect"></select>
+                    </div>
+                    <div class="control-group">
+                        <label>Episode:</label>
+                        <select id="episodeSelect"></select>
+                    </div>
+                </div>
+
+                <!-- Server Selector -->
+                <div class="server-selector">
+                    <label>Select Server:</label>
+                    <select id="serverSelect"></select>
+                </div>
+
+                <!-- Download Button -->
+                <button id="shareBtn" class="btn btn-secondary" title="Share this link">
+  📤 Share
+</button>
+                <button id="downloadBtn" class="download-btn">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                        <polyline points="7 10 12 15 17 10"></polyline>
+                        <line x1="12" y1="15" x2="12" y2="3"></line>
+                    </svg>
+                    Download
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="https://github.com/Rishu-xd/Equanta.git">Source Code</a>
+                <a href="privacy policy">Privacy Policy</a>
+                <a href="terms">Terms & Conditions</a>
+            </div>
+            <p class="footer-copyright">&copy; 2025 Equanta. All rights reserved.</p>
+            <p class="footer-disclaimer">Educational project. All content belongs to respective owners.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="config.js"></script>
+    <script src="api.js"></script>
+    <script src="ui.js"></script>
+    <script src="player.js"></script>
+    <script src="app.js"></script>
+     <script src="shareRouter.js"></script>
+  <script src="player-updates.js"></script>
+     <!-- Initialize router on startup -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      if (window.ShareRouter) {
+        window.ShareRouter.init();
+      }
+    });
+</body>
+</html>
