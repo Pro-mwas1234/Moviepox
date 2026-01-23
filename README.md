@@ -1,9 +1,7 @@
 # 🎬 Equanta
 
-**Equanta** is a modern, high-speed streaming web app inspired by platforms like HiAnime — but smarter, cleaner, and faster.  
+**Moviepox** is a modern, high-speed streaming web app inspired by platforms like HiAnime — but smarter, cleaner, and faster.  
 It lets users stream movies and TV shows directly using data fetched from **TMDB (The Movie Database)** API and offers **7+ embeddable servers** to switch between seamlessly — **all without page reloads**.
-
-🌐 **Live Demo:** [https://equanta.run.place](https://equanta.run.place)
 
 ---
 
@@ -23,7 +21,6 @@ It lets users stream movies and TV shows directly using data fetched from **TMDB
 
 - **Frontend:** HTML, CSS, JavaScript (Vanilla)
 - **API:** [TMDB API](https://developer.themoviedb.org/)
-- **Hosting:** GitHub Pages / Custom Domain via `run.place`
 - **Architecture:** Single Page Application (SPA)
 
 ---
@@ -39,11 +36,11 @@ It lets users stream movies and TV shows directly using data fetched from **TMDB
 
 ## 📦 Setup (for Developers)
 
-If you’d like to clone and run *Equanta* locally:
+If you’d like to clone and run *moviepox* locally:
 
 ```bash
 # Clone the repository
-git clone https://github.com/Rishu-xd/equanta.git
+git clone https://github.com/Pro-mwas1234/moviepox.git
 
 # Open the project folder
 cd equanta
