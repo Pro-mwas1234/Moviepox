@@ -34,8 +34,8 @@
     {
       "id": 5,
       "name": "Server 5 - Vidking",
-      "movie_url": "https://www.vidking.net/embed/movie/",
-      "tv_url": "https://www.vidking.net/embed/tv/",
+      "movie_url": "https://vidsrc-embed.ru/embed/movie/",
+      "tv_url": "https://vidsrc-embed.ru/embed/tv/",
       "tv_format": "{url}{tmdb_id}/{season}/{episode}"
     }
   ],
