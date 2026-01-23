@@ -1,4 +1,4 @@
-# 🎬 Equanta
+# 🎬 Moviepox
 
 **Moviepox** is a modern, high-speed streaming web app inspired by platforms like HiAnime — but smarter, cleaner, and faster.  
 It lets users stream movies and TV shows directly using data fetched from **TMDB (The Movie Database)** API and offers **7+ embeddable servers** to switch between seamlessly — **all without page reloads**.
