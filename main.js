@@ -4,7 +4,7 @@
  */
 
 (async function initApp() {
-    console.log('🎬 Netflix Clone - Initializing...');
+    console.log('🎬 Moviepox - Initializing...');
     
     // Show loading spinner
     UI.showLoading();
@@ -26,7 +26,7 @@
         // Render content rows based on region
         await renderContentByRegion(userRegion);
         
-        console.log('✅ Netflix Clone - Ready!');
+        console.log('✅ Moviepox - Ready!');
     } catch (error) {
         console.error('❌ Initialization Error:', error);
         alert('Failed to initialize the application. Please refresh the page.');
@@ -191,7 +191,7 @@
         }
     });
     
-    console.log('💡 Tip: API key is loaded from Equanta GitHub repo. All features enabled!');
+    console.log('💡 Tip: API key is loaded from Moviepox GitHub repo. All features enabled!');
     console.log('📥 Download button available in player (coming soon feature)');
     console.log('🌍 Content is customized based on your region!');
 })();
