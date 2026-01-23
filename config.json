@@ -31,6 +31,13 @@
       "tv_url": "https://player.autoembed.cc/embed/tv/",
       "tv_format": "{url}{tmdb_id}/{season}/{episode}"
     }
+    {
+      "id": 5,
+      "name": "Server 4 - Vidking",
+      "movie_url": "https://www.vidking.net/embed/movie/",
+      "tv_url": "https://www.vidking.net/embed/tv/",
+      "tv_format": "{url}{tmdb_id}/{season}/{episode}"
+    }
   ],
   "geolocation_api": "https://ipapi.co/json/",
   "genre_mappings": {
