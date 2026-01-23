@@ -30,7 +30,7 @@
       "movie_url": "https://player.autoembed.cc/embed/movie/",
       "tv_url": "https://player.autoembed.cc/embed/tv/",
       "tv_format": "{url}{tmdb_id}/{season}/{episode}"
-    }
+    },
     {
       "id": 5,
       "name": "Server 4 - Vidking",
