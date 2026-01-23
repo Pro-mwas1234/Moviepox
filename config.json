@@ -33,9 +33,16 @@
     },
     {
       "id": 5,
-      "name": "Server 5 - Vidking",
+      "name": "Server 5 - Vidsrc",
       "movie_url": "https://vidsrc-embed.ru/embed/movie/",
       "tv_url": "https://vidsrc-embed.ru/embed/tv/",
+      "tv_format": "{url}{tmdb_id}/{season}/{episode}"
+    }
+      {
+      "id": 6,
+      "name": "Server 6 - Vidsrc",
+      "movie_url": "https://moviesapi.club/movie/",
+      "tv_url": "https://moviesapi.club/tv",
       "tv_format": "{url}{tmdb_id}/{season}/{episode}"
     }
   ],
