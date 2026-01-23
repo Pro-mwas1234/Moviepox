@@ -1,6 +1,6 @@
 {
-  "name": "Equanta",
-  "short_name": "Equanta",
+  "name": "Moviepox",
+  "short_name": "Moviepox",
   "description": "Watch movies and shows from multiple servers — fast, clean, and ad-free.",
   "start_url": "./index.html",
   "display": "standalone",
