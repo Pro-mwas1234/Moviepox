@@ -1,6 +1,6 @@
 self.addEventListener("install", event => {
   event.waitUntil(
-    caches.open("equanta-cache").then(cache => {
+    caches.open("moviepox-cache").then(cache => {
       return cache.addAll(["/", "/index.html"]);
     })
   );
