@@ -1,100 +1,274 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Privacy Policy - Moviepox" />
   <title>Privacy Policy | Moviepox</title>
+  <link rel="icon" type="image/png" href="icon.png">
+  <link rel="shortcut icon" href="icon.png" type="image/x-icon">
+  <link rel="apple-touch-icon" href="icon.png">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
   <style>
-    body {
-      font-family: 'Poppins', sans-serif;
-      background-color: #0f0f0f;
-      color: #f5f5f5;
+    :root {
+      --primary-color: #8b5cf6;
+      --accent-color: #00fbff;
+      --bg-dark: #050505;
+      --glass-bg: rgba(15, 15, 15, 0.85);
+      --glass-border: rgba(255, 255, 255, 0.1);
+      --gradient-brand: linear-gradient(135deg, #00fbff 0%, #8b5cf6 50%, #d946ef 100%);
+    }
+
+    * {
       margin: 0;
       padding: 0;
-      line-height: 1.7;
+      box-sizing: border-box;
     }
-    .container {
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: var(--bg-dark);
+      color: #f5f5f5;
+      overflow-x: hidden;
+      line-height: 1.8;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 20px;
+    }
+
+    /* 3D Scene Background */
+    .scene-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      perspective: 1500px;
+      overflow: hidden;
+      background: radial-gradient(circle at 50% 50%, #1a1a2e 0%, var(--bg-dark) 100%);
+    }
+
+    .floating-icon {
+      position: absolute;
+      opacity: 0.15;
+      color: var(--accent-color);
+      animation: float3D 20s infinite linear;
+      pointer-events: none;
+    }
+
+    @keyframes float3D {
+      0% {
+        transform: translateZ(-500px) rotateX(0deg) rotateY(0deg) translateY(0);
+      }
+
+      50% {
+        transform: translateZ(200px) rotateX(180deg) rotateY(180deg) translateY(-100px);
+      }
+
+      100% {
+        transform: translateZ(-500px) rotateX(360deg) rotateY(360deg) translateY(0);
+      }
+    }
+
+    .legal-container {
       max-width: 900px;
-      margin: 0 auto;
-      padding: 60px 20px;
+      width: 100%;
+      background: var(--glass-bg);
+      backdrop-filter: blur(50px);
+      -webkit-backdrop-filter: blur(50px);
+      border: 1px solid var(--glass-border);
+      border-radius: 40px;
+      padding: 5rem 4rem;
+      box-shadow: 0 50px 100px -20px rgba(0, 0, 0, 0.7);
+      position: relative;
+      z-index: 1;
+      animation: containerEntry 1s cubic-bezier(0.23, 1, 0.32, 1);
     }
-    h1 {
-      font-size: 2.2rem;
-      color: #22c55e; /* green accent */
+
+    @keyframes containerEntry {
+      from {
+        opacity: 0;
+        transform: translateY(40px) scale(0.95);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    .header-3d {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+
+    .header-3d h1 {
+      font-size: 3.5rem;
+      font-weight: 900;
+      letter-spacing: -1px;
       margin-bottom: 1rem;
+      background: var(--gradient-brand);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
+
+    .header-3d p {
+      color: var(--accent-color);
+      text-transform: uppercase;
+      letter-spacing: 4px;
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+
     h2 {
-      margin-top: 2rem;
-      color: #e5e5e5;
-      font-size: 1.4rem;
+      font-size: 1.8rem;
+      margin: 3rem 0 1.5rem;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 15px;
     }
-    a {
-      color: #22c55e;
+
+    h2 i {
+      color: var(--primary-color);
+      width: 24px;
+      height: 24px;
+    }
+
+    p {
+      margin-bottom: 1.5rem;
+      color: #ccc;
+      font-weight: 300;
+    }
+
+    strong {
+      color: var(--accent-color);
+      font-weight: 600;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 2rem;
+      color: #888;
       text-decoration: none;
+      font-weight: 500;
+      transition: all 0.3s ease;
     }
-    a:hover {
-      text-decoration: underline;
+
+    .back-link:hover {
+      color: var(--accent-color);
+      transform: translateX(-5px);
     }
+
     footer {
       text-align: center;
-      margin-top: 40px;
-      color: #aaa;
-      font-size: 0.9rem;
+      margin-top: 5rem;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      color: #555;
+      font-size: 0.85rem;
+    }
+
+    @media (max-width: 768px) {
+      .legal-container {
+        padding: 3rem 2rem;
+        border-radius: 24px;
+      }
+
+      .header-3d h1 {
+        font-size: 2.5rem;
+      }
     }
   </style>
 </head>
+
 <body>
-  <div class="container">
-    <h1>Privacy Policy</h1>
-    <p><strong>Last Updated:</strong> January 2026</p>
+  <div class="scene-bg">
+    <i data-lucide="shield" class="floating-icon" style="top: 10%; left: 10%; animation-delay: 0s;"></i>
+    <i data-lucide="lock" class="floating-icon" style="top: 20%; right: 15%; animation-delay: -5s;"></i>
+    <i data-lucide="eye-off" class="floating-icon" style="bottom: 15%; left: 20%; animation-delay: -10s;"></i>
+    <i data-lucide="clapperboard" class="floating-icon" style="bottom: 25%; right: 10%; animation-delay: -15s;"></i>
+  </div>
 
-    <p>
-      At <strong>Moviepox</strong> (“we”, “our”, “us”), your privacy is important to us. 
-      This page explains what information we collect and how it is handled when you use our website
-      <a href="https://tse2.mm.bing.net/th/id/OIP.3ilHR5cCp-ojEZAVEfzZGgHaE7?rs=1&pid=ImgDetMain&o=7&rm=3" target="_blank">Moviepox admin</a>.
-    </p>
+  <div class="legal-container">
+    <a href="index.html" class="back-link">
+      <i data-lucide="arrow-left"></i> Back to Cinema
+    </a>
 
-    <h2>1. Information We Collect</h2>
-    <p>
-      Moviepox does <strong>not collect, store, or share</strong> any personal data from users. 
-      We do not use cookies, analytics, or any tracking tools.
-    </p>
+    <div class="header-3d">
+      <p>Privacy & Data</p>
+      <h1>Privacy Policy</h1>
+      <div style="font-size: 0.8rem; opacity: 0.5;">Last Updated: January 2026</div>
+    </div>
 
-    <h2>2. Third-Party Content</h2>
-    <p>
-      Our website embeds external streaming servers and uses data from 
-      <a href="https://tse2.mm.bing.net/th/id/OIP.3ilHR5cCp-ojEZAVEfzZGgHaE7?rs=1&pid=ImgDetMain&o=7&rm=3" target="_blank">The Movie Database (TMDB)</a>. 
-      These are <strong>third-party services</strong> and may collect information such as your IP address,
-      browser details, or playback activity according to their own privacy policies.
-    </p>
+    <section>
+      <p>
+        At <strong>Moviepox</strong>, your privacy is our premiere priority. This cinematic experience is built on
+        trust, which is why we’ve designed our platform to be as transparent as a high-definition lens.
+      </p>
 
-    <p>
-      Moviepox has <strong>no control</strong> over how these third-party providers handle data.
-      We recommend reviewing their respective privacy policies before using their services.
-    </p>
+      <h2><i data-lucide="file-text"></i> 1. Information We Collect</h2>
+      <p>
+        Moviepox is a <strong>no-trace</strong> platform. We do not collect, store, or profile your personal identities.
+        Whether you're browsing the latest blockbusters or tracking your history, that data stays within your encrypted
+        local environment or your private Firebase cloud session.
+      </p>
 
-    <h2>3. External Links</h2>
-    <p>
-      Our website may contain links to external sites. 
-      We are not responsible for the content or privacy practices of those websites.
-    </p>
+      <h2><i data-lucide="layers"></i> 2. Third-Party Content</h2>
+      <p>
+        Our platform acts as a high-end interface for data provided by <strong>The Movie Database (TMDB)</strong> and
+        external streaming mirrors. Note that these third-party agents may utilize their own tracking technologies
+        according to their respective policies.
+      </p>
+      <p>
+        Moviepox has <strong>no control</strong> over these external entities. We act only as the director of your
+        viewing experience.
+      </p>
 
-    <h2>4. Changes to This Policy</h2>
-    <p>
-      We may update this Privacy Policy occasionally. Updates will be reflected with a new “Last Updated” date on this page.
-    </p>
+      <h2><i data-lucide="external-link"></i> 3. External Links</h2>
+      <p>
+        As you navigate our cinematic universe, you may encounter links to official trailers or studio sites. Moviepox
+        is not responsible for the scripts or security of those external sets.
+      </p>
 
-    <h2>5. Contact Us</h2>
-    <p>
-      If you have questions or concerns about this Privacy Policy, you can reach us via our 
-      <a href="hhttps://tse2.mm.bing.net/th/id/OIP.3ilHR5cCp-ojEZAVEfzZGgHaE7?rs=1&pid=ImgDetMain&o=7&rm=3" target="_blank">Page</a>
-      or email us at <strong>shawnmwask1234@gmail.com</strong>.
-    </p>
+      <h2><i data-lucide="refresh-ccw"></i> 4. Policy Updates</h2>
+      <p>
+        As the industry evolves, so may this policy. Any changes will be announced with a spotlight on this page.
+      </p>
+
+      <h2><i data-lucide="mail"></i> 5. Contact the Crew</h2>
+      <p>
+        Questions? Our support crew is standing by. Reach out to the production lead at
+        <strong>shawnmwask1234@gmail.com</strong>.
+      </p>
+    </section>
 
     <footer>
-      © 2026 Moviepox. All rights reserved.
+      &copy; 2026 Moviepox • A Premium Educational Production.
     </footer>
   </div>
+
+  <script>
+    lucide.createIcons();
+
+    // Subtle 3D Tilt Effect
+    const card = document.querySelector('.legal-container');
+    document.addEventListener('mousemove', (e) => {
+      const xAxis = (window.innerWidth / 2 - e.pageX) / 50;
+      const yAxis = (window.innerHeight / 2 - e.pageY) / 50;
+      card.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
+    });
+  </script>
 </body>
+
 </html>

@@ -57,6 +57,18 @@ class TMDbAPI {
         return await this.fetchData(`/trending/${mediaType}/${timeWindow}`);
     }
 
+    async getTrendingDay() {
+        return await this.fetchData('/trending/all/day');
+    }
+
+    async getUpcoming() {
+        return await this.fetchData('/movie/upcoming', { region: this.userCountry });
+    }
+
+    async getTopRated(mediaType = 'movie') {
+        return await this.fetchData(`/${mediaType}/top_rated`);
+    }
+
     async discoverMovies(params = {}) {
         return await this.fetchData('/discover/movie', params);
     }
@@ -119,6 +131,14 @@ class TMDbAPI {
 
     async getTVSeasonDetails(tvId, seasonNumber) {
         return await this.fetchData(`/tv/${tvId}/season/${seasonNumber}`);
+    }
+
+    async getMovieVideos(id) {
+        return await this.fetchData(`/movie/${id}/videos`);
+    }
+
+    async getTVVideos(id) {
+        return await this.fetchData(`/tv/${id}/videos`);
     }
 
     async search(query, page = 1) {

@@ -18,6 +18,10 @@ class App {
 
             await this.loadAllContent();
 
+            if (window.HistoryManager) {
+                window.HistoryManager.render();
+            }
+
             console.log('✅ moviepox ready!');
         } catch (error) {
             console.error('Init error:', error);
@@ -31,19 +35,38 @@ class App {
 
         console.log('Loading content...');
 
-        // Trending Movies
+        // Hero Banner & Trending (Day)
+        const trendingDay = await api.getTrendingDay();
+        if (trendingDay && trendingDay.results) {
+            // Pick a high-quality featured item for hero
+            const featured = trendingDay.results.find(item => item.backdrop_path && item.vote_average > 7) || trendingDay.results[0];
+            if (featured) {
+                await ui.createHeroBanner(featured, featured.media_type || 'movie');
+            }
+        }
+
+        // Trending Movies (Week)
         const trendingMovies = await api.getTrending('movie', 'week');
         if (trendingMovies && trendingMovies.results) {
             ui.renderSlider('trendingMovies', trendingMovies.results, 'movie');
-            if (trendingMovies.results[0]) {
-                await ui.createHeroBanner(trendingMovies.results[0], 'movie');
-            }
         }
 
         // Trending TV
         const trendingSeries = await api.getTrending('tv', 'week');
         if (trendingSeries && trendingSeries.results) {
             ui.renderSlider('trendingSeries', trendingSeries.results, 'tv');
+        }
+
+        // Popular Movies
+        const popularMovies = await api.getTopRated('movie'); // Using top rated as popular for higher quality
+        if (popularMovies && popularMovies.results) {
+            ui.renderSlider('popularMovies', popularMovies.results, 'movie');
+        }
+
+        // Upcoming
+        const upcoming = await api.getUpcoming();
+        if (upcoming && upcoming.results) {
+            ui.renderSlider('upcomingMovies', upcoming.results, 'movie');
         }
 
         // Regional

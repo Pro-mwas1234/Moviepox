@@ -38,7 +38,7 @@
       "tv_url": "https://vidsrc-embed.ru/embed/tv/",
       "tv_format": "{url}{tmdb_id}/{season}/{episode}"
     },
-      {
+    {
       "id": 6,
       "name": "Server 6 -movieapi",
       "movie_url": "https://moviesapi.club/movie/",

@@ -123,23 +123,43 @@ class UIManager {
 
         const title = item.title || item.name;
         const overview = item.overview || 'No description available';
+        const backdrop = this.api.getImageURL(item.backdrop_path, 'original');
 
-        heroBanner.style.backgroundImage = `url('${this.api.getImageURL(item.backdrop_path, 'original')}')`;
+        // Fetch trailer
+        const videos = mediaType === 'movie'
+            ? await this.api.getMovieVideos(item.id)
+            : await this.api.getTVVideos(item.id);
+
+        const trailer = videos?.results?.find(v => v.type === 'Trailer' && v.site === 'YouTube');
 
         heroBanner.innerHTML = `
+            <div id="hero-video-container" class="hero-video-container">
+                ${trailer ? `
+                    <iframe 
+                        src="https://www.youtube.com/embed/${trailer.key}?autoplay=1&mute=1&loop=1&playlist=${trailer.key}&controls=0&modestbranding=1&rel=0&iv_load_policy=3&showinfo=0&autohide=1" 
+                        frameborder="0" 
+                        allow="autoplay; encrypted-media" 
+                        allowfullscreen
+                        style="width: 100%; height: 100%; pointer-events: none;">
+                    </iframe>
+                ` : `<div class="hero-backdrop-fallback" style="background-image: url('${backdrop}'); width: 100%; height: 100%;"></div>`}
+            </div>
+            <div class="hero-overlay"></div>
             <div class="hero-content">
                 <h1>${title}</h1>
                 <p>${overview.substring(0, 200)}${overview.length > 200 ? '...' : ''}</p>
                 <div class="hero-buttons">
                     <button class="btn btn-primary" onclick="window.playerManager.openPlayer(${item.id}, '${mediaType}')">
-                        ▶ Play Now
+                        <i data-lucide="play" style="width: 20px; height: 20px; margin-right: 8px;"></i> Play Now
                     </button>
                     <button class="btn btn-secondary" onclick="window.uiManager.openDetail(${item.id}, '${mediaType}')">
-                        ℹ More Info
+                        <i data-lucide="info" style="width: 20px; height: 20px; margin-right: 8px;"></i> More Info
                     </button>
                 </div>
             </div>
         `;
+
+        if (window.lucide) window.lucide.createIcons();
     }
 
     async openDetail(id, mediaType) {
@@ -149,7 +169,7 @@ class UIManager {
         modal.classList.add('active');
         detailContent.innerHTML = '<div class="loading-container"><div class="loading"></div></div>';
 
-        const details = mediaType === 'tv' 
+        const details = mediaType === 'tv'
             ? await this.api.getTVDetails(id)
             : await this.api.getMovieDetails(id);
 
@@ -182,6 +202,10 @@ class UIManager {
                 </button>
             </div>
         `;
+
+        if (window.HistoryManager) {
+            window.HistoryManager.add(details);
+        }
     }
 }
 

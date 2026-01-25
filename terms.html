@@ -1,50 +1,272 @@
-<div class="panel">
-  <p>These Terms and Conditions (“Terms”) govern your access to and use of the website moviepox.vercel.app and any related pages, features, or content (collectively, the “Site”). By accessing or using the Site, you agree to be bound by these Terms. If you do not agree, do not use the Site.</p>
-</div>
+<!DOCTYPE html>
+<html lang="en">
 
-<h2>1. About the Service</h2>
-<p>The Site provides an interface for discovering movies and TV shows using metadata and artwork sourced from The Movie Database (TMDB). The Site does not host or store copyrighted video files; playback, when available, is provided via embedded third‑party players. The Site is not affiliated with, endorsed, or certified by TMDB or Netflix.</p>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Terms and Conditions - Moviepox" />
+  <title>Terms & Conditions | Moviepox</title>
+  <link rel="icon" type="image/png" href="icon.png">
+  <link rel="shortcut icon" href="icon.png" type="image/x-icon">
+  <link rel="apple-touch-icon" href="icon.png">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    :root {
+      --primary-color: #d946ef;
+      --accent-color: #00fbff;
+      --bg-dark: #050505;
+      --glass-bg: rgba(15, 15, 15, 0.85);
+      --glass-border: rgba(255, 255, 255, 0.1);
+      --gradient-brand: linear-gradient(135deg, #d946ef 0%, #8b5cf6 50%, #00fbff 100%);
+    }
 
-<h2>2. Eligibility and Use</h2>
-<p>You must be at least the age of majority in your jurisdiction to use the Site. You agree to use the Site only for lawful purposes and in compliance with applicable laws, rules, and regulations.</p>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-<h2>3. Third‑Party Content and Embeds</h2>
-<p>The Site displays information and images obtained from TMDB and may embed third‑party video players. These third parties are solely responsible for their content, availability, and policies. Links or embeds do not imply endorsement. Your use of third‑party services is governed by their terms and privacy policies.</p>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: var(--bg-dark);
+      color: #f5f5f5;
+      overflow-x: hidden;
+      line-height: 1.8;
+      min-height: 100vh;
+      perspective: 2000px;
+    }
 
-<h2>4. Intellectual Property</h2>
-<p>All trademarks, logos, and brand names remain the property of their respective owners. Site code, design, and original assets are owned by [Your Name/Entity] or licensed to it and are protected by copyright and other laws. You may not copy, modify, distribute, or create derivative works from Site materials except as expressly permitted by applicable open‑source licenses (see Source Code section, if any).</p>
+    .scroll-scene {
+      padding: 80px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 40px;
+    }
 
-<h2>5. Acceptable Use</h2>
-<ul>
-  <li>Do not attempt to bypass technical measures, scrape at scale, or interfere with Site operation.</li>
-  <li>Do not upload or inject malicious code, or engage in activities that disrupt service for others.</li>
-  <li>Do not infringe the rights of third parties, including intellectual property or privacy rights.</li>
-</ul>
+    /* 3D Animated Background */
+    .grid-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      background-image:
+        linear-gradient(rgba(139, 92, 246, 0.1) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(139, 92, 246, 0.1) 1px, transparent 1px);
+      background-size: 50px 50px;
+      transform: rotateX(60deg) translateY(-200px);
+      animation: gridScroll 20s linear infinite;
+    }
 
-<h2>6. No Hosting of Infringing Content</h2>
-<p>The Site does not host copyrighted video content and provides no guarantee of availability or lawful access to any embedded content. If you believe a third‑party embed infringes your rights, contact the third party directly and notify us as outlined below.</p>
+    @keyframes gridScroll {
+      from {
+        background-position: 0 0;
+      }
 
-<h2>7. Disclaimers</h2>
-<p>The Site is provided on an “AS IS” and “AS AVAILABLE” basis without warranties of any kind, whether express, implied, or statutory, including but not limited to warranties of merchantability, fitness for a particular purpose, title, and non‑infringement. The Site does not warrant that any content is accurate, complete, reliable, current, or error‑free, or that the Site will be uninterrupted or secure.</p>
+      to {
+        background-position: 0 500px;
+      }
+    }
 
-<h2>8. Limitation of Liability</h2>
-<p>To the maximum extent permitted by law,Entityand its affiliates, officers, employees, and agents will not be liable for any indirect, incidental, special, consequential, or punitive damages, or any loss of profits or revenues, whether incurred directly or indirectly, or loss of data, use, goodwill, or other intangible losses, resulting from your access to or use of (or inability to access or use) the Site.</p>
+    .term-card {
+      max-width: 800px;
+      width: 100%;
+      background: var(--glass-bg);
+      backdrop-filter: blur(40px);
+      -webkit-backdrop-filter: blur(40px);
+      border: 1px solid var(--glass-border);
+      border-radius: 32px;
+      padding: 3rem;
+      transform-style: preserve-3d;
+      transition: transform 0.5s ease;
+      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
+    }
 
-<h2>9. Indemnification</h2>
-<p>You agree to defend, indemnify, and hold harmless Entity from and against any claims, liabilities, damages, losses, and expenses (including reasonable attorneys’ fees) arising out of or in any way connected with your violation of these Terms or your misuse of the Site.</p>
+    .term-card:hover {
+      transform: translateZ(20px) rotateX(2deg);
+      border-color: var(--primary-color);
+    }
 
-<h2>10. Changes to the Service or Terms</h2>
-<p>We may modify or discontinue any part of the Site at any time. We may update these Terms from time to time; the “Last updated” date reflects the latest version. Continued use of the Site after changes become effective constitutes your acceptance of the updated Terms.</p>
+    .header-3d {
+      text-align: center;
+      margin-bottom: 60px;
+      transform: translateZ(50px);
+    }
 
-<h2>11. Termination</h2>
-<p>We may suspend or terminate your access to the Site at any time, with or without notice, for conduct that we believe violates these Terms or is otherwise harmful.</p>
+    .header-3d h1 {
+      font-size: 4rem;
+      font-weight: 800;
+      background: var(--gradient-brand);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 10px;
+    }
 
-<h2>12. Governing Law and Dispute Resolution</h2>
-<p>These Terms are governed by the laws of State, without regard to its conflicts of law principles. Any disputes arising out of or relating to these Terms or the Site shall be subject to the exclusive jurisdiction of the courts located in [Your City/Region].</p>
+    .header-3d p {
+      color: var(--accent-color);
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
 
-<h2>13. Contact</h2>
-<p>For questions, notices, or claims, contact: <a href="mailto: shawnmwask1234@gmail.com"></p>
+    h2 {
+      font-size: 1.5rem;
+      color: #fff;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
 
-<div class="legal-note">
-  Note: This sample is for general informational purposes only and does not constitute legal advice. Consider consulting a qualified attorney for terms tailored to your jurisdiction and use case.
-</div>
+    h2 i {
+      color: var(--accent-color);
+    }
+
+    p,
+    ul {
+      color: #aaa;
+      font-weight: 300;
+      margin-bottom: 1.5rem;
+    }
+
+    ul {
+      padding-left: 20px;
+    }
+
+    li {
+      margin-bottom: 10px;
+    }
+
+    .back-btn {
+      position: fixed;
+      top: 30px;
+      left: 30px;
+      z-index: 100;
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      padding: 12px 24px;
+      border-radius: 50px;
+      color: #fff;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+
+    .back-btn:hover {
+      background: var(--primary-color);
+      transform: scale(1.05);
+    }
+
+    .legal-note {
+      background: rgba(0, 251, 255, 0.05);
+      border-left: 4px solid var(--accent-color);
+      padding: 1.5rem;
+      border-radius: 0 16px 16px 0;
+      font-size: 0.9rem;
+      font-style: italic;
+    }
+
+    @media (max-width: 768px) {
+      .header-3d h1 {
+        font-size: 2.5rem;
+      }
+
+      .term-card {
+        padding: 2rem;
+      }
+
+      .back-btn {
+        top: 15px;
+        left: 15px;
+        padding: 8px 16px;
+        font-size: 0.8rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="grid-bg"></div>
+
+  <a href="index.html" class="back-btn">
+    <i data-lucide="clapperboard"></i> <span>Return to Moviepox</span>
+  </a>
+
+  <div class="scroll-scene">
+    <div class="header-3d">
+      <h1>Terms</h1>
+      <p>Rules of Engagement</p>
+    </div>
+
+    <div class="term-card">
+      <h2><i data-lucide="info"></i> 1. About the Service</h2>
+      <p>Moviepox provides a high-end interface for discovering cinematic content. We source metadata and artwork via
+        TMDB. We do not host video files; all playback occurs via curated third-party mirrors.</p>
+    </div>
+
+    <div class="term-card">
+      <h2><i data-lucide="user-check"></i> 2. Usage Rights</h2>
+      <p>By accessing the Site, you represent that you are of legal age in your jurisdiction. Use the platform lawfully
+        and respect the digital ecosystem we have built.</p>
+    </div>
+
+    <div class="term-card">
+      <h2><i data-lucide="shield-alert"></i> 3. Liability & Content</h2>
+      <p>We provide this service "as is." Since we act as a lens into third-party content, we are not liable for the
+        availability or legality of the external streams provided by the mirrors.</p>
+    </div>
+
+    <div class="term-card">
+      <h2><i data-lucide="activity"></i> 4. Acceptable Conduct</h2>
+      <ul>
+        <li>Do not attempt to scrape or disrupt the Site's 3D architecture.</li>
+        <li>Do not inject malicious scripts into the cinematic engine.</li>
+        <li>Respect the intellectual property of the studios and creators.</li>
+      </ul>
+    </div>
+
+    <div class="term-card">
+      <div class="legal-note">
+        Note: This production is for educational purposes. All content rights belong to their respective creators. ⚖️🎬
+      </div>
+    </div>
+
+    <footer style="color: #444; font-size: 0.8rem; margin: 40px 0;">
+      &copy; 2026 Moviepox • All Rights Reserved.
+    </footer>
+  </div>
+
+  <script>
+    lucide.createIcons();
+
+    // 3D Intersection Observer for Entry 
+    const cards = document.querySelectorAll('.term-card');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = "1";
+          entry.target.style.transform = "translateY(0) rotateX(0)";
+        } else {
+          entry.target.style.opacity = "0.3";
+          entry.target.style.transform = "translateY(50px) rotateX(-10deg)";
+        }
+      });
+    }, { threshold: 0.1 });
+
+    cards.forEach(card => {
+      card.style.transition = "all 0.8s cubic-bezier(0.23, 1, 0.32, 1)";
+      observer.observe(card);
+    });
+  </script>
+</body>
+
+</html>

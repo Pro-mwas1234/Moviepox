@@ -1,42 +1,81 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Moviepox</title> - Stream Movies & TV Shows</title>
-<!-- Primary SEO -->
-<title>Moviepox— Stream Movies & TV Shows</title>
-<meta name="description" content="Moviepox is a fast, responsive Netflix-style site with trending movies, TV series, anime, and regional picks. Play instantly with multiple servers.">
-<link rel="canonical" href="https://moviepox.vercel.app/">
+    <title>Moviepox — Stream Movies & TV Shows</title>
+    <link rel="icon" type="image/png" href="icon.png">
+    <link rel="shortcut icon" href="icon.png" type="image/x-icon">
+    <link rel="apple-touch-icon" href="icon.png">
+    <!-- Fallbacks for root requests -->
+    <link rel="icon" href="icon.png" sizes="any">
+    <!-- Primary SEO -->
+    <meta name="description"
+        content="Moviepox is a fast, responsive Netflix-style site with trending movies, TV series, anime, and regional picks. Play instantly with multiple servers.">
+    <link rel="canonical" href="https://moviepox.vercel.app/">
 
-<!-- Open Graph (Facebook, LinkedIn, etc.) -->
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://moviepox.vercel.app/">
-<meta property="og:title" content="Moviepox — Stream Movies & TV Shows">
-<meta property="og:description" content="embed streaming with trending, regional, anime, and multi-server playback.">
-<meta property="og:image" content="https://moviepox.vercel.app/share.png">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
+    <!-- Open Graph (Facebook, LinkedIn, etc.) -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://moviepox.vercel.app/">
+    <meta property="og:title" content="Moviepox — Stream Movies & TV Shows">
+    <meta property="og:description"
+        content="embed streaming with trending, regional, anime, and multi-server playback.">
+    <meta property="og:image" content="https://moviepox.vercel.app/share.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
 
-<!-- Twitter Card -->
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Moviepox — Stream Movies & TV Shows">
-<meta name="twitter:description" content="embed streaming UI with trending, regional, anime, and multi-server playback.">
-<meta name="twitter:image" content="https://moviepox.vercel.app/share.png">
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Moviepox — Stream Movies & TV Shows">
+    <meta name="twitter:description"
+        content="embed streaming UI with trending, regional, anime, and multi-server playback.">
+    <meta name="twitter:image" content="https://moviepox.vercel.app/share.png">
     <link rel="stylesheet" href="main.css">
     <link rel="stylesheet" href="responsive.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <!-- Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Fireworks / Confetti -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 </head>
+
 <body>
     <!-- Navigation -->
     <nav class="navbar">
         <div class="nav-container">
             <div class="nav-logo">
-                <h1>😄MOVIEPOX💀| @Mwask</h1>
+                <i data-lucide="clapperboard" style="color: var(--accent-color); width: 32px; height: 32px;"></i>
+                <h1>MOVIEPOX</h1>
             </div>
             <div class="nav-search">
                 <input type="text" id="searchInput" placeholder="Search movies, series, anime...">
                 <div id="searchDropdown" class="search-dropdown"></div>
+            </div>
+            <div class="nav-auth">
+                <button class="btn-auth" id="auth-nav-btn">
+                    <i data-lucide="log-in"></i>
+                    <span>Login</span>
+                </button>
+                <div id="userDropdown" class="user-dropdown">
+                    <div class="dropdown-header">
+                        <span id="dropdown-username">Username</span>
+                    </div>
+                    <div class="dropdown-divider"></div>
+                    <a href="#" class="dropdown-item"
+                        onclick="window.downloadManager.renderQueue(); document.getElementById('downloadHistoryModal').classList.add('active');">
+                        <i data-lucide="download-cloud"></i> My Downloads
+                    </a>
+                    <a href="#" class="dropdown-item"><i data-lucide="history"></i> Recently Watched</a>
+                    <a href="#" class="dropdown-item"><i data-lucide="user"></i> Profile</a>
+                    <div class="dropdown-divider"></div>
+                    <button class="dropdown-item" id="logoutBtn"><i data-lucide="log-out"></i> Log Out</button>
+                </div>
             </div>
         </div>
     </nav>
@@ -45,6 +84,27 @@
     <main id="mainContent">
         <!-- Hero Banner -->
         <div id="heroBanner" class="hero-banner"></div>
+
+        <!-- Recently Watched -->
+        <div id="recently-watched-section" class="content-section" style="display: none;">
+            <div class="section-header">
+                <h2 class="section-title">Recently Watched</h2>
+                <button class="btn-text" onclick="window.HistoryManager.clear()">Clear History</button>
+            </div>
+            <div class="slider-container">
+                <button class="slider-btn slider-btn-left" data-slider="recentlyWatchedContainer">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="15 18 9 12 15 6"></polyline>
+                    </svg>
+                </button>
+                <div id="recentlyWatchedContainer" class="content-slider"></div>
+                <button class="slider-btn slider-btn-right" data-slider="recentlyWatchedContainer">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="9 18 15 12 9 6"></polyline>
+                    </svg>
+                </button>
+            </div>
+        </div>
 
         <!-- Trending Movies -->
         <div class="content-section">
@@ -79,6 +139,46 @@
                 </button>
                 <div id="trendingSeries" class="content-slider"></div>
                 <button class="slider-btn slider-btn-right" data-slider="trendingSeries">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="9 18 15 12 9 6"></polyline>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Popular Movies -->
+        <div class="content-section">
+            <div class="section-header">
+                <h2 class="section-title">Popular Movies</h2>
+            </div>
+            <div class="slider-container">
+                <button class="slider-btn slider-btn-left" data-slider="popularMovies">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="15 18 9 12 15 6"></polyline>
+                    </svg>
+                </button>
+                <div id="popularMovies" class="content-slider"></div>
+                <button class="slider-btn slider-btn-right" data-slider="popularMovies">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="9 18 15 12 9 6"></polyline>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Upcoming Releases -->
+        <div class="content-section">
+            <div class="section-header">
+                <h2 class="section-title">Coming Soon</h2>
+            </div>
+            <div class="slider-container">
+                <button class="slider-btn slider-btn-left" data-slider="upcomingMovies">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="15 18 9 12 15 6"></polyline>
+                    </svg>
+                </button>
+                <div id="upcomingMovies" class="content-slider"></div>
+                <button class="slider-btn slider-btn-right" data-slider="upcomingMovies">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <polyline points="9 18 15 12 9 6"></polyline>
                     </svg>
@@ -203,7 +303,7 @@
                 <iframe id="videoPlayer" allowfullscreen></iframe>
             </div>
             <div class="player-controls">
-                
+
                 <!-- TV Show Season/Episode Selector -->
                 <div id="tvControls" class="tv-controls" style="display: none;">
                     <div class="control-group">
@@ -224,8 +324,8 @@
 
                 <!-- Download Button -->
                 <button id="shareBtn" class="btn btn-secondary" title="Share this link">
-  📤 Share
-</button>
+                    📤 Share
+                </button>
                 <button id="downloadBtn" class="download-btn">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
@@ -238,32 +338,163 @@
         </div>
     </div>
 
+    <!-- Auth Modal -->
+    <div id="authModal" class="modal">
+        <div class="modal-content auth-modal-content">
+            <button class="modal-close" id="closeAuthModal">&times;</button>
+            <div class="auth-tabs">
+                <button class="auth-tab-btn active" id="tab-btn-login"
+                    onclick="authManager.switchTab('login')">Login</button>
+                <button class="auth-tab-btn" id="tab-btn-signup" onclick="authManager.switchTab('signup')">Sign
+                    Up</button>
+            </div>
+
+            <div class="auth-forms-container">
+                <div id="authSlider" class="auth-forms-slider">
+                    <!-- Login Form -->
+                    <form id="login-form" class="auth-form">
+                        <div class="form-group">
+                            <label><i data-lucide="user"></i> Username</label>
+                            <input type="text" id="login-username" required placeholder="Enter your username">
+                        </div>
+                        <div class="form-group">
+                            <label><i data-lucide="lock"></i> Password</label>
+                            <input type="password" id="login-password" required placeholder="••••••••">
+                        </div>
+                        <div class="form-footer">
+                            <a href="#" id="forgotPasswordLink" class="text-link">Forgot Password?</a>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">
+                            <span>Login</span>
+                            <i data-lucide="chevron-right"></i>
+                        </button>
+                    </form>
+
+                    <!-- Signup Form -->
+                    <form id="signup-form" class="auth-form">
+                        <div class="form-group">
+                            <label><i data-lucide="user"></i> Username</label>
+                            <input type="text" id="signup-username" required placeholder="Pick a unique username">
+                        </div>
+                        <div class="form-group">
+                            <label><i data-lucide="mail"></i> Email</label>
+                            <input type="email" id="signup-email" required placeholder="Enter your email">
+                        </div>
+                        <div class="form-group">
+                            <label><i data-lucide="lock"></i> Password</label>
+                            <input type="password" id="signup-password" required placeholder="••••••••">
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">
+                            <span>Create Account</span>
+                            <i data-lucide="user-plus"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Forgot Password Modal -->
+    <div id="resetModal" class="modal">
+        <div class="modal-content auth-modal-content">
+            <button class="modal-close" id="closeResetModal">&times;</button>
+            <div class="auth-form" style="position: static; padding: 2rem 3rem;">
+                <div class="verify-text">
+                    <h3><span>Reset</span> Password</h3>
+                    <p>Enter your email to receive a cinematic reset link 🎬</p>
+                </div>
+                <form id="reset-form">
+                    <div class="form-group">
+                        <label><i data-lucide="mail"></i> Email Address</label>
+                        <input type="email" id="reset-email" required placeholder="Enter your email">
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100">
+                        <span>Send Reset Link</span>
+                        <i data-lucide="send"></i>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+    </main>
+
+    <!-- Custom Verification Popup (The Cat) -->
+    <div id="verifyPopup" class="modal">
+        <div class="modal-content verify-popup-content">
+            <button class="modal-close" id="closeVerifyPopup">&times;</button>
+            <div class="verify-cat-container">
+                <img src="verify_cat.png" alt="Verification Cat" class="verify-cat-img">
+            </div>
+            <div class="verify-text">
+                <h3>Check ur Gmail</h3>
+                <p>A verification letter is waiting for you! ✉️</p>
+            </div>
+            <button class="btn btn-primary w-100" id="verifyDoneBtn">Got it!</button>
+        </div>
+    </div>
+
     <!-- Footer -->
     <footer class="footer">
         <div class="footer-content">
-            <div>
+            <div class="footer-brand">
+                <i data-lucide="clapperboard"></i>
+                <span>MOVIEPOX</span>
+            </div>
+            <div class="footer-links">
                 <a href="./policy.html">Privacy Policy</a>
                 <a href="./terms.html">Terms & Conditions</a>
             </div>
-            <p class="footer-copyright">&copy; 2026 Moviepox. All rights reserved.</p>
-            <p class="footer-disclaimer">Educational project. All content belongs to respective owners.</p>
+            <div class="footer-bottom">
+                <p class="footer-copyright">&copy; 2026 Moviepox • All rights reserved.</p>
+                <p class="footer-disclaimer">Educational project. All content belongs to respective owners.</p>
+            </div>
         </div>
     </footer>
 
+    <!-- Download Manager Modal (Engine Selection) -->
+    <div id="downloadManagerModal" class="modal">
+        <div class="modal-content reset-popup-content portal-modal">
+            <button class="modal-close" onclick="this.closest('.modal').classList.remove('active')">&times;</button>
+            <div id="downloadManagerContent">
+                <!-- Content injected by download.js -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Download History Modal (Queue) -->
+    <div id="downloadHistoryModal" class="modal">
+        <div class="modal-content reset-popup-content portal-modal">
+            <button class="modal-close" onclick="this.closest('.modal').classList.remove('active')">&times;</button>
+            <div class="verify-text">
+                <h3>Download <span>History</span></h3>
+                <p>Track your recent cinematic acquisitions 📥</p>
+            </div>
+            <div id="downloadQueueContainer" class="queue-container">
+                <!-- Queue items injected by download.js -->
+            </div>
+        </div>
+    </div>
+
     <!-- Scripts -->
     <script src="config.js"></script>
+    <script src="firebase_config.js"></script>
+    <script src="auth.js"></script>
+    <script src="history.js"></script>
+    <script src="download.js"></script>
     <script src="api.js"></script>
     <script src="ui.js"></script>
     <script src="player.js"></script>
     <script src="app.js"></script>
-     <script src="shareRouter.js"></script>
-  <script src="player-updates.js"></script>
-     <!-- Initialize router on startup -->
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      if (window.ShareRouter) {
-        window.ShareRouter.init();
-      }
-    });
+    <script src="shareRouter.js"></script>
+    <script src="player-updates.js"></script>
+    <!-- Initialize router on startup -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            if (window.ShareRouter) {
+                window.ShareRouter.init();
+            }
+        });
+    </script>
 </body>
+
 </html>
