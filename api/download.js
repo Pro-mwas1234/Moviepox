@@ -9,10 +9,10 @@ export default function handler(req, res) {
 
     if (type === 'tv') {
         // Construct URL for TV show download via vidsrc.xyz (reliable aggregator)
-        downloadUrl = `https://vidsrc.xyz/download/tv?tmdb=${id}&season=${s || 1}&episode=${e || 1}`;
+        downloadUrl = `https://dl.vidsrc.vip/tv?tmdb=${id}&season=${s || 1}&episode=${e || 1}`;
     } else {
         // Construct URL for movie download
-        downloadUrl = `https://vidsrc.xyz/download/movie?tmdb=${id}`;
+        downloadUrl = `https://dl.vidsrc.vip/movie/?tmdb=${id}`;
     }
 
     // Use a 302 redirect to the download aggregator
