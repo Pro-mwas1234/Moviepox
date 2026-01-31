@@ -1,21 +1,21 @@
-export default function handler(req, res) {
-    const { type, id, s, e } = req.query;
+//export default function handler(req, res) {
+  //  const { type, id, s, e } = req.query;
 
-    if (!id) {
-        return res.status(400).json({ error: 'ID is required' });
-    }
+    //if (!id) {
+      //  return res.status(400).json({ error: 'ID is required' });
+    //}
 
-    let downloadUrl = '';
+    //let downloadUrl = '';
 
-    if (type === 'tv') {
+    //if (type === 'tv') {
         // Construct URL for TV show download via vidsrc.xyz (reliable aggregator)
-        downloadUrl = `https://dl.vidsrc.vip/tv?tmdb=${id}&season=${s || 1}&episode=${e || 1}`;
-    } else {
+      //  downloadUrl = `https://dl.vidsrc.vip/tv?tmdb=${id}&season=${s || 1}&episode=${e || 1}`;
+    //} else {
         // Construct URL for movie download
-        downloadUrl = `https://dl.vidsrc.vip/movie/?tmdb=${id}`;
-    }
+      //  downloadUrl = `https://dl.vidsrc.vip/movie/?tmdb=${id}`;
+    //}
 
     // Use a 302 redirect to the download aggregator
-    res.setHeader('Location', downloadUrl);
-    res.status(302).end();
-}
+    //res.setHeader('Location', downloadUrl);
+    //res.status(302).end();
+//}
