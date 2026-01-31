@@ -117,9 +117,9 @@ class DownloadManager {
     startDownload(engineId, itemId, mediaType, season, episode) {
         let url = '';
         if (mediaType === 'tv') {
-            url = `https://vidsrc.me/download/${itemId}/${season}/${episode}`;
+            url = `https://dl.vidsrc.vip/tv/${itemId}/${season}/${episode}`;
         } else {
-            url = `https://vidsrc.me/download/${itemId}`;
+            url = `https://dl.vidsrc.vip/movie/${itemId}`;
         }
 
         // Implementation of different engines would go here
