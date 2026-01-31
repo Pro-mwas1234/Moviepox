@@ -47,12 +47,12 @@
     },
     {
       "id": 7,
-      "name": "Server 7 - 3asy player",
-      "movie_url": "https://player.videasy.net/movie/",
-      "tv_url": "https://player.videasy.net/tv/",
-      "tv_format": "{url}{tmdb_id}-{season}-{episode}"
-    }
-        
+      "name": "Server 7 - Vidsrc",
+      "movie_url": "https://dl.vidsrc.vip/movie/",
+      "tv_url": "https://dl.vidsrc.vip/tv/",
+      "tv_format": "{url}{tmdb_id}/{season}/{episode}"
+    },
+            
   ],
   "geolocation_api": "https://ipapi.co/json/",
   "genre_mappings": {
