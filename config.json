@@ -52,6 +52,13 @@
       "tv_url": "https://player.videasy.net/tv/",
       "tv_format": "{url}{tmdb_id}-{season}-{episode}"
     },
+    {
+      "id": 8,
+      "name": "Server 8 - download server",
+      "movie_url": "https://dl.vidsrc.vip/movie/",
+      "tv_url": "https://dl.vidsrc.vip/tv/",
+      "tv_format": "{url}{tmdb_id}-{season}-{episode}"
+    },
   ],
   "geolocation_api": "https://ipapi.co/json/",
   "genre_mappings": {
