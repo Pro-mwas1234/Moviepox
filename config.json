@@ -41,16 +41,9 @@
     {
       "id": 6,
       "name": "Server 6 - Movieapi",
-      "movie_url": "https://moviesapi.club/movie/",
-      "tv_url": "https://moviesapi.club/tv/",
-      "tv_format": "{url}{tmdb_id}-{season}-{episode}"
-    },
-    {
-      "id": 7,
-      "name": "Server 7 - Vidsrc",
       "movie_url": "https://dl.vidsrc.vip/movie/",
       "tv_url": "https://moviesapi.club/tv/",
-      "tv_format": "{url}{tmdb_id}/{season}/{episode}"
+      "tv_format": "{url}{tmdb_id}-{season}-{episode}"
     },
             
   ],
