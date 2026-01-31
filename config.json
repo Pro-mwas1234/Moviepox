@@ -40,18 +40,11 @@
     },
     {
       "id": 6,
-      "name": "Server 6 - Movieapi",
-      "movie_url": "https://moviesapi.club/movie/",
-      "tv_url": "https://moviesapi.club/tv/",
-      "tv_format": "{url}{tmdb_id}-{season}-{episode}"
-    },
-    {
-      "id": 7,
-      "name": "Server 7 - 3asy player",
-      "movie_url": "https://player.videasy.net/movie/",
-      "tv_url": "https://player.videasy.net/tv/",
-      "tv_format": "{url}{tmdb_id}-{season}-{episode}"
-    },
+      "name": "Server 6 -movieapi",
+      "movie_url": "https://as-cdn21.top/video/",
+      "tv_url": "https://as-cdn21.top/video/",
+      "tv_format": "{url}{tmdb_id}/{season}/{episode}"
+    }
   ],
   "geolocation_api": "https://ipapi.co/json/",
   "genre_mappings": {
