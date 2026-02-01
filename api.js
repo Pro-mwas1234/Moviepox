@@ -53,7 +53,7 @@ class TMDbAPI {
         return `${this.imageBase}/${size}${path}`;
     }
 
-    async getTrending(mediaType = 'movie', timeWindow = 'week') {
+    async getTrending(mediaType = 'movie', timeWindow = 'day') {
         return await this.fetchData(`/trending/${mediaType}/${timeWindow}`);
     }
 
