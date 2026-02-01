@@ -42,7 +42,7 @@
       "id": 6,
       "name": "Server 6 - Movie api",
       "movie_url": "https://moviesapi.to/movie/",
-      "tv_url": "https://moviesapi.to//tv/",
+      "tv_url": "https://moviesapi.to/tv/",
       "tv_format": "{url}{tmdb_id}/{season}/{episode}"
     }
   ],
