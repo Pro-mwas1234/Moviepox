@@ -40,9 +40,9 @@
     },
     {
       "id": 6,
-      "name": "Server 6 -movieapi",
-      "movie_url": "https://as-cdn21.top/video/",
-      "tv_url": "https://as-cdn21.top/video/",
+      "name": "Server 6 - easy play",
+      "movie_url": "https://player.videasy.net/movie/",
+      "tv_url": "https://player.videasy.net/tv/",
       "tv_format": "{url}{tmdb_id}/{season}/{episode}"
     }
   ],
