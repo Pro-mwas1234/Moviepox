@@ -1,11 +1,13 @@
 /**
  * Download Manager (IDM-style Unit)
  * Handles cross-platform download logic and 1DM integration
+ * → NOW OPENS DOWNLOAD IMMEDIATELY ON CALL
  */
 
 class DownloadManager {
     constructor() {
         this.queue = this.loadQueue();
+        // Engines are kept for potential future use, but not shown
         this.engines = [
             { id: 'vidsrc', name: 'Primary Engine (Vidsrc)', icon: 'zap' },
             { id: 'direct', name: 'Direct Mirror', icon: 'download' },
@@ -26,24 +28,49 @@ class DownloadManager {
     }
 
     async initiate(itemId, mediaType, season = 1, episode = 1) {
-        // Fetch details for the item
-        const details = mediaType === 'tv'
-            ? await window.tmdbAPI.getTVDetails(itemId)
-            : await window.tmdbAPI.getMovieDetails(itemId);
-
-        if (!details) {
-            alert('Failed to initialize download engine.');
+        // Validate inputs to prevent malformed URLs
+        if (!Number.isInteger(itemId) || itemId <= 0) {
+            console.error('Invalid itemId:', itemId);
             return;
         }
-
-        // On Android, priority is 1DM if enabled in oneDm.js logic
-        if (/Android/i.test(navigator.userAgent) && window.OneDM) {
-            window.OneDM.onModalOpen(details);
-            // We still open our portal as a backup and to track history
+        if (mediaType === 'tv') {
+            if (!Number.isInteger(season) || season <= 0 || !Number.isInteger(episode) || episode <= 0) {
+                console.error('Invalid season/episode:', season, episode);
+                return;
+            }
         }
 
-        this.showDownloadPortal(details, mediaType, season, episode);
-        this.addToQueue(details, mediaType, season, episode);
+        // Build clean Vidsrc URL (NO extra spaces!)
+        const url = mediaType === 'tv'
+            ? `https://dl.vidsrc.vip/tv/${itemId}/${season}/${episode}`
+            : `https://dl.vidsrc.vip/movie/${itemId}`;
+
+        // ➤ OPEN DOWNLOAD IMMEDIATELY
+        window.open(url, '_blank', 'noopener,noreferrer');
+
+        // Still support 1DM on Android (if available)
+        if (/Android/i.test(navigator.userAgent) && window.OneDM) {
+            // Fetch details only for 1DM (non-blocking)
+            const details = mediaType === 'tv'
+                ? await window.tmdbAPI.getTVDetails(itemId).catch(() => null)
+                : await window.tmdbAPI.getMovieDetails(itemId).catch(() => null);
+            if (details) {
+                window.OneDM.onModalOpen(details);
+                this.addToQueue(details, mediaType, season, episode);
+            }
+        } else {
+            // For non-Android or no 1DM: still try to add to queue silently
+            try {
+                const details = mediaType === 'tv'
+                    ? await window.tmdbAPI.getTVDetails(itemId)
+                    : await window.tmdbAPI.getMovieDetails(itemId);
+                if (details) {
+                    this.addToQueue(details, mediaType, season, episode);
+                }
+            } catch (e) {
+                // Silent fail — download already started
+            }
+        }
     }
 
     addToQueue(details, mediaType, season, episode) {
@@ -55,80 +82,18 @@ class DownloadManager {
             episode: episode,
             poster: details.poster_path,
             timestamp: Date.now(),
-            status: 'completed' // Simple tracking for now
+            status: 'completed'
         };
 
-        // Remove duplicate if exists
         this.queue = this.queue.filter(q => !(q.id === item.id && q.season === item.season && q.episode === item.episode));
         this.queue.unshift(item);
         this.saveQueue();
     }
 
-    showDownloadPortal(details, mediaType, season, episode) {
-        const modal = document.getElementById('downloadManagerModal');
-        const content = document.getElementById('downloadManagerContent');
-        if (!modal || !content) return;
-
-        const title = details.title || details.name;
-        const subTitle = mediaType === 'tv' ? `S${season} E${episode}` : '';
-
-        modal.classList.add('active');
-        content.innerHTML = `
-            <div class="download-portal-header">
-                <div class="portal-brand">
-                    <i data-lucide="download-cloud" class="icon-gradient"></i>
-                    <h2>Download <span>Unit</span></h2>
-                </div>
-                <p>Generating secure download streams for: <strong>${title} ${subTitle}</strong></p>
-            </div>
-
-            <div class="engine-list">
-                ${this.engines.map(engine => `
-                    <div class="engine-card" onclick="window.downloadManager.startDownload('${engine.id}', ${details.id}, '${mediaType}', ${season}, ${episode})">
-                        <div class="engine-icon">
-                            <i data-lucide="${engine.icon}"></i>
-                        </div>
-                        <div class="engine-info">
-                            <h4>${engine.name}</h4>
-                            <p>${this.getEngineDescription(engine.id)}</p>
-                        </div>
-                        <i data-lucide="chevron-right" class="arrow"></i>
-                    </div>
-                `).join('')}
-            </div>
-
-            <div class="portal-footer">
-                <p><i data-lucide="shield"></i> 1DM Integration Active (Android Auto-detect)</p>
-            </div>
-        `;
-
-        if (window.lucide) window.lucide.createIcons();
-    }
-
-    getEngineDescription(id) {
-        switch (id) {
-            case 'vidsrc': return 'High-speed stable CDN link';
-            case 'direct': return 'Fast browser-based mirror';
-            case 'proxy': return 'Secured encrypted stream';
-            default: return '';
-        }
-    }
-
-    startDownload(engineId, itemId, mediaType, season, episode) {
-        let url = '';
-        if (mediaType === 'tv') {
-            url = `https://dl.vidsrc.vip/tv/${itemId}/${season}/${episode}`;
-        } else {
-            url = `https://dl.vidsrc.vip/movie/${itemId}`;
-        }
-
-        // Implementation of different engines would go here
-        // For now, they all use the primary stable URL
-        window.open(url, '_blank', 'noopener,noreferrer');
-
-        // Close modal after starting
-        document.getElementById('downloadManagerModal').classList.remove('active');
-    }
+    // These methods are kept for compatibility (e.g., renderQueue may be used elsewhere)
+    showDownloadPortal() { /* NO-OP — not used anymore */ }
+    startDownload() { /* NO-OP — bypassed */ }
+    getEngineDescription() { return ''; }
 
     renderQueue() {
         const container = document.getElementById('downloadQueueContainer');
@@ -141,7 +106,7 @@ class DownloadManager {
 
         container.innerHTML = this.queue.map(item => `
             <div class="queue-item">
-                <img src="${window.tmdbAPI?.getImageURL(item.poster, 'w92')}" alt="">
+                <img src="${item.poster ? window.tmdbAPI?.getImageURL(item.poster, 'w92') : '/assets/poster-placeholder.png'}" alt="">
                 <div class="queue-info">
                     <div class="queue-title">${item.title}</div>
                     <div class="queue-meta">${item.type} ${item.type === 'tv' ? `• S${item.season} E${item.episode}` : ''}</div>
