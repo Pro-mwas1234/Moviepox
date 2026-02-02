@@ -1,3 +1,20 @@
+/* Hide scrollbars globally */
+::-webkit-scrollbar {
+  display: none;
+}
+
+html {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;     /* Firefox */
+}
+
+body {
+  overflow-x: hidden;
+  overflow-y: auto; /* or 'hidden' if you never want vertical scroll */
+}
+
+
+
 * {
     margin: 0;
     padding: 0;
