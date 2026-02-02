@@ -48,9 +48,9 @@
     {
       "id": 7,
       "name": "Server 7 - epl",
-      "movie_url": "https://gametimes.top/home/blog1/",
-      "tv_url": "https://gametimes.top/home/blog1/",
-      "tv_format": ""
+      "movie_url": "https://gametimes.top/",
+      "tv_url": "https://gametimes.top/",
+      "tv_format": "{url}/home/blog1"
     }
   ],
   "geolocation_api": "https://ipapi.co/json/",
