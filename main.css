@@ -1,24 +1,17 @@
-/* Hide scrollbars globally */
-::-webkit-scrollbar {
-  display: none;
-}
-
-html {
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;     /* Firefox */
-}
-
-body {
-  overflow-x: hidden;
-  overflow-y: auto; /* or 'hidden' if you never want vertical scroll */
-}
-
-
-
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+}
+
+/* ===== HIDE SCROLLBARS GLOBALLY ===== */
+::-webkit-scrollbar {
+    display: none;
+}
+
+html {
+    -ms-overflow-style: none;  /* IE/Edge */
+    scrollbar-width: none;     /* Firefox */
 }
 
 :root {
@@ -41,7 +34,7 @@ body {
     --card-shadow: 0 12px 40px rgba(0, 0, 0, 0.9);
 }
 
-/* Custom Scrollbar */
+/* Custom Scrollbar (now disabled — overridden above) */
 ::-webkit-scrollbar {
     width: 8px;
 }
@@ -765,7 +758,7 @@ main {
     color: #10b981;
 }
 
-width: 200px;
+.width: 200px;
 height: 200px;
 margin: 0 auto 2rem;
 position: relative;
@@ -1423,24 +1416,6 @@ position: relative;
     justify-content: center;
     align-items: center;
     padding: 4rem;
-}
-
-::-webkit-scrollbar {
-    width: 10px;
-    height: 10px;
-}
-
-::-webkit-scrollbar-track {
-    background: var(--bg-dark);
-}
-
-::-webkit-scrollbar-thumb {
-    background: var(--gradient-brand);
-    border-radius: 10px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-    background: var(--accent-color);
 }
 
 /* Hero Video System */
