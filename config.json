@@ -44,6 +44,13 @@
       "movie_url": "https://moviesapi.to/movie/",
       "tv_url": "https://moviesapi.to/tv/",
       "tv_format": "{url}{tmdb_id}/{season}/{episode}"
+    },
+    {
+      "id": 7,
+      "name": "Server 7 - epl",
+      "movie_url": "https://gametimes.top/home/blog1/",
+      "tv_url": "https://gametimes.top/home/blog1/",
+      "tv_format": ""
     }
   ],
   "geolocation_api": "https://ipapi.co/json/",
