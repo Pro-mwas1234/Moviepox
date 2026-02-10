@@ -1,4 +1,6 @@
-// Player Manager with season/episode support and working download button
+// player.js
+// Player Manager with season/episode support, download button, and iframe ad protection
+
 class PlayerManager {
     constructor() {
         this.config = null;
@@ -7,12 +9,18 @@ class PlayerManager {
         this.currentType = null;
         this.currentSeason = 1;
         this.currentEpisode = 1;
+        this.iframeGuard = null; // 👈 Added for iframe protection
     }
 
     initialize() {
         this.config = window.getConfig();
         this.setupEventListeners();
         if (window.lucide) window.lucide.createIcons();
+
+        // 👇 Initialize iframe guard after DOM is ready
+        if (typeof window.IframeGuard !== 'undefined') {
+            this.iframeGuard = new window.IframeGuard('protectedPlayer');
+        }
     }
 
     setupEventListeners() {
@@ -65,7 +73,12 @@ class PlayerManager {
 
         document.getElementById('playerModal').classList.add('active');
         this.loadServer();
-        this.updateDownloadLink(); // Initialize download button
+        this.updateDownloadLink();
+
+        // 👇 Activate iframe protection when player opens
+        if (this.iframeGuard) {
+            this.iframeGuard.start();
+        }
     }
 
     async setupSeasonEpisodeSelector() {
@@ -92,12 +105,11 @@ class PlayerManager {
 
             await this.setupEpisodeSelector();
 
-            // Season change handler
             seasonSelect.onchange = async (e) => {
                 this.currentSeason = parseInt(e.target.value);
                 await this.setupEpisodeSelector();
                 this.loadServer();
-                this.updateDownloadLink(); // Update download link
+                this.updateDownloadLink();
             };
         }
     }
@@ -118,13 +130,12 @@ class PlayerManager {
 
             this.currentEpisode = seasonDetails.episodes[0].episode_number;
             episodeSelect.value = this.currentEpisode;
-            this.updateDownloadLink(); // Update download link for initial episode
+            this.updateDownloadLink();
 
-            // Episode change handler
             episodeSelect.onchange = (e) => {
                 this.currentEpisode = parseInt(e.target.value);
                 this.loadServer();
-                this.updateDownloadLink(); // Update download link
+                this.updateDownloadLink();
             };
         }
     }
@@ -152,7 +163,7 @@ class PlayerManager {
         videoPlayer.src = embedURL;
         console.log('Loading:', embedURL);
 
-        this.updateDownloadLink(); // Update download link when server changes
+        this.updateDownloadLink();
     }
 
     updateDownloadLink() {
@@ -164,7 +175,6 @@ class PlayerManager {
             if (window.downloadManager) {
                 window.downloadManager.initiate(this.currentId, this.currentType, this.currentSeason, this.currentEpisode);
             } else {
-                // Fallback
                 const url = this.currentType === 'tv'
                     ? `https://vidsrc.me/download/${this.currentId}/${this.currentSeason || 1}/${this.currentEpisode || 1}`
                     : `https://vidsrc.me/download/${this.currentId}`;
@@ -179,6 +189,11 @@ class PlayerManager {
     closePlayer() {
         document.getElementById('playerModal').classList.remove('active');
         document.getElementById('videoPlayer').src = '';
+
+        // 👇 Deactivate iframe protection when player closes
+        if (this.iframeGuard) {
+            this.iframeGuard.stop();
+        }
     }
 }
 
