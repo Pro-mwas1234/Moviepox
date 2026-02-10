@@ -43,7 +43,7 @@ If you’d like to clone and run *moviepox* locally:
 git clone https://github.com/Pro-mwas1234/moviepox.git
 
 # Open the project folder
-cd equanta
+cd Moviepox
 
 # Start a local server (for example, using VSCode Live Server)
 # Or simply open index.html in your browser
