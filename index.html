@@ -312,16 +312,8 @@
         <div class="player-container">
             <button class="player-close" id="closePlayer">&times;</button>
             <div class="player-wrapper">
-  <div id="protectedPlayer" data-iframe-guard="true">
-    <iframe 
-      id="videoPlayer" 
-      allowfullscreen
-      sandbox="allow-scripts allow-same-origin allow-forms allow-presentation"
-      referrerpolicy="no-referrer-when-downgrade"
-      loading="eager"
-    ></iframe>
-  </div>
-</div>
+                <iframe id="videoPlayer" allowfullscreen></iframe>
+            </div>
             <div class="player-controls">
 
                 <!-- TV Show Season/Episode Selector -->
@@ -496,25 +488,23 @@
     </div>
 
     <!-- Scripts -->
-<!-- ... other scripts ... -->
-
-<script src="config.js"></script>
-<script src="firebase_config.js"></script>
-<script src="auth.js"></script>
-<script src="history.js"></script>
-<script src="download.js"></script>
-<script src="api.js"></script>
-<script src="ui.js"></script>
-
-<!-- 👇 ADD THIS LINE -->
-<script src="iframe-guard.js"></script>
-
-<!-- 👇 THEN player.js -->
-<script src="player.js"></script>
-
-<script src="app.js"></script>
-<script src="shareRouter.js"></script>
-<script src="player-updates.js"></script>        document.addEventListener('DOMContentLoaded', () => {
+<script>
+alert("update movie ❄️api  [sever 2]fixed⚡️with no ads")
+</script>
+    <script src="config.js"></script>
+    <script src="firebase_config.js"></script>
+    <script src="auth.js"></script>
+    <script src="history.js"></script>
+    <script src="download.js"></script>
+    <script src="api.js"></script>
+    <script src="ui.js"></script>
+    <script src="player.js"></script>
+    <script src="app.js"></script>
+    <script src="shareRouter.js"></script>
+    <script src="player-updates.js"></script>
+    <!-- Initialize router on startup -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
             if (window.ShareRouter) {
                 window.ShareRouter.init();
             }
