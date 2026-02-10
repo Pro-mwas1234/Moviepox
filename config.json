@@ -12,39 +12,40 @@
     },
     {
       "id": 2,
-      "name": "Server 2 - Indiraembed",
+      "name": "Server 2 - Movie api",
+      "movie_url": "https://moviesapi.club/movie/",
+      "tv_url": "https://moviesapi.club/tv/",
+      "tv_format": "{url}{tmdb_id}-{season}-{episode}"
+    },
+    {
+      "id": 3,
+      "name": "Server 3 - Indiraembed",
       "movie_url": "https://indraembed.netlify.app/movie/",
       "tv_url": "https://indraembed.netlify.app/tv/",
       "tv_format": "{url}{tmdb_id}/{season}/{episode}"
     },
     {
-      "id": 3,
-      "name": "Server 3 - 2Embed",
+      "id": 4,
+      "name": "Server 4 - 2Embed",
       "movie_url": "https://www.2embed.stream/embed/",
       "tv_url": "https://www.2embed.stream/embed/",
       "tv_format": "{url}{tmdb_id}&s={season}&e={episode}"
     },
     {
-      "id": 4,
-      "name": "Server 4 - autoEmbed",
+      "id": 5,
+      "name": "Server 5 - autoEmbed",
       "movie_url": "https://player.autoembed.cc/embed/movie/",
       "tv_url": "https://player.autoembed.cc/embed/tv/",
       "tv_format": "{url}{tmdb_id}/{season}/{episode}"
     },
     {
-      "id": 5,
-      "name": "Server 5 - Vidsrc",
+      "id": 6,
+      "name": "Server 6 - Vidsrc",
       "movie_url": "https://vidsrc-embed.ru/embed/movie/",
       "tv_url": "https://vidsrc-embed.ru/embed/tv/",
       "tv_format": "{url}{tmdb_id}/{season}/{episode}"
     },
-    {
-      "id": 6,
-      "name": "Server 6 - Movie api",
-      "movie_url": "https://moviesapi.to/movie/",
-      "tv_url": "https://moviesapi.to/tv/",
-      "tv_format": "{url}{tmdb_id}/{season}/{episode}"
-    },
+    
     {
       "id": 7,
       "name": "Server 7 - epl",
