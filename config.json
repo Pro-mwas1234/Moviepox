@@ -6,8 +6,8 @@
     {
       "id": 1,
       "name": "Server 1 - zxcstream",
-      "movie_url": "https://www.zxcstream.xyz/player/movie/",
-      "tv_url": "https://www.zxcstream.xyz/player/tv/",
+      "movie_url": "https://www.zxcstream.xyz/embed/movie/",
+      "tv_url": "https://www.zxcstream.xyz/embed/tv/",
       "tv_format": "{url}{tmdb_id}/{season}/{episode}"
     },
     {
