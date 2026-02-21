@@ -44,8 +44,7 @@
       "movie_url": "https://www.2embed.stream/embed/",
       "tv_url": "https://www.2embed.stream/embed/",
       "tv_format": "{url}{tmdb_id}&s={season}&e={episode}"
-    },
-    
+    }    
   ],
   "geolocation_api": "https://ipapi.co/json/",
   "genre_mappings": {
