@@ -10,49 +10,45 @@
       "tv_url": "https://www.zxcstream.xyz/embed/tv/",
       "tv_format": "{url}{tmdb_id}/{season}/{episode}"
     },
+    
     {
       "id": 2,
-      "name": "Server 2 - Movie api",
+      "name": "Server 2 - xpass",
+      "movie_url": "https://play.xpass.top/e/movie/",
+      "tv_url": "https://play.xpass.top/e/tv/",
+      "tv_format": "{url}{tmdb_id}/{season}/{episode}"
+    },
+    
+    {
+      "id": 3,
+      "name": "Server 3 - autoEmbed",
+      "movie_url": "https://player.autoembed.cc/embed/movie/",
+      "tv_url": "https://player.autoembed.cc/embed/tv/",
+      "tv_format": "{url}{tmdb_id}/{season}/{episode}"
+    },
+
+    {
+      "id": 4,
+      "name": "Server 4 - Movie api",
       "movie_url": "https://moviesapi.club/movie/",
       "tv_url": "https://moviesapi.club/tv/",
       "tv_format": "{url}{tmdb_id}-{season}-{episode}"
     },
     {
-      "id": 3,
-      "name": "Server 3 - Indiraembed",
+      "id": 5,
+      "name": "Server 5 - Indiraembed",
       "movie_url": "https://indraembed.netlify.app/movie/",
       "tv_url": "https://indraembed.netlify.app/tv/",
       "tv_format": "{url}{tmdb_id}/{season}/{episode}"
     },
     {
-      "id": 4,
-      "name": "Server 4 - 2Embed",
+      "id": 6,
+      "name": "Server 6 - 2Embed",
       "movie_url": "https://www.2embed.stream/embed/",
       "tv_url": "https://www.2embed.stream/embed/",
       "tv_format": "{url}{tmdb_id}&s={season}&e={episode}"
     },
-    {
-      "id": 5,
-      "name": "Server 5 - autoEmbed",
-      "movie_url": "https://player.autoembed.cc/embed/movie/",
-      "tv_url": "https://player.autoembed.cc/embed/tv/",
-      "tv_format": "{url}{tmdb_id}/{season}/{episode}"
-    },
-    {
-      "id": 6,
-      "name": "Server 6 - Vidsrc",
-      "movie_url": "https://vidsrc-embed.ru/embed/movie/",
-      "tv_url": "https://vidsrc-embed.ru/embed/tv/",
-      "tv_format": "{url}{tmdb_id}/{season}/{episode}"
-    },
     
-    {
-      "id": 7,
-      "name": "Server 7 - epl",
-      "movie_url": "https://gametimes.top/",
-      "tv_url": "https://gametimes.top/",
-      "tv_format": "{url}/home/blog1"
-    }
   ],
   "geolocation_api": "https://ipapi.co/json/",
   "genre_mappings": {
