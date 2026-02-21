@@ -10,7 +10,6 @@
       "tv_url": "https://www.zxcstream.xyz/embed/tv/",
       "tv_format": "{url}{tmdb_id}/{season}/{episode}"
     },
-    
     {
       "id": 2,
       "name": "Server 2 - xpass",
@@ -18,7 +17,6 @@
       "tv_url": "https://play.xpass.top/e/tv/",
       "tv_format": "{url}{tmdb_id}/{season}/{episode}"
     },
-    
     {
       "id": 3,
       "name": "Server 3 - autoEmbed",
@@ -26,7 +24,6 @@
       "tv_url": "https://player.autoembed.cc/embed/tv/",
       "tv_format": "{url}{tmdb_id}/{season}/{episode}"
     },
-
     {
       "id": 4,
       "name": "Server 4 - Movie api",
