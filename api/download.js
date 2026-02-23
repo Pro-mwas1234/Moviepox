@@ -9,10 +9,10 @@
 
     //if (type === 'tv') {
         // Construct URL for TV show download via vidsrc.xyz (reliable aggregator)
-      //  downloadUrl = `https://dl.vidsrc.vip/tv?tmdb=${id}&season=${s || 1}&episode=${e || 1}`;
+      //  downloadUrl = `https://02moviedownloader.site/api/download/tv?tmdb=${id}&season=${s || 1}&episode=${e || 1}`;
     //} else {
         // Construct URL for movie download
-      //  downloadUrl = `https://dl.vidsrc.vip/movie/?tmdb=${id}`;
+      //  downloadUrl = `https://02moviedownloader.site/api/download/movie?tmdb=${id}`;
     //}
 
     // Use a 302 redirect to the download aggregator
