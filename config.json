@@ -8,7 +8,7 @@
       "name": "Server 1 - vidcore",
       "movie_url": "https://vidcore.net/movie/",
       "tv_url": "https://vidcore.net/tv/",
-      "tv_format": "{url}{tmdb_id}-{season}-{episode}"
+      "tv_format": "{url}{tmdb_id}/{season}/{episode}"
     },
     {
       "id": 2,
