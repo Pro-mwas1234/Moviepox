@@ -5,14 +5,14 @@
   "servers": [
     {
       "id": 1,
-      "name": "Server 1 - vid🐱‍👤",
+      "name": "Server 1 - vidcore",
       "movie_url": "https://vidcore.net/movie/",
       "tv_url": "https://vidcore.net/tv/",
       "tv_format": "{url}{tmdb_id}/{season}/{episode}"
     },
     {
       "id": 2,
-      "name": "Server 2 - zx👌stream",
+      "name": "Server 2 - zxcstream",
       "movie_url": "https://www.zxcstream.xyz/embed/movie/",
       "tv_url": "https://www.zxcstream.xyz/embed/tv/",
       "tv_format": "{url}{tmdb_id}/{season}/{episode}"
