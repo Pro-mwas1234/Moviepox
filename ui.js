@@ -183,9 +183,6 @@ class UIManager {
                     <button class="btn btn-secondary" onclick="window.playerManager.playTrailer(${item.id}, '${mediaType}')">
                         <i data-lucide="youtube" style="width: 20px; height: 20px; margin-right: 8px;"></i> Watch Trailer
                     </button>
-                    <button class="btn btn-secondary" onclick="window.uiManager.openDetail(${item.id}, '${mediaType}')">
-                        <i data-lucide="info" style="width: 20px; height: 20px; margin-right: 8px;"></i> More Info
-                    </button>
                 </div>
             </div>
         `;
