@@ -123,21 +123,14 @@ class HistoryManager {
         }
 
         section.style.display = 'block';
-        container.innerHTML = history.map(item => `
-            <div class="content-card" onclick="uiManager.openDetail(${item.id}, '${item.media_type}')">
-                <img src="${window.tmdbAPI.getImageURL(item.poster_path, 'w342')}" alt="${item.title}" loading="lazy">
-                <div class="card-overlay">
-                    <div class="card-play">
-                        <svg width="40" height="40" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M8 5v14l11-7z"></path>
-                        </svg>
-                    </div>
-                </div>
-                <div class="card-info">
-                    <h3 class="card-title">${item.title}</h3>
-                </div>
-            </div>
-        `).join('');
+        container.innerHTML = ''; // Clear container
+
+        history.forEach(item => {
+            const card = window.uiManager.createContentCard(item, item.media_type);
+            container.appendChild(card);
+        });
+
+        console.log('✓ Rendered history items');
 
         if (window.lucide) window.lucide.createIcons();
     }

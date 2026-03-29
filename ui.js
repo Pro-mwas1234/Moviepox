@@ -18,6 +18,14 @@ class UIManager {
         card.innerHTML = `
             <img src="${this.api.getImageURL(posterPath)}" alt="${title}" loading="lazy">
             <div class="card-overlay">
+                <div class="card-actions-wrapper">
+                    <div class="card-action-btn card-play-btn" title="Play Now">
+                        <i data-lucide="play" style="width: 18px; height: 18px;"></i>
+                    </div>
+                    <div class="card-action-btn card-trailer-btn" title="Watch Trailer">
+                        <i data-lucide="youtube" style="width: 18px; height: 18px;"></i>
+                    </div>
+                </div>
                 <div class="card-title">${title}</div>
                 <div class="card-info">
                     <span>${year}</span>
@@ -27,6 +35,26 @@ class UIManager {
         `;
 
         card.onclick = () => this.openDetail(item.id, type);
+
+        // Play Now button click handler
+        const playBtn = card.querySelector('.card-play-btn');
+        if (playBtn) {
+            playBtn.onclick = (e) => {
+                e.stopPropagation(); // Prevent opening the detail modal
+                window.playerManager.openPlayer(item.id, type);
+            };
+        }
+
+        // Trailer button click handler
+        const trailerBtn = card.querySelector('.card-trailer-btn');
+        if (trailerBtn) {
+            trailerBtn.onclick = (e) => {
+                e.stopPropagation(); // Prevent opening the detail modal
+                window.playerManager.playTrailer(item.id, type);
+            };
+        }
+
+        if (window.lucide) window.lucide.createIcons();
         return card;
     }
 
@@ -152,6 +180,9 @@ class UIManager {
                     <button class="btn btn-primary" onclick="window.playerManager.openPlayer(${item.id}, '${mediaType}')">
                         <i data-lucide="play" style="width: 20px; height: 20px; margin-right: 8px;"></i> Play Now
                     </button>
+                    <button class="btn btn-secondary" onclick="window.playerManager.playTrailer(${item.id}, '${mediaType}')">
+                        <i data-lucide="youtube" style="width: 20px; height: 20px; margin-right: 8px;"></i> Watch Trailer
+                    </button>
                     <button class="btn btn-secondary" onclick="window.uiManager.openDetail(${item.id}, '${mediaType}')">
                         <i data-lucide="info" style="width: 20px; height: 20px; margin-right: 8px;"></i> More Info
                     </button>
@@ -197,9 +228,14 @@ class UIManager {
                     ${genres.map(g => `<span class="genre-tag">${g.name}</span>`).join('')}
                 </div>
                 <p class="detail-overview">${details.overview || 'No description available'}</p>
-                <button class="btn btn-primary" onclick="window.playerManager.openPlayer(${id}, '${mediaType}')">
-                    ▶ Play Now
-                </button>
+                <div class="detail-actions" style="display: flex; gap: 1rem; margin-top: 1.5rem;">
+                    <button class="btn btn-primary" onclick="window.playerManager.openPlayer(${id}, '${mediaType}')">
+                         ▶ Play Now
+                    </button>
+                    <button class="btn btn-secondary" onclick="window.playerManager.playTrailer(${id}, '${mediaType}')" style="background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.2);">
+                         🎬 Watch Trailer
+                    </button>
+                </div>
             </div>
         `;
 

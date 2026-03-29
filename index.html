@@ -55,11 +55,9 @@
 
   gtag('config', 'G-NZ64PY1BR7');
 </script>
-    <!--add shii 
-    <script id="aclib" type="text/javascript" src="//acscdn.com/script/aclib.js"></script>
-
-
-    -->
+    <!-- Global Ads & Scripts -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7974461746943590"
+     crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -182,25 +180,6 @@
             </div>
         </div>
 
-        <!-- Upcoming Releases -->
-      <!--  <div class="content-section">
-            <div class="section-header">
-                <h2 class="section-title">Coming Soon</h2>
-            </div>
-            <div class="slider-container">
-                <button class="slider-btn slider-btn-left" data-slider="upcomingMovies">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <polyline points="15 18 9 12 15 6"></polyline>
-                    </svg>
-                </button>
-                <div id="upcomingMovies" class="content-slider"></div>
-                <button class="slider-btn slider-btn-right" data-slider="upcomingMovies">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <polyline points="9 18 15 12 9 6"></polyline>
-                    </svg>
-                </button>
-            </div>
-        </div> -->
 
         <!-- Top Movies in Your Area -->
         <div class="content-section">
@@ -337,6 +316,11 @@
                     <label>Select Server:</label>
                     <select id="serverSelect"></select>
                 </div>
+
+                <!-- Trailer Mode Action -->
+                <button id="trailerPlayBtn" class="btn btn-primary" style="display: none;">
+                    🎬 Play Movie
+                </button>
 
                 <!-- Download Button -->
                 <button id="shareBtn" class="btn btn-secondary" title="Share this link">
@@ -493,15 +477,14 @@
         </div>
     </div>
 
-    <!-- Scripts -->
- <!--   <script >
-                alert("join the support channel and plz log in to get quick updates")
-    </script>-->
+    <!-- Ads Support -->
     <script type="text/javascript">
-    aclib.runAutoTag({
-        zoneId: '0xwhz3v9ix',
-    });
-</script>
+    if (window.aclib) {
+        aclib.runAutoTag({
+            zoneId: '0xwhz3v9ix',
+        });
+    }
+    </script>
 
 
     <script src="config.js"></script>

@@ -36,6 +36,13 @@ class PlayerManager {
         document.getElementById('closeModal').onclick = () => {
             document.getElementById('detailModal').classList.remove('active');
         };
+
+        const trailerPlayBtn = document.getElementById('trailerPlayBtn');
+        if (trailerPlayBtn) {
+            trailerPlayBtn.onclick = () => {
+                this.openPlayer(this.currentId, this.currentType);
+            };
+        }
     }
 
     async openPlayer(id, mediaType) {
@@ -64,8 +71,54 @@ class PlayerManager {
         }
 
         document.getElementById('playerModal').classList.add('active');
+        
+        // Ensure controls are visible when opening a full movie/show
+        document.getElementById('serverSelect').closest('.server-selector').style.display = 'block';
+        document.getElementById('shareBtn').style.display = 'inline-flex';
+        document.getElementById('downloadBtn').style.display = 'inline-flex';
+        document.getElementById('trailerPlayBtn').style.display = 'none';
+
         this.loadServer();
         this.updateDownloadLink(); // Initialize download button
+    }
+
+    async playTrailer(id, mediaType) {
+        this.currentId = id;
+        this.currentType = mediaType;
+
+        document.getElementById('detailModal').classList.remove('active');
+        document.getElementById('playerModal').classList.add('active');
+
+        // Hide selectors for trailer
+        document.getElementById('tvControls').style.display = 'none';
+        document.getElementById('serverSelect').closest('.server-selector').style.display = 'none';
+        document.getElementById('shareBtn').style.display = 'none';
+        document.getElementById('downloadBtn').style.display = 'none';
+        document.getElementById('trailerPlayBtn').style.display = 'inline-flex';
+
+        const videoPlayer = document.getElementById('videoPlayer');
+        videoPlayer.src = ''; // Clear existing
+
+        try {
+            const api = window.tmdbAPI;
+            const videos = mediaType === 'movie' 
+                ? await api.getMovieVideos(id) 
+                : await api.getTVVideos(id);
+            
+            const trailer = videos?.results?.find(v => v.type === 'Trailer' && v.site === 'YouTube');
+            
+            if (trailer) {
+                videoPlayer.src = `https://www.youtube.com/embed/${trailer.key}?autoplay=1`;
+                console.log('Playing Trailer:', trailer.key);
+            } else {
+                alert('No trailer available for this title.');
+                this.closePlayer();
+            }
+        } catch (error) {
+            console.error('Trailer error:', error);
+            alert('Failed to load trailer.');
+            this.closePlayer();
+        }
     }
 
     async setupSeasonEpisodeSelector() {
