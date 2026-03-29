@@ -230,7 +230,7 @@ class UIManager {
                          ▶ Play Now
                     </button>
                     <button class="btn btn-secondary" onclick="window.playerManager.playTrailer(${id}, '${mediaType}')" style="background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.2);">
-                         🎬 Watch Trailer
+                         O.O Watch Trailer
                     </button>
                 </div>
             </div>
