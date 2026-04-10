@@ -2019,3 +2019,69 @@ main {
         gap: 1.5rem 1rem;
     }
 }
+
+/* Search Hub Styles */
+.search-hub-container {
+    padding: 2rem 1.5rem;
+    animation: fadeIn 0.5s ease-out;
+}
+
+.search-hub-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.search-hub-input-wrapper {
+    position: relative;
+    max-width: 600px;
+    margin: 2rem auto;
+}
+
+.search-hub-input-wrapper i {
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: rgba(255, 255, 255, 0.4);
+}
+
+.search-hub-input-wrapper input {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 50px;
+    padding: 1.2rem 1.2rem 1.2rem 3.5rem;
+    color: white;
+    font-size: 1.1rem;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.search-hub-input-wrapper input:focus {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: var(--primary-color);
+    box-shadow: 0 0 20px rgba(147, 51, 234, 0.2);
+}
+
+.search-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 5rem 2rem;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.4);
+    font-size: 1.1rem;
+}
+
+.empty-message-vibrant {
+    padding: 4rem 2rem;
+    text-align: center;
+    font-size: 1.2rem;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}

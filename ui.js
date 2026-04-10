@@ -49,7 +49,7 @@ class UIManager {
         } else {
             // Default/Search/Trending Variant
             card.innerHTML = `
-                <img src="${this.api.getImageURL(posterPath)}" alt="${title}" loading="lazy" style="width: 100%; height: 350px; object-fit: cover;">
+                <img src="${this.api.getImageURL(posterPath)}" alt="${title}" loading="lazy" class="card-img-responsive">
                 <div class="card-overlay">
                     <div class="card-title">${title}</div>
                     <div class="card-info">
@@ -116,6 +116,11 @@ class UIManager {
     }
 
     toggleSearch() {
+        if (window.innerWidth <= 768) {
+            this.openSearchHub();
+            return;
+        }
+
         const overlay = document.querySelector('.search-overlay');
         const input = document.getElementById('searchInput');
         if (!overlay || !input) return;
@@ -129,6 +134,76 @@ class UIManager {
             overlay.classList.add('active');
             input.focus();
         }
+    }
+
+    openSearchHub() {
+        const mainContent = document.getElementById('mainContent');
+        if (!mainContent) return;
+
+        // Transitions smoothly to a full search page
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        
+        mainContent.innerHTML = `
+            <div class="search-hub-container" style="min-height: 100vh; padding-top: 100px;">
+                <div class="search-hub-header">
+                    <h2 class="section-title">Explore <span>Movies & Shows</span></h2>
+                    <div class="search-hub-input-wrapper">
+                        <i data-lucide="search"></i>
+                        <input type="text" id="hubSearchInput" placeholder="Titles, genres, actors..." autofocus>
+                    </div>
+                </div>
+                <div id="hubResultsGrid" class="genre-results-grid">
+                    <!-- Results will populate here -->
+                    <div class="search-placeholder">
+                        <i data-lucide="sparkles" style="width: 48px; height: 48px; opacity: 0.2; margin-bottom: 1rem;"></i>
+                        <p>Search for your next obsession...</p>
+                    </div>
+                </div>
+            </div>
+        `;
+
+        if (window.lucide) window.lucide.createIcons();
+
+        const input = document.getElementById('hubSearchInput');
+        input.addEventListener('input', (e) => {
+            clearTimeout(this.searchTimeout);
+            const query = e.target.value.trim();
+            if (query.length < 2) {
+                document.getElementById('hubResultsGrid').innerHTML = `
+                    <div class="search-placeholder">
+                        <i data-lucide="sparkles" style="width: 48px; height: 48px; opacity: 0.2; margin-bottom: 1rem;"></i>
+                        <p>Search for your next obsession...</p>
+                    </div>
+                `;
+                if (window.lucide) window.lucide.createIcons();
+                return;
+            }
+
+            this.searchTimeout = setTimeout(async () => {
+                const resultsGrid = document.getElementById('hubResultsGrid');
+                resultsGrid.innerHTML = '<div class="loading-mini"></div>';
+
+                try {
+                    const data = await this.api.search(query);
+                    resultsGrid.innerHTML = '';
+                    
+                    if (!data || data.results.length === 0) {
+                        resultsGrid.innerHTML = '<p class="empty-message-vibrant">No results found for "' + query + '"</p>';
+                        return;
+                    }
+
+                    data.results.forEach(item => {
+                        const card = this.createContentCard(item);
+                        resultsGrid.appendChild(card);
+                    });
+
+                    if (window.lucide) window.lucide.createIcons();
+                } catch (error) {
+                    console.error('Search error:', error);
+                    resultsGrid.innerHTML = '<p class="error-msg">Failed to load results.</p>';
+                }
+            }, 500);
+        });
     }
 
     setupRealtimeSearch() {
