@@ -170,19 +170,38 @@
         overflow: visible;
     }
 
-    /* Cinematic 2-Column Grid for Mobile */
+    /* Restore Horizontal Sliders */
     .content-slider {
+        display: flex !important;
+        flex-wrap: nowrap !important;
+        gap: 1.2rem !important;
+        overflow-x: auto !important;
+        padding-bottom: 1rem !important;
+        scrollbar-width: none;
+    }
+
+    .content-slider::-webkit-scrollbar {
+        display: none;
+    }
+
+    /* Dedicated Grid Class for Discover/Search Hubs */
+    .mobile-grid {
         display: grid !important;
         grid-template-columns: repeat(2, 1fr) !important;
         gap: 1.2rem !important;
         overflow: visible !important;
-        padding: 0 !important;
     }
 
     .content-card {
-        width: 100% !important;
+        width: 155px !important;
+        min-width: 155px !important;
         margin: 0 !important;
-        flex: none !important;
+        flex-shrink: 0 !important;
+    }
+
+    .mobile-grid .content-card {
+        width: 100% !important;
+        min-width: 0 !important;
     }
 
     .content-card img {

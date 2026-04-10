@@ -49,7 +49,7 @@ class UIManager {
         } else {
             // Default/Search/Trending Variant
             card.innerHTML = `
-                <img src="${this.api.getImageURL(posterPath)}" alt="${title}" loading="lazy" class="card-img-responsive">
+                <img src="${this.api.getImageURL(posterPath)}" alt="${title}" loading="lazy" class="card-img-responsive" style="width: 100%; height: auto; aspect-ratio: 2/3; object-fit: cover; border-radius: 8px;">
                 <div class="card-overlay">
                     <div class="card-title">${title}</div>
                     <div class="card-info">
@@ -152,7 +152,7 @@ class UIManager {
                         <input type="text" id="hubSearchInput" placeholder="Titles, genres, actors..." autofocus>
                     </div>
                 </div>
-                <div id="hubResultsGrid" class="genre-results-grid">
+                <div id="hubResultsGrid" class="genre-results-grid mobile-grid">
                     <!-- Results will populate here -->
                     <div class="search-placeholder">
                         <i data-lucide="sparkles" style="width: 48px; height: 48px; opacity: 0.2; margin-bottom: 1rem;"></i>
@@ -375,7 +375,7 @@ class UIManager {
                             <i data-lucide="home"></i> Back to Home
                         </button>
                     </div>
-                    <div id="genreResultsGrid" class="genre-results-grid"></div>
+                    <div id="genreResultsGrid" class="genre-results-grid mobile-grid"></div>
                 </div>
             `;
 

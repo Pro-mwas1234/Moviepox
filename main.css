@@ -4,6 +4,16 @@
     box-sizing: border-box;
 }
 
+.card-img-responsive {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 2/3;
+    object-fit: cover;
+    border-radius: 12px;
+    display: block;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
 /* ===== HIDE SCROLLBARS GLOBALLY ===== */
 ::-webkit-scrollbar {
     display: none;
@@ -1692,8 +1702,8 @@ main {
 /* Footer */
 .footer {
     background: rgba(10, 10, 10, 0.8);
-    backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(20px);
     padding: 5rem 2rem 3rem;
     margin-top: 6rem;
     text-align: center;
