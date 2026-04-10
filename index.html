@@ -72,10 +72,10 @@
                 <a href="#" class="nav-link" onclick="window.uiManager.toggleSearch(); return false;">
                     <i data-lucide="search" style="width: 20px; height: 20px;"></i> Search
                 </a>
-                <a href="#" class="nav-link" onclick="window.scrollTo({top: window.innerHeight, behavior: 'smooth'}); return false;">
+                <a href="#" class="nav-link" onclick="app.scrollToSection('trendingMovies'); return false;">
                     <i data-lucide="layout-grid" style="width: 20px; height: 20px;"></i> Browse
                 </a>
-                <a href="#" class="nav-link" onclick="document.getElementById('watch-later-section').scrollIntoView({behavior: 'smooth'}); return false;">
+                <a href="#" class="nav-link" onclick="app.scrollToSection('watch-later-section'); return false;">
                     <i data-lucide="bookmark" style="width: 20px; height: 20px;"></i> My List
                 </a>
                 <div class="nav-auth">
@@ -101,11 +101,11 @@
         
         <!-- Bottom Navigation (Mobile Only) -->
         <div class="bottom-nav">
-            <a href="#" class="bottom-nav-item" onclick="window.scrollTo({top: 0, behavior: 'smooth'}); return false;">
+            <a href="#" class="bottom-nav-item" onclick="app.scrollToSection('mainContent'); return false;">
                 <i data-lucide="home"></i>
                 <span>Home</span>
             </a>
-            <a href="#" class="bottom-nav-item" onclick="window.scrollTo({top: window.innerHeight, behavior: 'smooth'}); return false;">
+            <a href="#" class="bottom-nav-item" onclick="app.scrollToSection('trendingMovies'); return false;">
                 <i data-lucide="layout-grid"></i>
                 <span>Browse</span>
             </a>
@@ -114,7 +114,7 @@
                     <i data-lucide="search"></i>
                 </div>
             </a>
-            <a href="#" class="bottom-nav-item" onclick="document.getElementById('watch-later-section').scrollIntoView({behavior: 'smooth'}); return false;">
+            <a href="#" class="bottom-nav-item" onclick="app.scrollToSection('watch-later-section'); return false;">
                 <i data-lucide="bookmark"></i>
                 <span>My List</span>
             </a>
@@ -179,11 +179,6 @@
             </div>
         </div>
 
-        <div class="bottom-actions">
-            <button class="btn btn-secondary profile-fab" id="profile-fab-btn">
-                <i data-lucide="user"></i> Profile <i data-lucide="chevron-down" style="width: 14px;"></i>
-            </button>
-        </div>
 
         <!-- Trending Movies -->
         <div class="content-section">

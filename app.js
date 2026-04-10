@@ -130,6 +130,29 @@ class App {
             window.scrollTo({ top: 0, behavior: 'smooth' });
         };
     }
+
+    scrollToSection(id) {
+        const section = document.getElementById(id);
+        if (!section) return;
+
+        const navHeight = document.querySelector('.navbar').offsetHeight;
+        let offset = navHeight + 20;
+
+        // On mobile, the top nav is transparent/minimal, so we adjust the offset
+        if (window.innerWidth <= 768) {
+            offset = 10;
+        }
+
+        const bodyRect = document.body.getBoundingClientRect().top;
+        const elementRect = section.getBoundingClientRect().top;
+        const elementPosition = elementRect - bodyRect;
+        const offsetPosition = elementPosition - offset;
+
+        window.scrollTo({
+            top: offsetPosition,
+            behavior: 'smooth'
+        });
+    }
 }
 
 document.addEventListener('DOMContentLoaded', () => {
