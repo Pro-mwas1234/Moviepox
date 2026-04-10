@@ -31,234 +31,160 @@
 }
 
 @media (max-width: 768px) {
-    .nav-container {
-        flex-wrap: wrap;
-        justify-content: space-between;
-        gap: 0.8rem;
-        padding: 0.8rem;
+    /* Hide Desktop Nav Elements */
+    .nav-links-right {
+        display: none;
     }
 
-    .nav-logo {
-        order: 1;
-        display: flex;
-        align-items: center;
-        gap: 8px;
+    .nav-container {
+        padding: 0 1.5rem;
+        height: 70px;
+        justify-content: center;
     }
 
     .nav-logo h1 {
-        display: block;
-        font-size: 1.2rem;
+        font-size: 1.4rem;
     }
 
-    .nav-logo i {
-        width: 24px !important;
-        height: 24px !important;
-    }
-
-    .nav-auth {
-        order: 2;
-    }
-
-    .nav-search {
-        order: 3;
+    /* Bottom Navigation Bar */
+    .bottom-nav {
+        display: flex;
+        position: fixed;
+        bottom: 0;
+        left: 0;
         width: 100%;
-        max-width: none;
-        flex: none;
-        margin-top: 0.2rem;
+        height: 75px;
+        background: rgba(10, 10, 15, 0.85);
+        -webkit-backdrop-filter: blur(25px);
+        backdrop-filter: blur(25px);
+        border-top: 1px solid rgba(255, 255, 255, 0.08);
+        z-index: 10000;
+        justify-content: space-around;
+        align-items: center;
+        padding-bottom: env(safe-area-inset-bottom, 5px);
     }
 
-    .nav-search input {
-        padding: 0.7rem 1.2rem;
-        font-size: 0.9rem;
-        border-radius: 12px;
+    .bottom-nav-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 4px;
+        color: rgba(255, 255, 255, 0.6);
+        text-decoration: none;
+        font-size: 0.75rem;
+        font-weight: 500;
+        transition: all 0.3s ease;
     }
 
-    .btn-auth {
-        padding: 0.5rem 1rem;
-        font-size: 0.8rem;
+    .bottom-nav-item i {
+        width: 20px;
+        height: 20px;
     }
 
+    .bottom-nav-item.active,
+    .bottom-nav-item:active {
+        color: var(--primary-color);
+    }
+
+    .bottom-nav-search {
+        width: 50px;
+        height: 50px;
+        background: var(--gradient-brand);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: -25px;
+        box-shadow: 0 8px 25px rgba(147, 51, 234, 0.4);
+        color: white;
+    }
+
+    /* Hero Banner Mobile */
     .hero-banner {
-        height: 60vh;
+        height: 75vh;
         padding: 1.5rem;
-        margin-top: 0;
+        background-position: center;
+    }
+
+    .hero-content {
+        bottom: 8rem; /* Higher to clear bottom nav */
+        max-width: 100%;
     }
 
     .hero-content h1 {
-        font-size: 2rem;
-    }
-
-    .hero-content p {
-        font-size: 1rem;
-        display: none;
+        font-size: 2.2rem;
+        line-height: 1.1;
+        margin-bottom: 1rem;
     }
 
     .hero-buttons {
         flex-direction: column;
+        gap: 0.8rem;
     }
 
-    .btn {
+    .hero-buttons .btn {
         width: 100%;
+        padding: 1.2rem;
         justify-content: center;
     }
 
+    /* Content Layout */
     .content-section {
-        padding: 1rem;
-    }
-
-    .content-card {
-        width: 140px;
-    }
-
-    .content-card img {
-        height: 220px;
-    }
-
-    .card-title {
-        font-size: 0.9rem;
-    }
-
-    .slider-btn {
-        width: 35px;
-        height: 35px;
-        opacity: 0.8;
-    }
-
-    .slider-container:hover .slider-btn {
-        opacity: 0.8;
-    }
-
-    .modal-content {
-        width: 95%;
-    }
-
-    .detail-backdrop {
-        height: 250px;
-    }
-
-    .detail-info {
-        padding: 1rem;
-    }
-
-    .detail-title {
-        font-size: 1.5rem;
-    }
-
-    .detail-meta {
-        flex-direction: column;
-        gap: 0.5rem;
-    }
-
-    .player-container {
-        width: 100%;
-    }
-
-    .player-modal.active {
-        padding: 1rem;
-    }
-
-    .player-controls {
-        padding: 1rem;
-    }
-
-    .tv-controls {
-        flex-direction: column;
-    }
-
-    .server-selector {
-        flex-direction: column;
-        align-items: stretch;
-    }
-
-    .download-btn {
-        width: 100%;
-    }
-
-    .footer-links {
-        flex-direction: column;
-        gap: 1rem;
+        padding: 1.5rem;
+        margin-bottom: 1.5rem;
     }
 
     .section-title {
-        font-size: 1.3rem;
+        font-size: 1.2rem;
+        margin-bottom: 1.2rem;
+    }
+
+    .slider-btn {
+        display: none !important; /* Touch scrolling only on mobile */
+    }
+
+    .content-card {
+        width: 155px; /* Better fit for 2.x cards on mobile */
+    }
+
+    .content-card img {
+        height: 230px;
+    }
+
+    /* Search Overlay Mobile */
+    .search-overlay {
+        padding: 2rem 1.5rem;
+    }
+
+    .search-overlay input {
+        font-size: 1.8rem;
+        padding: 1rem 0;
+    }
+
+    .search-overlay-close {
+        top: 1.5rem;
+        right: 1.5rem;
+    }
+
+    /* Floating Profile FAB adjustments */
+    .bottom-actions {
+        bottom: 100px; /* Adjust to stay above bottom nav */
+        right: 1.5rem;
+    }
+
+    .profile-fab {
+        padding: 0.6rem 1rem;
+        font-size: 0.8rem;
     }
 }
 
 @media (max-width: 480px) {
-    .nav-logo h1 {
-        display: block;
-        font-size: 1rem;
-    }
-
-    .nav-logo i {
-        width: 22px !important;
-        height: 22px !important;
-    }
-
-    .nav-container {
-        gap: 0.4rem;
-        padding: 0.8rem 0.5rem;
-    }
-
-    .nav-search {
-        flex-basis: 100%;
-        max-width: none;
-        order: 3;
-    }
-
-    .nav-search input {
-        padding: 0.6rem 1rem;
-        font-size: 0.8rem;
-    }
-
-    .btn-auth {
-        padding: 0.4rem 0.8rem;
-    }
-
-    .hero-banner {
-        height: 50vh;
-        margin-top: 0;
-    }
-
-    .hero-content h1 {
-        font-size: 1.5rem;
-    }
-
-    .hero-content p {
-        font-size: 0.9rem;
-        display: none;
-    }
-
     .content-card {
-        width: 120px;
+        width: calc(50vw - 1.5rem - 10px); /* 2 Column dynamic spacing */
     }
-
-    .content-card img {
-        height: 180px;
-    }
-
-    .section-title {
-        font-size: 1.1rem;
-    }
-
-    .slider-btn {
-        width: 30px;
-        height: 30px;
-    }
-
-    .detail-title {
-        font-size: 1.2rem;
-    }
-
-    .modal-close,
-    .player-close {
-        width: 35px;
-        height: 35px;
-        font-size: 1.5rem;
-    }
-
-    .footer {
-        padding: 2rem 1rem;
+    
+    .hero-content h1 {
+        font-size: 1.8rem;
     }
 }
 

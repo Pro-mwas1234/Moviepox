@@ -69,10 +69,10 @@
             </div>
             
             <div class="nav-links-right">
-                <a href="#" class="nav-link" onclick="document.getElementById('searchInput').focus(); return false;">
+                <a href="#" class="nav-link" onclick="window.uiManager.toggleSearch(); return false;">
                     <i data-lucide="search" style="width: 20px; height: 20px;"></i> Search
                 </a>
-                <a href="#" class="nav-link">
+                <a href="#" class="nav-link" onclick="window.scrollTo({top: window.innerHeight, behavior: 'smooth'}); return false;">
                     <i data-lucide="layout-grid" style="width: 20px; height: 20px;"></i> Browse
                 </a>
                 <a href="#" class="nav-link" onclick="document.getElementById('watch-later-section').scrollIntoView({behavior: 'smooth'}); return false;">
@@ -98,10 +98,41 @@
                 </div>
             </div>
         </div>
-        <!-- Hidden Search Input for the search functionality -->
-        <div class="search-overlay" style="display: none;">
-            <input type="text" id="searchInput" placeholder="Search movies, series, anime...">
-            <div id="searchDropdown" class="search-dropdown"></div>
+        
+        <!-- Bottom Navigation (Mobile Only) -->
+        <div class="bottom-nav">
+            <a href="#" class="bottom-nav-item" onclick="window.scrollTo({top: 0, behavior: 'smooth'}); return false;">
+                <i data-lucide="home"></i>
+                <span>Home</span>
+            </a>
+            <a href="#" class="bottom-nav-item" onclick="window.scrollTo({top: window.innerHeight, behavior: 'smooth'}); return false;">
+                <i data-lucide="layout-grid"></i>
+                <span>Browse</span>
+            </a>
+            <a href="#" class="bottom-nav-item" onclick="window.uiManager.toggleSearch(); return false;">
+                <div class="bottom-nav-search">
+                    <i data-lucide="search"></i>
+                </div>
+            </a>
+            <a href="#" class="bottom-nav-item" onclick="document.getElementById('watch-later-section').scrollIntoView({behavior: 'smooth'}); return false;">
+                <i data-lucide="bookmark"></i>
+                <span>My List</span>
+            </a>
+            <a href="#" class="bottom-nav-item" id="mobile-auth-btn" onclick="document.getElementById('auth-nav-btn').click(); return false;">
+                <i data-lucide="user"></i>
+                <span>Profile</span>
+            </a>
+        </div>
+        
+        <!-- Cinematic Search Overlay -->
+        <div class="search-overlay">
+            <button class="search-overlay-close" onclick="window.uiManager.toggleSearch()">
+                <i data-lucide="x"></i>
+            </button>
+            <div class="search-field-container">
+                <input type="text" id="searchInput" placeholder="Search movies, series, anime...">
+                <div id="searchDropdown" class="search-dropdown"></div>
+            </div>
         </div>
     </nav>
 

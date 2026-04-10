@@ -81,16 +81,23 @@ class AuthManager {
         const dropdownUsername = document.getElementById('dropdown-username');
         if (!authBtn) return;
 
+        const authBtnText = authBtn.querySelector('span');
+        const authBtnIcon = authBtn.querySelector('i');
+
         if (this.user) {
             const username = this.user.displayName || this.user.email.split('@')[0];
-            authBtn.innerHTML = `<i data-lucide="user"></i> <span>${username}</span>`;
+            if (authBtnText) authBtnText.textContent = username;
+            if (authBtnIcon) authBtnIcon.setAttribute('data-lucide', 'user');
+            
             authBtn.onclick = (e) => {
                 e.stopPropagation();
                 userDropdown.classList.toggle('active');
             };
             if (dropdownUsername) dropdownUsername.textContent = username;
         } else {
-            authBtn.innerHTML = `<i data-lucide="log-in"></i> <span>Login</span>`;
+            if (authBtnText) authBtnText.textContent = "Profile";
+            if (authBtnIcon) authBtnIcon.setAttribute('data-lucide', 'user');
+            
             authBtn.onclick = () => this.showAuthModal();
             if (userDropdown) userDropdown.classList.remove('active');
         }

@@ -115,6 +115,22 @@ class UIManager {
         });
     }
 
+    toggleSearch() {
+        const overlay = document.querySelector('.search-overlay');
+        const input = document.getElementById('searchInput');
+        if (!overlay || !input) return;
+
+        const isActive = overlay.classList.contains('active');
+        
+        if (isActive) {
+            overlay.classList.remove('active');
+            input.placeholder = "Search movies, series, anime...";
+        } else {
+            overlay.classList.add('active');
+            input.focus();
+        }
+    }
+
     setupRealtimeSearch() {
         const searchInput = document.getElementById('searchInput');
         const dropdown = document.getElementById('searchDropdown');
