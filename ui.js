@@ -211,8 +211,8 @@ class UIManager {
                     <button class="btn btn-primary" onclick="window.playerManager.openPlayer(${item.id}, '${mediaType}')">
                         <i data-lucide="play" style="fill: white;"></i> WATCH NOW
                     </button>
-                    <button class="btn btn-secondary" onclick="window.WishlistManager?.toggle(${JSON.stringify(item).replace(/"/g, '&quot;')})">
-                        <i data-lucide="plus"></i> ADD TO LIST
+                    <button class="btn btn-secondary ${isWishlisted ? 'hidden' : ''}" onclick="window.WishlistManager?.toggle(${JSON.stringify(item).replace(/"/g, '&quot;')}); this.classList.add('hidden');">
+                        <i data-lucide="list-plus"></i> ADD TO BUCKET LIST
                     </button>
                 </div>
             </div>
@@ -264,11 +264,16 @@ class UIManager {
                     <button class="btn btn-primary btn-large" onclick="window.playerManager.openPlayer(${id}, '${mediaType}')">
                         <i data-lucide="play" style="width: 20px; height: 20px; fill: white;"></i> Play Now
                     </button>
+                    ${!isWishlisted ? `
+                    <button class="btn btn-secondary btn-large bucket-add-btn" onclick="window.WishlistManager.toggle(${JSON.stringify(details).replace(/"/g, '&quot;')}); this.remove();">
+                        <i data-lucide="list-plus"></i> Add to Bucket List
+                    </button>
+                    ` : ''}
                     <button class="btn btn-secondary btn-large" onclick="window.playerManager.playTrailer(${id}, '${mediaType}')">
                         🎬 Watch Trailer
                     </button>
-                    <button class="btn btn-icon-only wishlist-toggle-btn ${isWishlisted ? 'active' : ''}" title="Watch Later">
-                        <i data-lucide="bookmark" style="width: 24px; height: 24px; ${isWishlisted ? 'fill: currentColor;' : ''}"></i>
+                    <button class="btn btn-icon-only wishlist-toggle-btn ${isWishlisted ? 'active' : ''}" title="Bucket List">
+                        <i data-lucide="check-square" style="width: 24px; height: 24px; ${isWishlisted ? 'fill: currentColor;' : ''}"></i>
                     </button>
                 </div>
             </div>

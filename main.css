@@ -524,9 +524,15 @@ body {
 
 .detail-actions {
     display: flex;
+    flex-wrap: wrap;
     gap: 1.2rem;
     margin-top: 2.5rem;
     align-items: center;
+}
+
+.detail-actions .btn-large {
+    flex: 1;
+    min-width: 180px;
 }
 
 .wishlist-toggle-btn.active {
@@ -1785,3 +1791,7 @@ main {
 }
 
 /* Hero Video System - Removed duplicate block */
+
+.hidden {
+    display: none !important;
+}
