@@ -105,7 +105,14 @@ class PlayerManager {
                 ? await api.getMovieVideos(id) 
                 : await api.getTVVideos(id);
             
-            const trailer = videos?.results?.find(v => v.type === 'Trailer' && v.site === 'YouTube');
+            const results = videos?.results || [];
+            const trailer = results
+                .filter(v => v.type === 'Trailer' && v.site === 'YouTube')
+                .sort((a, b) => {
+                    // Prioritize official trailers, then by latest publication date
+                    if (a.official !== b.official) return b.official ? 1 : -1;
+                    return new Date(b.published_at) - new Date(a.published_at);
+                })[0];
             
             if (trailer) {
                 videoPlayer.src = `https://www.youtube.com/embed/${trailer.key}?autoplay=1`;

@@ -38,8 +38,19 @@ class App {
         // Hero Banner & Trending (Day)
         const trendingDay = await api.getTrendingDay();
         if (trendingDay && trendingDay.results) {
-            // Pick a high-quality featured item for hero
-            const featured = trendingDay.results.find(item => item.backdrop_path && item.vote_average > 7) || trendingDay.results[0];
+            // Filter for high-quality, released items with backdrop imagery
+            const now = new Date();
+            const validItems = trendingDay.results.filter(item => {
+                const releaseDate = new Date(item.release_date || item.first_air_date);
+                return item.backdrop_path && 
+                       item.vote_average > 6 && 
+                       releaseDate <= now;
+            });
+
+            // Pick a random item from the top 5 valid results to keep the UI fresh
+            const candidates = validItems.slice(0, 5);
+            const featured = candidates[Math.floor(Math.random() * candidates.length)] || trendingDay.results[0];
+            
             if (featured) {
                 await ui.createHeroBanner(featured, featured.media_type || 'movie');
             }

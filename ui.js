@@ -158,7 +158,14 @@ class UIManager {
             ? await this.api.getMovieVideos(item.id)
             : await this.api.getTVVideos(item.id);
 
-        const trailer = videos?.results?.find(v => v.type === 'Trailer' && v.site === 'YouTube');
+        const results = videos?.results || [];
+        const trailer = results
+            .filter(v => v.type === 'Trailer' && v.site === 'YouTube')
+            .sort((a, b) => {
+                // Prioritize official trailers, then by latest publication date
+                if (a.official !== b.official) return b.official ? 1 : -1;
+                return new Date(b.published_at) - new Date(a.published_at);
+            })[0];
 
         heroBanner.innerHTML = `
             <div id="hero-video-container" class="hero-video-container">
