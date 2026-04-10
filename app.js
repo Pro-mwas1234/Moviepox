@@ -25,7 +25,7 @@ class App {
             console.log('✅ moviepox ready!');
         } catch (error) {
             console.error('Init error:', error);
-            alert('Initialization failed. Please run via a local server (not file://)');
+            alert('Initialization failed: ' + error.message + '\n\nPlease check the console for details.');
         }
     }
 
@@ -156,6 +156,6 @@ class App {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    const app = new App();
-    app.init();
+    window.app = new App();
+    window.app.init();
 });

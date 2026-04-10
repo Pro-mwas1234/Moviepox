@@ -190,6 +190,7 @@ class UIManager {
         const title = item.title || item.name;
         const overview = item.overview || 'No description available';
         const backdrop = this.api.getImageURL(item.backdrop_path, 'original');
+        const isWishlisted = await window.WishlistManager?.isWishlisted(item.id);
 
         const videos = mediaType === 'movie'
             ? await this.api.getMovieVideos(item.id)
