@@ -7,6 +7,7 @@
 (function () {
   const ShareRouter = {
     initialized: false,
+    currentMedia: null, // Stores {id, type, season, episode}
 
     /**
      * Initialize router on page load
@@ -69,26 +70,21 @@
           window.playerManager.openPlayer(id, 'tv', { season, episode });
         }
       }
+
+      // Cleanup: Remove hash from URL immediately after handling deep-link
+      history.replaceState(null, '', window.location.pathname);
+      console.log('[ShareRouter] Deep-link handled and URL cleaned');
     },
 
     /**
      * Update browser URL when media/episode changes
      */
     updateURL(id, type, season = 1, episode = 1) {
-      let hash;
+      // Store state internally for sharing
+      this.currentMedia = { id, type, season, episode };
 
-      if (type === 'tv') {
-        const sStr = String(season).padStart(2, '0');
-        const eStr = String(episode).padStart(2, '0');
-        const segment = `S${sStr} E${eStr}`;
-        hash = `#/${id}/${encodeURIComponent(segment)}`;
-      } else {
-        hash = `#/${id}`;
-      }
-
-      // Update without triggering another hashchange if possible
-      window.location.hash = hash;
-      console.log('[ShareRouter] Hash updated to:', hash);
+      // We no longer update window.location.hash to keep URL clean
+      console.log('[ShareRouter] Internal state updated (URL remains clean)');
     },
 
     /**
@@ -102,7 +98,7 @@
       }
 
       btn.onclick = async () => {
-        const url = window.location.href;
+        const url = this.getCurrentShareURL();
         const title = document.title || 'Moviepox';
         const text = 'Check out this title on Moviepox 🎬';
 
@@ -126,7 +122,21 @@
      * Get current URL for manual sharing
      */
     getCurrentShareURL() {
-      return window.location.href;
+      if (!this.currentMedia) return window.location.origin + window.location.pathname;
+      
+      const { id, type, season, episode } = this.currentMedia;
+      let hash = '';
+      
+      if (type === 'tv') {
+        const sStr = String(season).padStart(2, '0');
+        const eStr = String(episode).padStart(2, '0');
+        const segment = `S${sStr} E${eStr}`;
+        hash = `#/${id}/${encodeURIComponent(segment)}`;
+      } else {
+        hash = `#/${id}`;
+      }
+      
+      return `${window.location.origin}${window.location.pathname}${hash}`;
     }
   };
 

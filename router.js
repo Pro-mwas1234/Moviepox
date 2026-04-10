@@ -30,11 +30,17 @@ class Router {
         document.querySelectorAll('.section').forEach(sec => sec.classList.remove('active'));
         const targetSection = document.getElementById(section+'Section');
         if(targetSection){targetSection.classList.add('active');}
-        history.pushState({section},'',`#${section}`);
+        
+        // Use clean URL but keep state in History API
+        history.pushState({section}, '', window.location.pathname);
+        
         window.scrollTo({top:0,behavior:'smooth'});
     }
-    closeModal(modalId){document.getElementById(modalId).classList.remove('active');history.pushState({},'', '#home');}
-    handlePopState(state){if(state.section){this.navigateTo(state.section);}}
+    closeModal(modalId){
+        document.getElementById(modalId).classList.remove('active');
+        history.pushState({}, '', window.location.pathname);
+    }
+    handlePopState(state){if(state && state.section){this.navigateTo(state.section);}}
     handleInitialRoute(){
         const hash = window.location.hash.substring(1);
         if (!hash || hash === 'home') {this.navigateTo('home');}
@@ -50,6 +56,12 @@ class Router {
             const mediaType = parts[1];
             const id = parts[2];
             if(id){window.playerManager.openPlayer(parseInt(id),mediaType);}
+        }
+
+        // Cleanup: Remove hash from address bar after initial load
+        if (window.location.hash) {
+            history.replaceState(null, '', window.location.pathname);
+            console.log('[Router] Initial route handled and URL cleaned');
         }
     }
 }
