@@ -4,7 +4,7 @@ class UIManager {
         this.searchTimeout = null;
     }
 
-    createContentCard(item, mediaType) {
+    createContentCard(item, mediaType, showRemove = false) {
         const card = document.createElement('div');
         card.className = 'content-card';
 
@@ -17,13 +17,18 @@ class UIManager {
 
         card.innerHTML = `
             <img src="${this.api.getImageURL(posterPath)}" alt="${title}" loading="lazy">
+            <div class="card-play-btn-large">
+                <i data-lucide="play" style="width: 30px; height: 30px; fill: white;"></i>
+            </div>
             <div class="card-overlay">
                 <div class="card-actions-wrapper">
-                    <div class="card-action-btn card-play-btn" title="Play Now">
-                        <i data-lucide="play" style="width: 18px; height: 18px;"></i>
-                    </div>
-                    <div class="card-action-btn card-trailer-btn" title="Watch Trailer">
-                        <i data-lucide="youtube" style="width: 18px; height: 18px;"></i>
+                    ${showRemove ? `
+                        <div class="card-action-btn card-remove-btn" title="Remove" data-id="${item.id}">
+                            <i data-lucide="x" style="width: 18px; height: 18px;"></i>
+                        </div>
+                    ` : ''}
+                    <div class="card-action-btn card-bookmark-btn" title="Watch Later" data-id="${item.id}">
+                        <i data-lucide="bookmark" style="width: 18px; height: 18px;"></i>
                     </div>
                 </div>
                 <div class="card-title">${title}</div>
@@ -36,21 +41,42 @@ class UIManager {
 
         card.onclick = () => this.openDetail(item.id, type);
 
-        // Play Now button click handler
-        const playBtn = card.querySelector('.card-play-btn');
-        if (playBtn) {
-            playBtn.onclick = (e) => {
-                e.stopPropagation(); // Prevent opening the detail modal
+        // Actions
+        const playBtnLarge = card.querySelector('.card-play-btn-large');
+        if (playBtnLarge) {
+            playBtnLarge.onclick = (e) => {
+                e.stopPropagation();
                 window.playerManager.openPlayer(item.id, type);
             };
         }
 
-        // Trailer button click handler
-        const trailerBtn = card.querySelector('.card-trailer-btn');
-        if (trailerBtn) {
-            trailerBtn.onclick = (e) => {
-                e.stopPropagation(); // Prevent opening the detail modal
-                window.playerManager.playTrailer(item.id, type);
+        const bookmarkBtn = card.querySelector('.card-bookmark-btn');
+        if (bookmarkBtn) {
+            // Update bookmark icon state
+            window.WishlistManager?.isWishlisted(item.id).then(isSaved => {
+                if (isSaved) {
+                    bookmarkBtn.classList.add('active');
+                    bookmarkBtn.querySelector('i').style.fill = 'currentColor';
+                }
+            });
+
+            bookmarkBtn.onclick = async (e) => {
+                e.stopPropagation();
+                const isSaved = await window.WishlistManager.toggle(item);
+                bookmarkBtn.classList.toggle('active', isSaved);
+                bookmarkBtn.querySelector('i').style.fill = isSaved ? 'currentColor' : 'none';
+            };
+        }
+
+        const removeBtn = card.querySelector('.card-remove-btn');
+        if (removeBtn) {
+            removeBtn.onclick = (e) => {
+                e.stopPropagation();
+                if (window.HistoryManager && card.closest('#recentlyWatchedContainer')) {
+                    window.HistoryManager.remove(item.id);
+                } else if (window.WishlistManager && card.closest('#wishlistContainer')) {
+                    window.WishlistManager.remove(item.id);
+                }
             };
         }
 
@@ -218,30 +244,46 @@ class UIManager {
         const releaseDate = details.release_date || details.first_air_date || 'N/A';
         const runtime = details.runtime || (details.episode_run_time && details.episode_run_time[0]) || 'N/A';
         const genres = details.genres || [];
+        const isWishlisted = await window.WishlistManager?.isWishlisted(id);
 
         detailContent.innerHTML = `
-            <img src="${this.api.getImageURL(details.backdrop_path, 'original')}" alt="${title}" class="detail-backdrop">
+            <div class="detail-backdrop-container">
+                <img src="${this.api.getImageURL(details.backdrop_path, 'original')}" alt="${title}" class="detail-backdrop">
+                <div class="detail-backdrop-overlay"></div>
+            </div>
             <div class="detail-info">
                 <h2 class="detail-title">${title}</h2>
                 <div class="detail-meta">
-                    <div class="meta-item">⭐ ${rating}</div>
-                    <div class="meta-item">📅 ${releaseDate}</div>
-                    <div class="meta-item">⏱ ${runtime} min</div>
+                    <div class="meta-item"><i data-lucide="star" style="width: 16px; height: 16px; fill: #ffd700; color: #ffd700;"></i> ${rating}</div>
+                    <div class="meta-item"><i data-lucide="calendar" style="width: 16px; height: 16px;"></i> ${releaseDate.substring(0, 4)}</div>
+                    <div class="meta-item"><i data-lucide="clock" style="width: 16px; height: 16px;"></i> ${runtime} min</div>
                 </div>
                 <div class="detail-genres">
                     ${genres.map(g => `<span class="genre-tag">${g.name}</span>`).join('')}
                 </div>
                 <p class="detail-overview">${details.overview || 'No description available'}</p>
-                <div class="detail-actions" style="display: flex; gap: 1rem; margin-top: 1.5rem;">
-                    <button class="btn btn-primary" onclick="window.playerManager.openPlayer(${id}, '${mediaType}')">
-                         ▶ Play Now
+                <div class="detail-actions">
+                    <button class="btn btn-primary btn-large" onclick="window.playerManager.openPlayer(${id}, '${mediaType}')">
+                        <i data-lucide="play" style="width: 20px; height: 20px; fill: white;"></i> Play Now
                     </button>
-                    <button class="btn btn-secondary" onclick="window.playerManager.playTrailer(${id}, '${mediaType}')" style="background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.2);">
-                         O.O Watch Trailer
+                    <button class="btn btn-secondary btn-large" onclick="window.playerManager.playTrailer(${id}, '${mediaType}')">
+                        🎬 Watch Trailer
+                    </button>
+                    <button class="btn btn-icon-only wishlist-toggle-btn ${isWishlisted ? 'active' : ''}" title="Watch Later">
+                        <i data-lucide="bookmark" style="width: 24px; height: 24px; ${isWishlisted ? 'fill: currentColor;' : ''}"></i>
                     </button>
                 </div>
             </div>
         `;
+
+        const wishlistBtn = detailContent.querySelector('.wishlist-toggle-btn');
+        if (wishlistBtn) {
+            wishlistBtn.onclick = async () => {
+                const nowSaved = await window.WishlistManager.toggle(details);
+                wishlistBtn.classList.toggle('active', nowSaved);
+                wishlistBtn.querySelector('i').style.fill = nowSaved ? 'currentColor' : 'none';
+            };
+        }
 
         if (window.HistoryManager) {
             window.HistoryManager.add(details);

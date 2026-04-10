@@ -135,6 +135,20 @@ class HistoryManager {
         if (window.lucide) window.lucide.createIcons();
     }
 
+    static async remove(id) {
+        const user = window.firebaseAuth?.currentUser;
+        let history = await this.get();
+        history = history.filter(item => item.id !== id);
+
+        if (user) {
+            await this.saveToDb(user.uid, history);
+        } else {
+            this.saveToLocal(history);
+        }
+
+        this.render();
+    }
+
     static async clear() {
         const user = window.firebaseAuth?.currentUser;
         if (user) {

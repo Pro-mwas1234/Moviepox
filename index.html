@@ -120,6 +120,26 @@
             </div>
         </div>
 
+        <!-- Watch Later -->
+        <div id="watch-later-section" class="content-section" style="display: none;">
+            <div class="section-header">
+                <h2 class="section-title">Watch Later</h2>
+            </div>
+            <div class="slider-container">
+                <button class="slider-btn slider-btn-left" data-slider="wishlistContainer">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="15 18 9 12 15 6"></polyline>
+                    </svg>
+                </button>
+                <div id="wishlistContainer" class="content-slider"></div>
+                <button class="slider-btn slider-btn-right" data-slider="wishlistContainer">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="9 18 15 12 9 6"></polyline>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
         <!-- Trending Movies -->
         <div class="content-section">
             <div class="section-header">
@@ -493,6 +513,7 @@
     <script src="history.js"></script>
     <script src="download.js"></script>
     <script src="api.js"></script>
+    <script src="wishlist.js"></script>
     <script src="ui.js"></script>
     <script src="player.js"></script>
     <script src="app.js"></script>

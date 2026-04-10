@@ -10,13 +10,11 @@ class AuthManager {
         this.auth.onAuthStateChanged((user) => {
             this.user = user;
             if (user) {
-                if (window.HistoryManager) {
-                    window.HistoryManager.syncLocalToCloud(user.uid);
-                }
+                if (window.HistoryManager) window.HistoryManager.syncLocalToCloud(user.uid);
+                if (window.WishlistManager) window.WishlistManager.syncLocalToCloud(user.uid);
             } else {
-                if (window.HistoryManager) {
-                    window.HistoryManager.render();
-                }
+                if (window.HistoryManager) window.HistoryManager.render();
+                if (window.WishlistManager) window.WishlistManager.render();
             }
             this.updateUI();
         });
