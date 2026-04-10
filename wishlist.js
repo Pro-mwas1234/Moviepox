@@ -114,7 +114,13 @@ class WishlistManager {
         const wishlist = await this.get();
 
         if (wishlist.length === 0) {
-            section.style.display = 'none';
+            container.innerHTML = `
+                <div class="empty-bucket-msg">
+                    <i data-lucide="list-plus" style="width: 48px; height: 48px; opacity: 0.2; margin-bottom: 1rem;"></i>
+                    <p>Your bucket list is empty. Start adding some movies!</p>
+                </div>
+            `;
+            if (window.lucide) window.lucide.createIcons();
             return;
         }
 

@@ -222,6 +222,105 @@ class UIManager {
         if (window.lucide) window.lucide.createIcons();
     }
 
+    openGenreHub() {
+        const modal = document.getElementById('genreHubModal');
+        if (!modal) return;
+
+        this.renderGenreGrid();
+        modal.classList.add('active');
+
+        document.getElementById('closeGenreHub').onclick = () => {
+            modal.classList.remove('active');
+        };
+
+        modal.onclick = (e) => {
+            if (e.target.id === 'genreHubModal') modal.classList.remove('active');
+        };
+
+        // Esc key to close
+        const escHandler = (e) => {
+            if (e.key === 'Escape') {
+                modal.classList.remove('active');
+                document.removeEventListener('keydown', escHandler);
+            }
+        };
+        document.addEventListener('keydown', escHandler);
+    }
+
+    renderGenreGrid() {
+        const grid = document.getElementById('genreGrid');
+        if (!grid) return;
+
+        const genres = [
+            { id: 28, name: 'Action', icon: 'zap' },
+            { id: 35, name: 'Comedy', icon: 'laugh' },
+            { id: 18, name: 'Drama', icon: 'clapperboard' },
+            { id: 16, name: 'Anime', icon: 'swords' },
+            { id: 27, name: 'Horror', icon: 'ghost' },
+            { id: 10749, name: 'Romance', icon: 'heart' },
+            { id: 878, name: 'Sci-Fi', icon: 'rocket' },
+            { id: 9648, name: 'Mystery', icon: 'search' },
+            { id: 10751, name: 'Family', icon: 'users' },
+            { id: 14, name: 'Fantasy', icon: 'wand-2' }
+        ];
+
+        grid.innerHTML = '';
+        genres.forEach(genre => {
+            const card = document.createElement('div');
+            card.className = 'genre-card';
+            card.innerHTML = `
+                <i data-lucide="${genre.icon}"></i>
+                <span>${genre.name}</span>
+            `;
+            card.onclick = () => {
+                document.getElementById('genreHubModal').classList.remove('active');
+                this.applyGenreFilter(genre.id, genre.name);
+            };
+            grid.appendChild(card);
+        });
+
+        if (window.lucide) window.lucide.createIcons();
+    }
+
+    async applyGenreFilter(genreId, genreName) {
+        const mainContent = document.getElementById('mainContent');
+        if (!mainContent) return;
+
+        // Cinematic transition
+        mainContent.style.opacity = '0';
+        mainContent.style.transform = 'translateY(20px)';
+        mainContent.style.transition = 'all 0.4s ease';
+        
+        setTimeout(async () => {
+            mainContent.innerHTML = `
+                <div class="content-section" style="margin-top: 120px;">
+                    <div class="section-header" style="margin-bottom: 3rem; text-align: center; display: block;">
+                        <h2 class="section-title" style="font-size: 3rem; margin-bottom: 1rem;">Best in <span>${genreName}</span></h2>
+                        <button class="btn btn-secondary" style="margin: 0 auto;" onclick="location.reload()">
+                            <i data-lucide="home"></i> Back to Home
+                        </button>
+                    </div>
+                    <div id="genreResultsGrid" class="genre-results-grid"></div>
+                </div>
+            `;
+
+            const results = await this.api.discoverMovies({ with_genres: genreId });
+            const container = document.getElementById('genreResultsGrid');
+            
+            if (results && results.results) {
+                results.results.forEach(item => {
+                    const card = this.createContentCard(item, 'movie');
+                    container.appendChild(card);
+                });
+            }
+
+            mainContent.style.opacity = '1';
+            mainContent.style.transform = 'translateY(0)';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            if (window.lucide) window.lucide.createIcons();
+        }, 400);
+    }
+
     async openDetail(id, mediaType) {
         const modal = document.getElementById('detailModal');
         const detailContent = document.getElementById('detailContent');
@@ -233,6 +332,8 @@ class UIManager {
             ? await this.api.getTVDetails(id)
             : await this.api.getMovieDetails(id);
 
+        const recommendations = await this.api.getRecommendations(id, mediaType);
+
         if (!details) {
             detailContent.innerHTML = '<p>Failed to load details</p>';
             return;
@@ -243,6 +344,8 @@ class UIManager {
         const releaseDate = details.release_date || details.first_air_date || 'N/A';
         const runtime = details.runtime || (details.episode_run_time && details.episode_run_time[0]) || 'N/A';
         const genres = details.genres || [];
+        const status = details.status || 'Released';
+        const language = details.original_language?.toUpperCase() || 'EN';
         const isWishlisted = await window.WishlistManager?.isWishlisted(id);
 
         detailContent.innerHTML = `
@@ -256,6 +359,8 @@ class UIManager {
                     <div class="meta-item"><i data-lucide="star" style="width: 16px; height: 16px; fill: #ffd700; color: #ffd700;"></i> ${rating}</div>
                     <div class="meta-item"><i data-lucide="calendar" style="width: 16px; height: 16px;"></i> ${releaseDate.substring(0, 4)}</div>
                     <div class="meta-item"><i data-lucide="clock" style="width: 16px; height: 16px;"></i> ${runtime} min</div>
+                    <div class="meta-item"><i data-lucide="globe" style="width: 16px; height: 16px;"></i> ${language}</div>
+                    <div class="meta-item"><i data-lucide="activity" style="width: 16px; height: 16px;"></i> ${status}</div>
                 </div>
                 <div class="detail-genres">
                     ${genres.map(g => `<span class="genre-tag">${g.name}</span>`).join('')}
@@ -273,12 +378,31 @@ class UIManager {
                     <button class="btn btn-secondary btn-large" onclick="window.playerManager.playTrailer(${id}, '${mediaType}')">
                         🎬 Watch Trailer
                     </button>
-                    <button class="btn btn-icon-only wishlist-toggle-btn ${isWishlisted ? 'active' : ''}" title="Bucket List">
-                        <i data-lucide="check-square" style="width: 24px; height: 24px; ${isWishlisted ? 'fill: currentColor;' : ''}"></i>
-                    </button>
                 </div>
+
+                ${recommendations?.results?.length > 0 ? `
+                    <div class="more-like-this-section">
+                        <h3 class="section-title" style="margin-top: 2rem;">More Like <span>This</span></h3>
+                        <div class="rec-slider-container">
+                            <div id="recSlider" class="content-slider rec-slider"></div>
+                        </div>
+                    </div>
+                ` : ''}
             </div>
         `;
+
+        // Render Recommendations
+        if (recommendations?.results?.length > 0) {
+            const recContainer = document.getElementById('recSlider');
+            recommendations.results.slice(0, 10).forEach(rec => {
+                const card = this.createContentCard(rec, mediaType);
+                card.onclick = () => {
+                    this.openDetail(rec.id, mediaType);
+                    document.getElementById('detailModal').scrollTo({ top: 0, behavior: 'smooth' });
+                };
+                recContainer.appendChild(card);
+            });
+        }
 
         const wishlistBtn = detailContent.querySelector('.wishlist-toggle-btn');
         if (wishlistBtn) {

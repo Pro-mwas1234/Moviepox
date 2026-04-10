@@ -80,6 +80,40 @@ class PlayerManager {
 
         this.loadServer();
         this.updateDownloadLink(); // Initialize download button
+        this.renderRecommendations(); // Load recommendations
+    }
+
+    async renderRecommendations() {
+        const container = document.getElementById('playerRecContainer');
+        if (!container) return;
+
+        container.innerHTML = '<div class="loading-mini"></div>';
+
+        try {
+            const recommendations = await window.tmdbAPI.getRecommendations(this.currentId, this.currentType);
+            
+            if (!recommendations || recommendations.results.length === 0) {
+                document.querySelector('.player-extra-content').style.display = 'none';
+                return;
+            }
+
+            document.querySelector('.player-extra-content').style.display = 'block';
+            container.innerHTML = '';
+
+            recommendations.results.slice(0, 10).forEach(rec => {
+                const card = window.uiManager.createContentCard(rec, this.currentType);
+                card.onclick = () => {
+                    this.openPlayer(rec.id, this.currentType);
+                    container.parentElement.scrollTo({ top: 0, behavior: 'smooth' });
+                };
+                container.appendChild(card);
+            });
+
+            if (window.lucide) window.lucide.createIcons();
+        } catch (error) {
+            console.error('Error loading player recommendations:', error);
+            document.querySelector('.player-extra-content').style.display = 'none';
+        }
     }
 
     async playTrailer(id, mediaType) {

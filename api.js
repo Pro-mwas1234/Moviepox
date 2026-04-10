@@ -144,6 +144,10 @@ class TMDbAPI {
     async search(query, page = 1) {
         return await this.fetchData('/search/multi', { query, page });
     }
+
+    async getRecommendations(id, mediaType = 'movie') {
+        return await this.fetchData(`/${mediaType}/${id}/recommendations`);
+    }
 }
 
 window.tmdbAPI = new TMDbAPI();

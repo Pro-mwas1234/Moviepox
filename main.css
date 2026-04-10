@@ -548,10 +548,11 @@ main {
 }
 
 .content-section {
-    padding: 0 2rem 2rem;
+    padding: 0 2rem 3rem;
     max-width: 1400px;
     margin: 0 auto;
-    margin-bottom: 2rem;
+    margin-bottom: 4rem; /* Increased spacing to prevent collision */
+    position: relative;
 }
 
 .nav-auth {
@@ -1794,4 +1795,227 @@ main {
 
 .hidden {
     display: none !important;
+}
+
+/* Genre Hub Stylings */
+.genre-hub-content {
+    max-width: 1000px;
+    background: rgba(10, 10, 15, 0.95);
+    -webkit-backdrop-filter: blur(40px);
+    backdrop-filter: blur(40px);
+    padding: 3.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.genre-hub-header {
+    text-align: center;
+    margin-bottom: 3.5rem;
+}
+
+.genre-hub-header h3 {
+    font-size: 2.8rem;
+    font-weight: 800;
+}
+
+.genre-hub-header h3 span {
+    color: var(--primary-color);
+}
+
+.genre-hub-header p {
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+    margin-top: 0.5rem;
+}
+
+.genre-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1.5rem;
+}
+
+.genre-card {
+    height: 140px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.genre-card:hover {
+    transform: translateY(-8px);
+    background: rgba(124, 58, 237, 0.1);
+    border-color: var(--primary-color);
+    box-shadow: 0 15px 35px rgba(124, 58, 237, 0.2);
+}
+
+.genre-card i {
+    width: 32px;
+    height: 32px;
+    color: var(--primary-color);
+    transition: all 0.3s ease;
+}
+
+.genre-card:hover i {
+    transform: scale(1.2) rotate(-5deg);
+}
+
+.genre-card span {
+    font-weight: 600;
+    font-size: 1.1rem;
+    letter-spacing: 0.5px;
+}
+
+.genre-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: var(--gradient-purple);
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+}
+
+.genre-card:hover::after {
+    transform: scaleX(1);
+}
+
+.empty-bucket-msg {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 4rem 2rem;
+    background: rgba(255, 255, 255, 0.02);
+    border: 2px dashed rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    margin: 1rem 0;
+}
+
+.empty-bucket-msg p {
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+}
+
+/* Mobile Adjustments for Genre Hub */
+@media (max-width: 768px) {
+    .genre-hub-content {
+        padding: 2.5rem 1.5rem;
+        margin: 1rem;
+    }
+    
+    .genre-hub-header h3 {
+        font-size: 2rem;
+    }
+    
+    .genre-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+    }
+    
+    .genre-card {
+        height: 120px;
+    }
+}
+
+/* Player Modal Recommendations */
+.player-extra-content {
+    margin-top: 2rem;
+    padding: 2rem;
+    background: rgba(255, 255, 255, 0.02);
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.player-rec-header {
+    margin-bottom: 2rem;
+}
+
+.player-rec-header h3 {
+    font-size: 1.8rem;
+    font-weight: 700;
+}
+
+.player-rec-header h3 span {
+    color: var(--primary-color);
+}
+
+.player-rec-slider {
+    padding-bottom: 1rem;
+    display: flex;
+    overflow-x: auto;
+    gap: 1.5rem;
+}
+
+/* Detail Modal Specifics */
+.more-like-this-section {
+    padding: 2rem 0;
+    margin-top: 3rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.rec-slider-container {
+    position: relative;
+    padding: 1rem 0;
+}
+
+.rec-slider {
+    display: flex;
+    overflow-x: auto;
+    gap: 1.5rem;
+    scrollbar-width: none;
+}
+
+.rec-slider::-webkit-scrollbar {
+    display: none;
+}
+
+.rec-slider .content-card {
+    min-width: 140px;
+    width: 140px;
+    flex-shrink: 0;
+}
+
+.rec-slider .content-card img {
+    height: 210px;
+}
+
+@media (max-width: 768px) {
+    .player-extra-content {
+        padding: 1.5rem 1rem;
+    }
+    
+    .player-rec-header h3 {
+        font-size: 1.4rem;
+    }
+    
+    .rec-slider .content-card {
+        min-width: 120px;
+        width: 120px;
+    }
+    
+    .rec-slider .content-card img {
+        height: 180px;
+    }
+}
+
+/* Genre Results Grid */
+.genre-results-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 2.5rem 1.5rem;
+    padding-bottom: 4rem;
+}
+
+@media (max-width: 768px) {
+    .genre-results-grid {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        gap: 1.5rem 1rem;
+    }
 }

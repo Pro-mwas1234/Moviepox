@@ -123,14 +123,22 @@
     }
 
     .hero-content {
-        bottom: 8rem; /* Higher to clear bottom nav */
+        bottom: 8rem;
         max-width: 100%;
+        text-align: center;
+        width: 100%;
+        left: 0;
+        padding: 0 1.5rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
     }
 
     .hero-content h1 {
         font-size: 2.2rem;
         line-height: 1.1;
         margin-bottom: 1rem;
+        text-align: center;
     }
 
     .hero-buttons {
@@ -145,9 +153,15 @@
     }
 
     /* Content Layout */
+    main {
+        padding-bottom: 90px;
+    }
+
     .content-section {
-        padding: 1.5rem;
-        margin-bottom: 1.5rem;
+        padding: 1rem 1.5rem;
+        margin-bottom: 2.5rem;
+        position: relative;
+        overflow: visible;
     }
 
     .section-title {

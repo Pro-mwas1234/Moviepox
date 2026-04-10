@@ -72,10 +72,10 @@
                 <a href="#" class="nav-link" onclick="window.uiManager.toggleSearch(); return false;">
                     <i data-lucide="search" style="width: 20px; height: 20px;"></i> Search
                 </a>
-                <a href="#" class="nav-link" onclick="app.scrollToSection('trendingMovies'); return false;">
+                <a href="#" class="nav-link" onclick="window.uiManager.openGenreHub(); return false;">
                     <i data-lucide="layout-grid" style="width: 20px; height: 20px;"></i> Browse
                 </a>
-                <a href="#" class="nav-link" onclick="app.scrollToSection('watch-later-section'); return false;">
+                <a href="#" class="nav-link" onclick="window.app.scrollToSection('watch-later-section'); return false;">
                     <i data-lucide="list" style="width: 20px; height: 20px;"></i> Bucket List
                 </a>
                 <div class="nav-auth">
@@ -101,11 +101,11 @@
         
         <!-- Bottom Navigation (Mobile Only) -->
         <div class="bottom-nav">
-            <a href="#" class="bottom-nav-item" onclick="app.scrollToSection('mainContent'); return false;">
+            <a href="#" class="bottom-nav-item" onclick="window.app.scrollToSection('mainContent'); return false;">
                 <i data-lucide="home"></i>
                 <span>Home</span>
             </a>
-            <a href="#" class="bottom-nav-item" onclick="app.scrollToSection('trendingMovies'); return false;">
+            <a href="#" class="bottom-nav-item" onclick="window.uiManager.openGenreHub(); return false;">
                 <i data-lucide="layout-grid"></i>
                 <span>Browse</span>
             </a>
@@ -114,7 +114,7 @@
                     <i data-lucide="search"></i>
                 </div>
             </a>
-            <a href="#" class="bottom-nav-item" onclick="app.scrollToSection('watch-later-section'); return false;">
+            <a href="#" class="bottom-nav-item" onclick="window.app.scrollToSection('watch-later-section'); return false;">
                 <i data-lucide="list"></i>
                 <span>Bucket List</span>
             </a>
@@ -395,6 +395,14 @@
                     Download
                 </button>
             </div>
+            
+            <!-- Recommendations inside Player Modal -->
+            <div class="player-extra-content">
+                <div class="player-rec-header">
+                    <h3>You Might Also <span>Like</span></h3>
+                </div>
+                <div id="playerRecContainer" class="content-slider player-rec-slider"></div>
+            </div>
         </div>
     </div>
 
@@ -476,7 +484,17 @@
             </div>
         </div>
     </div>
-    </main>
+    <!-- Genre Hub Modal -->
+    <div id="genreHubModal" class="modal">
+        <div class="modal-content genre-hub-content">
+            <button class="modal-close" id="closeGenreHub">&times;</button>
+            <div class="genre-hub-header">
+                <h3>Browse by <span>Genre</span></h3>
+                <p>Curated collections of the best movies and shows</p>
+            </div>
+            <div id="genreGrid" class="genre-grid"></div>
+        </div>
+    </div>
 
     <!-- Custom Verification Popup (The Cat) -->
     <div id="verifyPopup" class="modal">
