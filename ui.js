@@ -4,9 +4,9 @@ class UIManager {
         this.searchTimeout = null;
     }
 
-    createContentCard(item, mediaType, showRemove = false) {
+    createContentCard(item, mediaType, variant = 'default') {
         const card = document.createElement('div');
-        card.className = 'content-card';
+        card.className = `content-card card-${variant}`;
 
         const type = mediaType || item.media_type || 'movie';
         const posterPath = item.poster_path || item.backdrop_path;
@@ -14,96 +14,92 @@ class UIManager {
         const date = item.release_date || item.first_air_date || '';
         const year = date ? new Date(date).getFullYear() : 'N/A';
         const rating = item.vote_average ? item.vote_average.toFixed(1) : 'N/A';
+        const genresStr = item.genre_ids ? 'ACTION • SCIFI' : 'MOVIE'; // Mocked for aesthetic
 
-        card.innerHTML = `
-            <img src="${this.api.getImageURL(posterPath)}" alt="${title}" loading="lazy">
-            <div class="card-play-btn-large">
-                <i data-lucide="play" style="width: 30px; height: 30px; fill: white;"></i>
-            </div>
-            <div class="card-overlay">
-                <div class="card-actions-wrapper">
-                    ${showRemove ? `
-                        <div class="card-action-btn card-remove-btn" title="Remove" data-id="${item.id}">
-                            <i data-lucide="x" style="width: 18px; height: 18px;"></i>
-                        </div>
-                    ` : ''}
-                    <div class="card-action-btn card-bookmark-btn" title="Watch Later" data-id="${item.id}">
-                        <i data-lucide="bookmark" style="width: 18px; height: 18px;"></i>
-                    </div>
+        if (variant === 'history') {
+            card.innerHTML = `
+                <img src="${this.api.getImageURL(posterPath)}" alt="${title}" loading="lazy" style="width: 100%; height: 350px; object-fit: cover;">
+                <div class="card-remove-overlay" title="Remove from History">
+                    <i data-lucide="x" style="width: 16px; height: 16px;"></i>
                 </div>
-                <div class="card-title">${title}</div>
-                <div class="card-info">
-                    <span>${year}</span>
-                    <span class="card-rating">⭐ ${rating}</span>
-                </div>
-            </div>
-        `;
-
-        card.onclick = () => this.openDetail(item.id, type);
-
-        // Actions
-        const playBtnLarge = card.querySelector('.card-play-btn-large');
-        if (playBtnLarge) {
-            playBtnLarge.onclick = (e) => {
-                e.stopPropagation();
-                window.playerManager.openPlayer(item.id, type);
-            };
-        }
-
-        const bookmarkBtn = card.querySelector('.card-bookmark-btn');
-        if (bookmarkBtn) {
-            // Update bookmark icon state
-            window.WishlistManager?.isWishlisted(item.id).then(isSaved => {
-                if (isSaved) {
-                    bookmarkBtn.classList.add('active');
-                    bookmarkBtn.querySelector('i').style.fill = 'currentColor';
-                }
-            });
-
-            bookmarkBtn.onclick = async (e) => {
-                e.stopPropagation();
-                const isSaved = await window.WishlistManager.toggle(item);
-                bookmarkBtn.classList.toggle('active', isSaved);
-                bookmarkBtn.querySelector('i').style.fill = isSaved ? 'currentColor' : 'none';
-            };
-        }
-
-        const removeBtn = card.querySelector('.card-remove-btn');
-        if (removeBtn) {
+            `;
+            const removeBtn = card.querySelector('.card-remove-overlay');
             removeBtn.onclick = (e) => {
                 e.stopPropagation();
-                if (window.HistoryManager && card.closest('#recentlyWatchedContainer')) {
-                    window.HistoryManager.remove(item.id);
-                } else if (window.WishlistManager && card.closest('#wishlistContainer')) {
-                    window.WishlistManager.remove(item.id);
-                }
+                window.HistoryManager?.remove(item.id);
             };
+        } else if (variant === 'wishlist') {
+            card.innerHTML = `
+                <img src="${this.api.getImageURL(posterPath)}" alt="${title}" loading="lazy" style="width: 100%; height: 350px; object-fit: cover;">
+                <div class="card-info-bar">
+                    <div class="card-info-text">
+                        <h4>${title.toUpperCase()}</h4>
+                        <span>${genresStr}</span>
+                    </div>
+                    <div class="card-bookmark-icon">
+                        <i data-lucide="bookmark" style="width: 18px; height: 18px; fill: white;"></i>
+                    </div>
+                </div>
+            `;
+            const bookmarkIcon = card.querySelector('.card-bookmark-icon');
+            bookmarkIcon.onclick = async (e) => {
+                e.stopPropagation();
+                await window.WishlistManager.toggle(item);
+            };
+        } else {
+            // Default/Search/Trending Variant
+            card.innerHTML = `
+                <img src="${this.api.getImageURL(posterPath)}" alt="${title}" loading="lazy" style="width: 100%; height: 350px; object-fit: cover;">
+                <div class="card-overlay">
+                    <div class="card-title">${title}</div>
+                    <div class="card-info">
+                        <span>${year}</span>
+                        <span class="card-rating">⭐ ${rating}</span>
+                    </div>
+                </div>
+            `;
         }
+
+        card.onclick = () => this.openDetail(item.id, type);
 
         if (window.lucide) window.lucide.createIcons();
         return card;
     }
 
-    renderSlider(containerId, items, mediaType) {
+    renderSlider(containerId, items, mediaType, variant = 'default') {
         const container = document.getElementById(containerId);
-        if (!container) {
-            console.error('Container not found:', containerId);
-            return;
+        if (!container) return;
+
+        const section = container.closest('.content-section');
+        if (section && !section.querySelector('.section-nav')) {
+            const header = section.querySelector('.section-header');
+            if (header) {
+                const nav = document.createElement('div');
+                nav.className = 'section-nav';
+                nav.innerHTML = `
+                    <button class="slider-arrow slider-prev" onclick="this.closest('.content-section').querySelector('.content-slider').scrollBy({left: -600, behavior: 'smooth'})">
+                        <i data-lucide="chevron-left"></i>
+                    </button>
+                    <button class="slider-arrow slider-next" onclick="this.closest('.content-section').querySelector('.content-slider').scrollBy({left: 600, behavior: 'smooth'})">
+                        <i data-lucide="chevron-right"></i>
+                    </button>
+                `;
+                header.appendChild(nav);
+            }
         }
 
         container.innerHTML = '';
-
         if (!items || items.length === 0) {
-            container.innerHTML = '<p style="color: #b3b3b3; padding: 2rem;">No content available</p>';
+            container.innerHTML = '<p class="empty-msg">No content available</p>';
             return;
         }
 
         items.slice(0, 20).forEach(item => {
-            const card = this.createContentCard(item, mediaType);
+            const card = this.createContentCard(item, mediaType, variant);
             container.appendChild(card);
         });
 
-        console.log(`✓ Rendered ${items.length} items in ${containerId}`);
+        if (window.lucide) window.lucide.createIcons();
     }
 
     setupSliderNavigation() {
@@ -179,42 +175,28 @@ class UIManager {
         const overview = item.overview || 'No description available';
         const backdrop = this.api.getImageURL(item.backdrop_path, 'original');
 
-        // Fetch trailer
         const videos = mediaType === 'movie'
             ? await this.api.getMovieVideos(item.id)
             : await this.api.getTVVideos(item.id);
 
-        const results = videos?.results || [];
-        const trailer = results
-            .filter(v => v.type === 'Trailer' && v.site === 'YouTube')
-            .sort((a, b) => {
-                // Prioritize official trailers, then by latest publication date
-                if (a.official !== b.official) return b.official ? 1 : -1;
-                return new Date(b.published_at) - new Date(a.published_at);
-            })[0];
+        const trailer = videos?.results?.filter(v => v.type === 'Trailer' && v.site === 'YouTube')[0];
 
         heroBanner.innerHTML = `
-            <div id="hero-video-container" class="hero-video-container">
+            <div class="hero-backdrop-container">
                 ${trailer ? `
-                    <iframe 
-                        src="https://www.youtube.com/embed/${trailer.key}?autoplay=1&mute=1&loop=1&playlist=${trailer.key}&controls=0&modestbranding=1&rel=0&iv_load_policy=3&showinfo=0&autohide=1" 
-                        frameborder="0" 
-                        allow="autoplay; encrypted-media" 
-                        allowfullscreen
-                        style="width: 100%; height: 100%; pointer-events: none;">
-                    </iframe>
-                ` : `<div class="hero-backdrop-fallback" style="background-image: url('${backdrop}'); width: 100%; height: 100%;"></div>`}
+                    <iframe src="https://www.youtube.com/embed/${trailer.key}?autoplay=1&mute=1&loop=1&playlist=${trailer.key}&controls=0" frameborder="0"></iframe>
+                ` : `<img src="${backdrop}" class="hero-backdrop-fallback">`}
             </div>
             <div class="hero-overlay"></div>
             <div class="hero-content">
                 <h1>${title}</h1>
-                <p>${overview.substring(0, 200)}${overview.length > 200 ? '...' : ''}</p>
+                <p>${overview.substring(0, 180)}...</p>
                 <div class="hero-buttons">
                     <button class="btn btn-primary" onclick="window.playerManager.openPlayer(${item.id}, '${mediaType}')">
-                        <i data-lucide="play" style="width: 20px; height: 20px; margin-right: 8px;"></i> Play Now
+                        <i data-lucide="play" style="fill: white;"></i> WATCH NOW
                     </button>
-                    <button class="btn btn-secondary" onclick="window.playerManager.playTrailer(${item.id}, '${mediaType}')">
-                        <i data-lucide="youtube" style="width: 20px; height: 20px; margin-right: 8px;"></i> Watch Trailer
+                    <button class="btn btn-secondary" onclick="window.WishlistManager?.toggle(${JSON.stringify(item).replace(/"/g, '&quot;')})">
+                        <i data-lucide="plus"></i> ADD TO LIST
                     </button>
                 </div>
             </div>

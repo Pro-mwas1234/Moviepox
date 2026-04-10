@@ -122,7 +122,7 @@ class WishlistManager {
         container.innerHTML = '';
 
         wishlist.forEach(item => {
-            const card = window.uiManager.createContentCard(item, item.media_type, true); // Pass true to show remove button
+            const card = window.uiManager.createContentCard(item, item.media_type, 'wishlist');
             container.appendChild(card);
         });
 

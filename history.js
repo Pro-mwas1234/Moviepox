@@ -126,7 +126,7 @@ class HistoryManager {
         container.innerHTML = ''; // Clear container
 
         history.forEach(item => {
-            const card = window.uiManager.createContentCard(item, item.media_type);
+            const card = window.uiManager.createContentCard(item, item.media_type, 'history');
             container.appendChild(card);
         });
 

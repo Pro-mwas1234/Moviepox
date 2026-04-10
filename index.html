@@ -64,33 +64,44 @@
     <!-- Navigation -->
     <nav class="navbar">
         <div class="nav-container">
-            <div class="nav-logo">
-                <i data-lucide="clapperboard" style="color: var(--accent-color); width: 32px; height: 32px;"></i>
+            <div class="nav-logo" onclick="window.location.reload()">
                 <h1>MOVIEPOX</h1>
             </div>
-            <div class="nav-search">
-                <input type="text" id="searchInput" placeholder="Search movies, series, anime...">
-                <div id="searchDropdown" class="search-dropdown"></div>
-            </div>
-            <div class="nav-auth">
-                <button class="btn-auth" id="auth-nav-btn">
-                    <i data-lucide="log-in"></i>
-                    <span>Login</span>
-                </button>
-                <div id="userDropdown" class="user-dropdown">
-                    <div class="dropdown-header">
-                        <span id="dropdown-username">Username</span>
+            
+            <div class="nav-links-right">
+                <a href="#" class="nav-link" onclick="document.getElementById('searchInput').focus(); return false;">
+                    <i data-lucide="search" style="width: 20px; height: 20px;"></i> Search
+                </a>
+                <a href="#" class="nav-link">
+                    <i data-lucide="layout-grid" style="width: 20px; height: 20px;"></i> Browse
+                </a>
+                <a href="#" class="nav-link" onclick="document.getElementById('watch-later-section').scrollIntoView({behavior: 'smooth'}); return false;">
+                    <i data-lucide="bookmark" style="width: 20px; height: 20px;"></i> My List
+                </a>
+                <div class="nav-auth">
+                    <button class="nav-link" id="auth-nav-btn" style="background: none; border: none; cursor: pointer;">
+                        <i data-lucide="user" style="width: 20px; height: 20px;"></i> <span>Profile</span>
+                    </button>
+                    <div id="userDropdown" class="user-dropdown">
+                        <div class="dropdown-header">
+                            <span id="dropdown-username">Username</span>
+                        </div>
+                        <div class="dropdown-divider"></div>
+                        <a href="#" class="dropdown-item"
+                            onclick="window.downloadManager.renderQueue(); document.getElementById('downloadHistoryModal').classList.add('active');">
+                            <i data-lucide="download-cloud"></i> My Downloads
+                        </a>
+                        <a href="https://t.me/+9jrSZIayJ4hiMTQ0" class="dropdown-item"><i data-lucide="user"></i> Support</a>
+                        <div class="dropdown-divider"></div>
+                        <button class="dropdown-item" id="logoutBtn"><i data-lucide="log-out"></i> Log Out</button>
                     </div>
-                    <div class="dropdown-divider"></div>
-                    <a href="#" class="dropdown-item"
-                        onclick="window.downloadManager.renderQueue(); document.getElementById('downloadHistoryModal').classList.add('active');">
-                        <i data-lucide="download-cloud"></i> My Downloads
-                    </a>
-                   <a href="https://t.me/+9jrSZIayJ4hiMTQ0" class="dropdown-item"><i data-lucide="user"></i> support</a>
-                    <div class="dropdown-divider"></div>
-                    <button class="dropdown-item" id="logoutBtn"><i data-lucide="log-out"></i> Log Out</button>
                 </div>
             </div>
+        </div>
+        <!-- Hidden Search Input for the search functionality -->
+        <div class="search-overlay" style="display: none;">
+            <input type="text" id="searchInput" placeholder="Search movies, series, anime...">
+            <div id="searchDropdown" class="search-dropdown"></div>
         </div>
     </nav>
 
@@ -100,10 +111,10 @@
         <div id="heroBanner" class="hero-banner"></div>
 
         <!-- Recently Watched -->
-        <div id="recently-watched-section" class="content-section" style="display: none;">
+        <div id="recently-watched-section" class="content-section">
             <div class="section-header">
-                <h2 class="section-title">Recently Watched</h2>
-                <button class="btn-text" onclick="window.HistoryManager.clear()">Clear History</button>
+                <h2 class="section-title">RECENTLY WATCHED</h2>
+                <button class="btn-text" onclick="window.HistoryManager.clear()">Clear All</button>
             </div>
             <div class="slider-container">
                 <button class="slider-btn slider-btn-left" data-slider="recentlyWatchedContainer">
@@ -121,23 +132,26 @@
         </div>
 
         <!-- Watch Later -->
-        <div id="watch-later-section" class="content-section" style="display: none;">
+        <div id="watch-later-section" class="content-section">
             <div class="section-header">
-                <h2 class="section-title">Watch Later</h2>
+                <h2 class="section-title">WATCH LATER</h2>
             </div>
             <div class="slider-container">
-                <button class="slider-btn slider-btn-left" data-slider="wishlistContainer">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <polyline points="15 18 9 12 15 6"></polyline>
-                    </svg>
-                </button>
                 <div id="wishlistContainer" class="content-slider"></div>
-                <button class="slider-btn slider-btn-right" data-slider="wishlistContainer">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <polyline points="9 18 15 12 9 6"></polyline>
-                    </svg>
-                </button>
             </div>
+
+            <div class="pagination-indicators">
+                <div class="dot active"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+            </div>
+        </div>
+
+        <div class="bottom-actions">
+            <button class="btn btn-secondary profile-fab" id="profile-fab-btn">
+                <i data-lucide="user"></i> Profile <i data-lucide="chevron-down" style="width: 14px;"></i>
+            </button>
         </div>
 
         <!-- Trending Movies -->
