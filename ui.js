@@ -18,7 +18,7 @@ class UIManager {
 
         if (variant === 'history') {
             card.innerHTML = `
-                <img src="${this.api.getImageURL(posterPath)}" alt="${title}" loading="lazy" style="width: 100%; height: 350px; object-fit: cover;">
+                <img src="${this.api.getImageURL(posterPath)}" alt="${title}" loading="lazy" class="card-img-responsive">
                 <div class="card-remove-overlay" title="Remove from History">
                     <i data-lucide="x" style="width: 16px; height: 16px;"></i>
                 </div>
@@ -30,7 +30,7 @@ class UIManager {
             };
         } else if (variant === 'wishlist') {
             card.innerHTML = `
-                <img src="${this.api.getImageURL(posterPath)}" alt="${title}" loading="lazy" style="width: 100%; height: 350px; object-fit: cover;">
+                <img src="${this.api.getImageURL(posterPath)}" alt="${title}" loading="lazy" class="card-img-responsive">
                 <div class="card-info-bar">
                     <div class="card-info-text">
                         <h4>${title.toUpperCase()}</h4>

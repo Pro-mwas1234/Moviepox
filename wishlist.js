@@ -92,11 +92,6 @@ class WishlistManager {
         const localItems = this.getFromLocal();
         const cloudItems = await this.get();
 
-        if (localItems.length === 0) {
-            this.render();
-            return;
-        }
-
         // Merge logic
         const merged = [...cloudItems];
         localItems.forEach(localItem => {
