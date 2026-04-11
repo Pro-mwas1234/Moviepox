@@ -1460,6 +1460,12 @@ main {
     border-color: var(--primary-color);
 }
 
+.control-group select option,
+.server-selector select option {
+    background-color: var(--bg-dark);
+    color: var(--text-primary);
+}
+
 .auth-modal-content {
     max-width: 460px;
     background: rgba(10, 10, 10, 0.95);
