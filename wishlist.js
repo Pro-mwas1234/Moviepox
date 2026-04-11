@@ -5,38 +5,45 @@ class WishlistManager {
      * Toggles an item in the wishlist.
      */
     static async toggle(item) {
-        if (!item || !item.id) return;
-
-        const user = window.firebaseAuth?.currentUser;
-        let wishlist = await this.get();
-
-        const exists = wishlist.some(i => i.id === item.id);
-
-        if (exists) {
-            wishlist = wishlist.filter(i => i.id !== item.id);
-            console.log(`[Wishlist] Removed: ${item.title || item.name}`);
-        } else {
-            wishlist.unshift({
-                id: item.id,
-                title: item.title || item.name,
-                poster_path: item.poster_path,
-                backdrop_path: item.backdrop_path,
-                media_type: item.media_type || (item.first_air_date ? 'tv' : 'movie'),
-                vote_average: item.vote_average,
-                release_date: item.release_date || item.first_air_date,
-                timestamp: Date.now()
-            });
-            console.log(`[Wishlist] Added: ${item.title || item.name}`);
+        if (!item || !item.id) {
+            console.error("[Wishlist] Cannot toggle: Invalid item data");
+            return false;
         }
 
-        if (user) {
-            await this.saveToDb(user.uid, wishlist);
-        } else {
-            this.saveToLocal(wishlist);
-        }
+        try {
+            const user = window.firebaseAuth?.currentUser;
+            let wishlist = await this.get();
+            const exists = wishlist.some(i => i.id === item.id);
 
-        this.render();
-        return !exists; // Returns true if added, false if removed
+            if (exists) {
+                wishlist = wishlist.filter(i => i.id !== item.id);
+                console.log(`[Wishlist] Removed: ${item.title || item.name}`);
+            } else {
+                wishlist.unshift({
+                    id: item.id,
+                    title: item.title || item.name,
+                    poster_path: item.poster_path,
+                    backdrop_path: item.backdrop_path,
+                    media_type: item.media_type || (item.first_air_date ? 'tv' : 'movie'),
+                    vote_average: item.vote_average,
+                    release_date: item.release_date || item.first_air_date,
+                    timestamp: Date.now()
+                });
+                console.log(`[Wishlist] Added: ${item.title || item.name}`);
+            }
+
+            if (user) {
+                await this.saveToDb(user.uid, wishlist);
+            } else {
+                this.saveToLocal(wishlist);
+            }
+
+            this.render();
+            return !exists;
+        } catch (error) {
+            console.error("[Wishlist] Toggle failed:", error);
+            return false;
+        }
     }
 
     static async isWishlisted(id) {
