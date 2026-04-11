@@ -121,6 +121,14 @@
         color: white;
     }
 
+    .user-dropdown {
+        position: fixed !important;
+        top: auto !important;
+        bottom: 85px !important;
+        right: 1.5rem !important;
+        z-index: 1000000;
+    }
+
     /* Hero Banner Mobile */
     .hero-banner {
         height: 85vh;

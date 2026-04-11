@@ -37,11 +37,9 @@ class WishlistManager {
                     await this.saveToDb(user.uid, wishlist);
                 } catch (dbErr) {
                     console.warn("[Wishlist] Cloud save disabled or denied, using local storage instead.", dbErr.message);
-                    this.saveToLocal(wishlist);
                 }
-            } else {
-                this.saveToLocal(wishlist);
             }
+            this.saveToLocal(wishlist);
 
             this.render();
             return !exists;
@@ -62,7 +60,9 @@ class WishlistManager {
         if (user) {
             try {
                 const snapshot = await window.firebaseDb.ref(`wishlist/${user.uid}`).once('value');
-                return snapshot.val() || [];
+                const val = snapshot.val();
+                if (!val) return [];
+                return Array.isArray(val) ? val : Object.values(val);
             } catch (e) {
                 console.error("Cloud wishlist error:", e);
                 return this.getFromLocal();
@@ -109,7 +109,7 @@ class WishlistManager {
         
         try {
             await this.saveToDb(uid, finalWishlist);
-            this.saveToLocal([]); // Clear local only on successful cloud sync
+            this.saveToLocal(finalWishlist); // Cache locally
         } catch (dbErr) {
             console.warn("[Wishlist] Sync delayed due to cloud permissions.", dbErr.message);
             this.saveToLocal(finalWishlist);
@@ -132,7 +132,7 @@ class WishlistManager {
 
         const wishlist = await this.get();
 
-        if (wishlist.length === 0) {
+        if (!wishlist || wishlist.length === 0) {
             container.innerHTML = `
                 <div class="empty-bucket-msg">
                     <i data-lucide="list-plus" style="width: 48px; height: 48px; opacity: 0.2; margin-bottom: 1rem;"></i>
@@ -163,11 +163,10 @@ class WishlistManager {
             try {
                 await this.saveToDb(user.uid, wishlist);
             } catch (dbErr) {
-                this.saveToLocal(wishlist);
+                // Ignore DB error, local is updated
             }
-        } else {
-            this.saveToLocal(wishlist);
         }
+        this.saveToLocal(wishlist);
 
         this.render();
     }

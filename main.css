@@ -140,12 +140,14 @@ body {
 }
 
 .nav-container {
-    max-width: 1600px;
+    max-width: 1400px;
     margin: 0 auto;
     padding: 0 4rem;
+    height: 80px;
     display: flex;
-    align-items: center;
     justify-content: space-between;
+    align-items: center;
+    position: relative;
 }
 
 .bottom-nav {
@@ -572,8 +574,8 @@ main {
 
 .user-dropdown {
     position: absolute;
-    top: 120%;
-    right: 0;
+    top: 70px;
+    right: 4rem;
     width: 240px;
     background: rgba(15, 15, 15, 0.95);
     -webkit-backdrop-filter: blur(25px);

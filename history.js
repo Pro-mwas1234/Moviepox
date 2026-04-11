@@ -30,10 +30,9 @@ class HistoryManager {
         }
 
         if (user) {
-            await this.saveToDb(user.uid, history);
-        } else {
-            this.saveToLocal(history);
+            try { await this.saveToDb(user.uid, history); } catch(e) {}
         }
+        this.saveToLocal(history);
 
         this.render();
     }
@@ -47,7 +46,9 @@ class HistoryManager {
         if (user) {
             try {
                 const snapshot = await window.firebaseDb.ref(`history/${user.uid}`).once('value');
-                return snapshot.val() || [];
+                const val = snapshot.val();
+                if (!val) return [];
+                return Array.isArray(val) ? val : Object.values(val);
             } catch (e) {
                 console.error("Cloud history error:", e);
                 return this.getFromLocal();
@@ -98,8 +99,8 @@ class HistoryManager {
         const finalHistory = merged.sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0)).slice(0, this.MAX_ITEMS);
         await this.saveToDb(uid, finalHistory);
 
-        // Clear local
-        this.saveToLocal([]);
+        // Cache locally
+        this.saveToLocal(finalHistory);
         this.render();
     }
 
@@ -117,7 +118,7 @@ class HistoryManager {
 
         if (!container || !section) return;
 
-        if (history.length === 0) {
+        if (!history || history.length === 0) {
             section.style.display = 'none';
             return;
         }
@@ -141,10 +142,9 @@ class HistoryManager {
         history = history.filter(item => item.id !== id);
 
         if (user) {
-            await this.saveToDb(user.uid, history);
-        } else {
-            this.saveToLocal(history);
+            try { await this.saveToDb(user.uid, history); } catch(e) {}
         }
+        this.saveToLocal(history);
 
         this.render();
     }
