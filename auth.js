@@ -77,28 +77,39 @@ class AuthManager {
 
     updateUI() {
         const authBtn = document.getElementById('auth-nav-btn');
+        const mobileAuthBtn = document.getElementById('mobile-auth-btn');
         const userDropdown = document.getElementById('userDropdown');
         const dropdownUsername = document.getElementById('dropdown-username');
-        if (!authBtn) return;
+        
+        const updateBtn = (btn) => {
+            if (!btn) return;
+            const text = btn.querySelector('span');
+            const icon = btn.querySelector('i');
 
-        const authBtnText = authBtn.querySelector('span');
-        const authBtnIcon = authBtn.querySelector('i');
+            if (this.user) {
+                const username = this.user.displayName || this.user.email.split('@')[0];
+                if (text) text.textContent = username;
+                btn.onclick = (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    if (window.uiManager) window.uiManager.handleProfileClick();
+                };
+            } else {
+                if (text) text.textContent = "Profile";
+                btn.onclick = (e) => {
+                    e.preventDefault();
+                    this.showAuthModal();
+                };
+            }
+        };
+
+        updateBtn(authBtn);
+        updateBtn(mobileAuthBtn);
 
         if (this.user) {
             const username = this.user.displayName || this.user.email.split('@')[0];
-            if (authBtnText) authBtnText.textContent = username;
-            if (authBtnIcon) authBtnIcon.setAttribute('data-lucide', 'user');
-            
-            authBtn.onclick = (e) => {
-                e.stopPropagation();
-                userDropdown.classList.toggle('active');
-            };
             if (dropdownUsername) dropdownUsername.textContent = username;
         } else {
-            if (authBtnText) authBtnText.textContent = "Profile";
-            if (authBtnIcon) authBtnIcon.setAttribute('data-lucide', 'user');
-            
-            authBtn.onclick = () => this.showAuthModal();
             if (userDropdown) userDropdown.classList.remove('active');
         }
 

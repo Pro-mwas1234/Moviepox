@@ -29,6 +29,13 @@
         display: none;
     }
 
+    body {
+        min-height: 100dvh;
+        overflow-x: hidden;
+        overscroll-behavior-y: none;
+        padding-bottom: 80px; /* Space for the bottom nav */
+    }
+
     .nav-container {
         padding: 0 1.5rem;
         height: 70px;

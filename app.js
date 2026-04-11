@@ -22,6 +22,10 @@ class App {
                 window.HistoryManager.render();
             }
 
+            if (window.WishlistManager) {
+                window.WishlistManager.render();
+            }
+
             console.log('✅ moviepox ready!');
         } catch (error) {
             console.error('Init error:', error);
@@ -137,15 +141,37 @@ class App {
         const mainContent = document.getElementById('mainContent');
         if (!mainContent) return;
 
-        // Reset the UI to original structure
+        // Reset UI - MUST include all sections or their managers break
         mainContent.innerHTML = `
             <div id="heroBanner" class="hero-banner"></div>
+
+            <!-- Recently Watched -->
+            <div id="recently-watched-section" class="content-section">
+                <div class="section-header">
+                    <h2 class="section-title">RECENTLY WATCHED</h2>
+                    <button class="btn-text" onclick="window.HistoryManager.clear()">Clear All</button>
+                </div>
+                <div class="slider-container">
+                    <div id="recentlyWatchedContainer" class="content-slider"></div>
+                </div>
+            </div>
+
+            <!-- Bucket List -->
+            <div id="watch-later-section" class="content-section">
+                <div class="section-header">
+                    <h2 class="section-title">BUCKET LIST</h2>
+                </div>
+                <div class="slider-container">
+                    <div id="wishlistContainer" class="content-slider"></div>
+                </div>
+            </div>
+
             <section class="content-section">
                 <h2 class="section-title">Trending <span>Movies</span></h2>
                 <div id="trendingMovies" class="content-slider"></div>
             </section>
             <section class="content-section">
-                <h2 class="section-header">Trending <span>Series</span></h2>
+                <h2 class="section-title">Trending <span>Series</span></h2>
                 <div id="trendingSeries" class="content-slider"></div>
             </section>
             <section class="content-section">
@@ -181,6 +207,9 @@ class App {
         window.scrollTo({ top: 0, behavior: 'smooth' });
         await this.loadAllContent();
         
+        // Re-render wishlist and history since we rebuilt the DOM
+        if (window.WishlistManager) window.WishlistManager.render();
+        if (window.HistoryManager) window.HistoryManager.render();
         if (window.lucide) window.lucide.createIcons();
         if (window.uiManager) window.uiManager.setupSliderNavigation();
     }
