@@ -23,10 +23,6 @@ class PlayerManager {
             this.loadServer();
         };
 
-        document.getElementById('playerModal').onclick = (e) => {
-            if (e.target.id === 'playerModal') this.closePlayer();
-        };
-
         document.getElementById('detailModal').onclick = (e) => {
             if (e.target.id === 'detailModal') {
                 document.getElementById('detailModal').classList.remove('active');

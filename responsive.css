@@ -3,14 +3,7 @@
         padding: 0 1.5rem;
     }
 
-    .content-card {
-        width: 100%;
-    }
-
-    .content-card img {
-        height: 100%;
-    }
-
+    /* Do NOT override content-card width here - it breaks sliders */
     .hero-banner {
         height: 60vh;
         padding: 2rem;
@@ -272,32 +265,186 @@
     }
 }
 
-@media (max-width: 768px) and (orientation: landscape) {
-    .hero-banner {
-        height: 100vh;
+
+/* =============================================
+   MOBILE PLAYER - COMPLETE OVERHAUL
+   ============================================= */
+@media (max-width: 768px) {
+    /* Player Modal: Full screen takeover */
+    .player-modal.active {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: stretch !important;
+        justify-content: flex-start !important;
+        padding: 0 !important;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
     }
 
-    .navbar {
-        padding: 0.5rem 0;
-    }
-}
-
-@media (min-width: 1920px) {
-
-    .nav-container,
-    .content-section {
-        max-width: 1800px;
+    .player-container {
+        width: 100% !important;
+        max-width: 100% !important;
+        position: relative;
+        border-radius: 0;
     }
 
-    .content-card {
-        width: 220px;
+    /* Close button: always visible, inside the container */
+    .player-close {
+        position: fixed !important;
+        top: 10px !important;
+        right: 12px !important;
+        z-index: 9999 !important;
+        width: 44px !important;
+        height: 44px !important;
+        font-size: 1.5rem !important;
+        background: rgba(0,0,0,0.85) !important;
+        border: 1px solid rgba(255,255,255,0.2) !important;
+        border-radius: 50% !important;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        color: white;
+        line-height: 1;
     }
 
-    .hero-content h1 {
-        font-size: 3.5rem;
+    /* Video: 16:9 ratio, full width */
+    .player-wrapper {
+        border-radius: 0 !important;
+        padding-bottom: 56.25%;
+        height: 0;
+        position: relative;
+        overflow: hidden;
+        background: #000;
+        margin-top: 0;
     }
 
-    .section-title {
-        font-size: 2rem;
+    .player-wrapper iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100% !important;
+        height: 100% !important;
+        border: none;
     }
-}
+
+    /* Controls: clean vertical stack, scrollable */
+    .player-controls {
+        padding: 1rem !important;
+        gap: 1rem !important;
+        display: flex;
+        flex-direction: column;
+        background: #0a0a0f;
+    }
+
+    /* TV Controls: stack vertically */
+    .tv-controls {
+        flex-direction: column !important;
+        gap: 0.75rem !important;
+        padding-bottom: 0.75rem !important;
+    }
+
+    .control-group {
+        width: 100%;
+    }
+
+    .control-group select {
+        width: 100%;
+        font-size: 1rem;
+        padding: 0.85rem 1rem;
+        border-radius: 10px;
+    }
+
+    /* Server selector: stack vertically */
+    .server-selector {
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 0.5rem !important;
+    }
+
+    .server-selector label {
+        font-size: 0.85rem;
+        color: rgba(255,255,255,0.6);
+    }
+
+    .server-selector select {
+        width: 100% !important;
+        font-size: 1rem;
+        padding: 0.85rem 1rem;
+        border-radius: 10px;
+    }
+
+    /* Action buttons: tappable size */
+    #trailerPlayBtn,
+    #shareBtn,
+    #downloadBtn {
+        width: 100% !important;
+        justify-content: center !important;
+        padding: 1rem !important;
+        font-size: 1rem !important;
+        border-radius: 12px !important;
+        min-height: 48px !important;
+    }
+
+    /* Recommendations: hide on mobile to keep player clean */
+    .player-extra-content {
+        display: none !important;
+    }
+
+    /* Detail Modal: full screen, scrollable */
+    .modal.active {
+        padding: 0 !important;
+        align-items: flex-start !important;
+    }
+
+    .modal-content {
+        width: 100% !important;
+        max-width: 100% !important;
+        max-height: 100vh !important;
+        border-radius: 0 !important;
+        overflow-y: auto !important;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .detail-backdrop {
+        height: 220px !important;
+        border-radius: 0 !important;
+    }
+
+    .detail-info {
+        padding: 1.2rem !important;
+    }
+
+    .detail-title {
+        font-size: clamp(1.4rem, 6vw, 2rem) !important;
+    }
+
+    .detail-meta {
+        gap: 0.75rem !important;
+        font-size: 0.85rem !important;
+    }
+
+    .detail-actions {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+
+    .detail-actions .btn {
+        width: 100% !important;
+        justify-content: center !important;
+        padding: 1rem !important;
+        font-size: 1rem !important;
+        min-height: 52px !important;
+        border-radius: 12px !important;
+    }
+
+    /* Modal close: bigger tap target */
+    .modal-close {
+        width: 48px !important;
+        height: 48px !important;
+        top: 0.75rem !important;
+        right: 0.75rem !important;
+        font-size: 1.4rem !important;
+    }
+}

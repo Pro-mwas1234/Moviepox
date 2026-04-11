@@ -355,7 +355,13 @@
         <div class="player-container">
             <button class="player-close" id="closePlayer">&times;</button>
             <div class="player-wrapper">
-                <iframe id="videoPlayer" allowfullscreen></iframe>
+                <iframe 
+                    id="videoPlayer" 
+                    allowfullscreen
+                    allow="autoplay; fullscreen; picture-in-picture; encrypted-media; gyroscope; accelerometer; clipboard-write"
+                    loading="lazy"
+                    sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-presentation allow-top-navigation-by-user-activation"
+                ></iframe>
             </div>
             <div class="player-controls">
 
