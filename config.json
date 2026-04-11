@@ -6,8 +6,8 @@
     {
       "id": 1,
       "name": "Server 1 - ghast",
-      "movie_url": "https://ghasto.netlify.app//movie/",
-      "tv_url": "https://ghasto.netlify.app/tv/",
+      "movie_url": "https://vidnest.fun/movie/",
+      "tv_url": "https://vidnest.fun/tv/",
       "tv_format": "{url}{tmdb_id}/{season}/{episode}"
     },
     {
