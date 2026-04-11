@@ -123,44 +123,66 @@
 
     /* Hero Banner Mobile */
     .hero-banner {
-        height: 75vh;
+        height: 85vh;
         padding: 1.5rem;
         background-position: center;
+        align-items: flex-end; /* Align content to the bottom for cinematic feel */
+        padding-bottom: 2rem;
+    }
+
+    .hero-overlay {
+        background: linear-gradient(to top, var(--bg-dark) 0%, rgba(5, 5, 16, 0.8) 30%, transparent 100%) !important;
     }
 
     .hero-content {
-        bottom: 9rem;
+        bottom: 0;
         max-width: 100%;
         text-align: center;
         width: 100%;
         left: 0;
-        padding: 0 1.5rem;
+        padding: 0 1rem;
         display: flex;
         flex-direction: column;
         align-items: center;
         z-index: 10;
+        margin-bottom: 4rem; /* Safe area above bottom nav */
     }
 
     .hero-content h1 {
-        font-size: clamp(1.5rem, 8vw, 2.2rem);
-        font-weight: 800;
-        line-height: 1.1;
-        margin-bottom: 1.2rem;
+        font-size: clamp(2rem, 10vw, 3rem);
+        font-weight: 900;
+        line-height: 1.05;
+        margin-bottom: 0.8rem;
         text-align: center;
         text-transform: uppercase;
-        letter-spacing: -1px;
-        text-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);
+        letter-spacing: -1.5px;
+        text-shadow: 0 4px 30px rgba(0, 0, 0, 0.9), 0 2px 10px rgba(0,0,0,0.5);
+    }
+
+    .hero-content p {
+        font-size: 0.95rem;
+        margin-bottom: 1.5rem;
     }
 
     .hero-buttons {
-        flex-direction: column;
+        flex-direction: row;
         gap: 0.8rem;
+        width: 100%;
+        justify-content: center;
     }
 
     .hero-buttons .btn {
-        width: 100%;
-        padding: 1.2rem;
-        justify-content: center;
+        flex: 1;
+        padding: 0.85rem 1rem;
+        font-size: 0.9rem;
+    }
+
+    .hero-buttons .btn-secondary {
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(15px);
+        -webkit-backdrop-filter: blur(15px);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        color: white;
     }
 
     /* Content Layout */

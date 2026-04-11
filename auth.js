@@ -243,7 +243,12 @@ class AuthManager {
         // Dropdown interactions
         const userDropdown = document.getElementById('userDropdown');
         document.addEventListener('click', (e) => {
-            if (userDropdown && !userDropdown.contains(e.target) && e.target.id !== 'auth-nav-btn') {
+            const authBtn = document.getElementById('auth-nav-btn');
+            const mobileBtn = document.getElementById('mobile-auth-btn');
+            
+            if (userDropdown && !userDropdown.contains(e.target) && 
+                (!authBtn || !authBtn.contains(e.target)) &&
+                (!mobileBtn || !mobileBtn.contains(e.target))) {
                 userDropdown.classList.remove('active');
             }
         });
