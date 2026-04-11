@@ -481,7 +481,9 @@ class UIManager {
             wishlistBtn.onclick = async () => {
                 const nowSaved = await window.WishlistManager.toggle(details);
                 wishlistBtn.classList.toggle('active', nowSaved);
-                const icon = wishlistBtn.querySelector('i');
+                
+                // Lucide turns <i> into <svg>, so we select the svg
+                const icon = wishlistBtn.querySelector('svg') || wishlistBtn.querySelector('i');
                 const text = wishlistBtn.querySelector('span');
                 
                 if (icon) icon.style.fill = nowSaved ? 'currentColor' : 'none';
@@ -489,9 +491,7 @@ class UIManager {
             };
         }
 
-        if (window.HistoryManager) {
-            window.HistoryManager.add(details);
-        }
+        if (window.lucide) window.lucide.createIcons();
     }
 }
 

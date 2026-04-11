@@ -77,6 +77,18 @@ class PlayerManager {
         this.loadServer();
         this.updateDownloadLink(); // Initialize download button
         this.renderRecommendations(); // Load recommendations
+
+        // Add to history when player actually opens
+        if (window.HistoryManager && window.tmdbAPI) {
+            try {
+                const apiMethod = mediaType === 'tv' ? 'getTVDetails' : 'getMovieDetails';
+                window.tmdbAPI[apiMethod](id).then(details => {
+                    if (details) window.HistoryManager.add(details);
+                }).catch(e => console.error("History logging failed:", e));
+            } catch (e) {
+                console.error(e);
+            }
+        }
     }
 
     async renderRecommendations() {
