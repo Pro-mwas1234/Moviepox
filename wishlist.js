@@ -33,7 +33,12 @@ class WishlistManager {
             }
 
             if (user) {
-                await this.saveToDb(user.uid, wishlist);
+                try {
+                    await this.saveToDb(user.uid, wishlist);
+                } catch (dbErr) {
+                    console.warn("[Wishlist] Cloud save disabled or denied, using local storage instead.", dbErr.message);
+                    this.saveToLocal(wishlist);
+                }
             } else {
                 this.saveToLocal(wishlist);
             }
@@ -101,8 +106,15 @@ class WishlistManager {
         });
 
         const finalWishlist = merged.sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0));
-        await this.saveToDb(uid, finalWishlist);
-        this.saveToLocal([]);
+        
+        try {
+            await this.saveToDb(uid, finalWishlist);
+            this.saveToLocal([]); // Clear local only on successful cloud sync
+        } catch (dbErr) {
+            console.warn("[Wishlist] Sync delayed due to cloud permissions.", dbErr.message);
+            this.saveToLocal(finalWishlist);
+        }
+        
         this.render();
     }
 
@@ -148,7 +160,11 @@ class WishlistManager {
         wishlist = wishlist.filter(item => item.id !== id);
 
         if (user) {
-            await this.saveToDb(user.uid, wishlist);
+            try {
+                await this.saveToDb(user.uid, wishlist);
+            } catch (dbErr) {
+                this.saveToLocal(wishlist);
+            }
         } else {
             this.saveToLocal(wishlist);
         }
