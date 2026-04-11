@@ -5,37 +5,37 @@
   "servers": [
     {
       "id": 1,
-      "name": "Server 1 - xpass",
+      "name": "Server 1 - Indiraembed",
+      "movie_url": "https://indraembed.netlify.app/movie/",
+      "tv_url": "https://indraembed.netlify.app/tv/",
+      "tv_format": "{url}{tmdb_id}/{season}/{episode}"
+    },
+    {
+      "id": 2,
+      "name": "Server 2 - xpass",
       "movie_url": "https://play.xpass.top/e/movie/",
       "tv_url": "https://play.xpass.top/e/tv/",
       "tv_format": "{url}{tmdb_id}/{season}/{episode}"
     },
     {
-      "id": 2,
-      "name": "Server 2 - vidcore",
+      "id": 3,
+      "name": "Server 3 - vidcore",
       "movie_url": "https://vidcore.net/movie/",
       "tv_url": "https://vidcore.net/tv/",
       "tv_format": "{url}{tmdb_id}/{season}/{episode}"
     },
     {
-      "id": 3,
-      "name": "Server 3 - zxcstream",
+      "id": 4,
+      "name": "Server 4 - zxcstream",
       "movie_url": "https://www.zxcstream.xyz/embed/movie/",
       "tv_url": "https://www.zxcstream.xyz/embed/tv/",
       "tv_format": "{url}{tmdb_id}/{season}/{episode}"
     },
     {
-      "id": 4,
-      "name": "Server 4 - autoEmbed",
+      "id": 5,
+      "name": "Server 5 - autoEmbed",
       "movie_url": "https://player.autoembed.cc/embed/movie/",
       "tv_url": "https://player.autoembed.cc/embed/tv/",
-      "tv_format": "{url}{tmdb_id}/{season}/{episode}"
-    },
-    {
-      "id": 5,
-      "name": "Server 5 - Indiraembed",
-      "movie_url": "https://indraembed.netlify.app/movie/",
-      "tv_url": "https://indraembed.netlify.app/tv/",
       "tv_format": "{url}{tmdb_id}/{season}/{episode}"
     },
     {
