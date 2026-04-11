@@ -126,9 +126,63 @@ class App {
             }
         });
 
-        document.querySelector('.nav-logo').onclick = () => {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+        document.querySelector('.nav-logo').onclick = (e) => {
+            e.preventDefault();
+            this.goHome();
         };
+    }
+
+    async goHome() {
+        console.log('🏠 Returning Home...');
+        const mainContent = document.getElementById('mainContent');
+        if (!mainContent) return;
+
+        // Reset the UI to original structure
+        mainContent.innerHTML = `
+            <div id="heroBanner" class="hero-banner"></div>
+            <section class="content-section">
+                <h2 class="section-title">Trending <span>Movies</span></h2>
+                <div id="trendingMovies" class="content-slider"></div>
+            </section>
+            <section class="content-section">
+                <h2 class="section-header">Trending <span>Series</span></h2>
+                <div id="trendingSeries" class="content-slider"></div>
+            </section>
+            <section class="content-section">
+                <h2 class="section-title">Popular <span>Highlights</span></h2>
+                <div id="popularMovies" class="content-slider"></div>
+            </section>
+            <section class="content-section">
+                <h2 class="section-title">Coming <span>Soon</span></h2>
+                <div id="upcomingMovies" class="content-slider"></div>
+            </section>
+            <section class="content-section">
+                <h2 id="regionalTitle" class="section-title">Top <span>Regional</span></h2>
+                <div id="regionalMovies" class="content-slider"></div>
+            </section>
+            <section class="content-section">
+                <h2 class="section-title">Cinematic <span>Anime</span></h2>
+                <div id="animeContent" class="content-slider"></div>
+            </section>
+            <section class="content-section">
+                <h2 class="section-title">Hollywood <span>Studio</span></h2>
+                <div id="hollywoodContent" class="content-slider"></div>
+            </section>
+            <section class="content-section">
+                <h2 class="section-title">Bollywood <span>Vibes</span></h2>
+                <div id="bollywoodContent" class="content-slider"></div>
+            </section>
+            <section class="content-section">
+                <h2 class="section-title">Tollywood <span>Action</span></h2>
+                <div id="tollywoodContent" class="content-slider"></div>
+            </section>
+        `;
+
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        await this.loadAllContent();
+        
+        if (window.lucide) window.lucide.createIcons();
+        if (window.uiManager) window.uiManager.setupSliderNavigation();
     }
 
     scrollToSection(id) {

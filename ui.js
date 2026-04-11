@@ -102,6 +102,19 @@ class UIManager {
         if (window.lucide) window.lucide.createIcons();
     }
 
+    handleProfileClick() {
+        if (!window.authManager) return;
+        
+        if (window.authManager.user) {
+            // Toggle dropdown if logged in
+            const dropdown = document.getElementById('userDropdown');
+            if (dropdown) dropdown.classList.toggle('active');
+        } else {
+            // Open auth modal if logged out
+            window.authManager.showAuthModal();
+        }
+    }
+
     setupSliderNavigation() {
         document.querySelectorAll('.slider-btn').forEach(btn => {
             btn.onclick = () => {

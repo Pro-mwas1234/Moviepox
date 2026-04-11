@@ -1247,9 +1247,13 @@ main {
 }
 
 .detail-title {
-    font-size: 2rem;
-    font-weight: 700;
+    font-size: clamp(1.8rem, 5vw, 3rem);
+    font-weight: 800;
     margin-bottom: 1.5rem;
+    line-height: 1.1;
+    background: linear-gradient(135deg, #fff 0%, #aaa 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 .detail-meta {

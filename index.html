@@ -101,7 +101,7 @@
         
         <!-- Bottom Navigation (Mobile Only) -->
         <div class="bottom-nav">
-            <a href="#" class="bottom-nav-item" onclick="window.app.scrollToSection('mainContent'); return false;">
+            <a href="#" class="bottom-nav-item" onclick="window.app.goHome(); return false;">
                 <i data-lucide="home"></i>
                 <span>Home</span>
             </a>
@@ -118,7 +118,7 @@
                 <i data-lucide="list"></i>
                 <span>Bucket List</span>
             </a>
-            <a href="#" class="bottom-nav-item" id="mobile-auth-btn" onclick="document.getElementById('auth-nav-btn').click(); return false;">
+            <a href="#" class="bottom-nav-item" id="mobile-auth-btn" onclick="window.uiManager.handleProfileClick(); return false;">
                 <i data-lucide="user"></i>
                 <span>Profile</span>
             </a>
