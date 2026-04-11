@@ -441,11 +441,12 @@ class UIManager {
                     <button class="btn btn-primary btn-large" onclick="window.playerManager.openPlayer(${id}, '${mediaType}')">
                         <i data-lucide="play" style="width: 20px; height: 20px; fill: white;"></i> Play Now
                     </button>
-                    ${!isWishlisted ? `
-                    <button class="btn btn-secondary btn-large bucket-add-btn" onclick="window.WishlistManager.toggle(${JSON.stringify(details).replace(/"/g, '&quot;')}); this.remove();">
-                        <i data-lucide="list-plus"></i> Add to Bucket List
+                    
+                    <button class="btn btn-secondary btn-large wishlist-toggle-btn ${isWishlisted ? 'active' : ''}">
+                        <i data-lucide="list-plus" style="${isWishlisted ? 'fill: currentColor;' : ''}"></i> 
+                        <span>${isWishlisted ? 'Remove from Bucket' : 'Add to Bucket List'}</span>
                     </button>
-                    ` : ''}
+
                     <button class="btn btn-secondary btn-large" onclick="window.playerManager.playTrailer(${id}, '${mediaType}')">
                         🎬 Watch Trailer
                     </button>
@@ -480,7 +481,11 @@ class UIManager {
             wishlistBtn.onclick = async () => {
                 const nowSaved = await window.WishlistManager.toggle(details);
                 wishlistBtn.classList.toggle('active', nowSaved);
-                wishlistBtn.querySelector('i').style.fill = nowSaved ? 'currentColor' : 'none';
+                const icon = wishlistBtn.querySelector('i');
+                const text = wishlistBtn.querySelector('span');
+                
+                if (icon) icon.style.fill = nowSaved ? 'currentColor' : 'none';
+                if (text) text.textContent = nowSaved ? 'Remove from Bucket' : 'Add to Bucket List';
             };
         }
 

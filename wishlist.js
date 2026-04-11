@@ -105,8 +105,8 @@ class WishlistManager {
 
         if (!container || !section) return;
 
-        // Safety check: wait for API to be ready
-        if (!window.tmdbAPI || !window.tmdbAPI.imageBase) {
+        // Safety check: wait for API and UI manager to be ready
+        if (!window.tmdbAPI || !window.tmdbAPI.imageBase || !window.uiManager) {
             setTimeout(() => this.render(), 500);
             return;
         }
