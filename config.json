@@ -34,8 +34,8 @@
     {
       "id": 5,
       "name": "Server 5 - Indiraembed",
-      "movie_url": "https://indraembed.netlify.app/movie/",
-      "tv_url": "https://indraembed.netlify.app/tv/",
+      "movie_url": "https://ghasto.netlify.app/movie/",
+      "tv_url": "https://ghasto.netlify.app/tv/",
       "tv_format": "{url}{tmdb_id}/{season}/{episode}"
     },
     {
