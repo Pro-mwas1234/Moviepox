@@ -3,48 +3,48 @@
   "tmdb_base_url": "https://api.themoviedb.org/3",
   "tmdb_image_base": "https://image.tmdb.org/t/p",
   "servers": [
-    {
+     {
       "id": 1,
-      "name": "Server 1 - ghast",
+      "name": "Server 1 - 👍nameless",
+      "movie_url": "https://embedmaster.link/clrx5l511lwn6mtd/movie/",
+      "tv_url": "https://embedmaster.link/clrx5l511lwn6mtd/tv/",
+      "tv_format": "{url}{tmdb_id}/{season}/{episode}"
+    },
+    {
+      "id": 2,
+      "name": "Server 2 - ghast",
       "movie_url": "https://vidnest.fun/movie/",
       "tv_url": "https://vidnest.fun/tv/",
       "tv_format": "{url}{tmdb_id}/{season}/{episode}"
     },
     {
-      "id": 2,
-      "name": "Server 2 - xpass",
+      "id": 3,
+      "name": "Server 3 - xpass",
       "movie_url": "https://play.xpass.top/e/movie/",
       "tv_url": "https://play.xpass.top/e/tv/",
       "tv_format": "{url}{tmdb_id}/{season}/{episode}"
     },
     {
-      "id": 3,
-      "name": "Server 3 - vidcore",
+      "id": 4,
+      "name": "Server 4 - vidcore",
       "movie_url": "https://vidcore.net/movie/",
       "tv_url": "https://vidcore.net/tv/",
       "tv_format": "{url}{tmdb_id}/{season}/{episode}"
     },
     {
-      "id": 4,
-      "name": "Server 4 - zxcstream",
+      "id": 5,
+      "name": "Server 5 - zxcstream",
       "movie_url": "https://www.zxcstream.xyz/embed/movie/",
       "tv_url": "https://www.zxcstream.xyz/embed/tv/",
       "tv_format": "{url}{tmdb_id}/{season}/{episode}"
     },
     {
-      "id": 5,
-      "name": "Server 5 - autoEmbed",
+      "id": 6,
+      "name": "Server 6 - autoEmbed",
       "movie_url": "https://player.autoembed.cc/embed/movie/",
       "tv_url": "https://player.autoembed.cc/embed/tv/",
       "tv_format": "{url}{tmdb_id}/{season}/{episode}"
-    },
-    {
-      "id": 6,
-      "name": "Server 6 - 2Embed",
-      "movie_url": "https://www.2embed.stream/embed/",
-      "tv_url": "https://www.2embed.stream/embed/",
-      "tv_format": "{url}{tmdb_id}&s={season}&e={episode}"
-    }    
+    }
   ],
   "geolocation_api": "https://ipapi.co/json/",
   "genre_mappings": {
