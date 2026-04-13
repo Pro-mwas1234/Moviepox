@@ -12,18 +12,19 @@
     },
     {
       "id": 2,
-      "name": "Server 2 - xpass",
-      "movie_url": "https://play.xpass.top/e/movie/",
-      "tv_url": "https://play.xpass.top/e/tv/",
-      "tv_format": "{url}{tmdb_id}/{season}/{episode}"
-    },
-    {
-      "id": 3,
-      "name": "Server 3 - vidcore",
+      "name": "Server 2 - Core✨",
       "movie_url": "https://vidcore.net/movie/",
       "tv_url": "https://vidcore.net/tv/",
       "tv_format": "{url}{tmdb_id}/{season}/{episode}"
     },
+    {
+      "id": 3,
+      "name": "Server 3 - xpass",
+      "movie_url": "https://play.xpass.top/e/movie/",
+      "tv_url": "https://play.xpass.top/e/tv/",
+      "tv_format": "{url}{tmdb_id}/{season}/{episode}"
+    },
+    
     {
       "id": 4,
       "name": "Server 4 - zxcstream",
