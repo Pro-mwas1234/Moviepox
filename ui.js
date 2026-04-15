@@ -57,7 +57,33 @@ class UIManager {
                         <span class="card-rating">⭐ ${rating}</span>
                     </div>
                 </div>
+                <button class="card-quick-btn card-quick-play" title="Play Now">
+                    <i data-lucide="play" style="width:16px;height:16px;fill:white;"></i>
+                </button>
+                <button class="card-quick-btn card-quick-bucket" title="Add to Bucket">
+                    <i data-lucide="list-plus" style="width:16px;height:16px;"></i>
+                </button>
             `;
+
+            // Play Now button
+            const playBtn = card.querySelector('.card-quick-play');
+            playBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                window.playerManager.openPlayer(item.id, type);
+            });
+
+            // Add to Bucket button
+            const bucketBtn = card.querySelector('.card-quick-bucket');
+            bucketBtn.addEventListener('click', async (e) => {
+                e.stopPropagation();
+                const saved = await window.WishlistManager?.toggle(item);
+                bucketBtn.classList.toggle('active', saved);
+            });
+
+            // Sync initial wishlist state
+            window.WishlistManager?.isWishlisted(item.id).then(saved => {
+                if (saved) bucketBtn?.classList.add('active');
+            });
         }
 
         card.onclick = () => this.openDetail(item.id, type);

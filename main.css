@@ -991,6 +991,72 @@ main {
     transform: translate(-50%, -50%) scale(1);
 }
 
+/* ===== PC Quick-Action Buttons on Card (hover only) ===== */
+.card-quick-btn {
+    position: absolute;
+    top: 10px;
+    width: 34px;
+    height: 34px;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    background: rgba(10, 10, 18, 0.75);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 15;
+    opacity: 0;
+    transform: translateY(-6px);
+    transition: opacity 0.25s ease, transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.2s ease, box-shadow 0.2s ease;
+    pointer-events: none;
+}
+
+/* Play Now — top LEFT */
+.card-quick-play {
+    left: 10px;
+}
+
+/* Add to Bucket — top RIGHT */
+.card-quick-bucket {
+    right: 10px;
+}
+
+/* Show on desktop hover */
+@media (hover: hover) {
+    .content-card:hover .card-quick-btn {
+        opacity: 1;
+        transform: translateY(0);
+        pointer-events: auto;
+    }
+
+    .card-quick-play:hover {
+        background: var(--gradient-purple);
+        border-color: var(--accent-color);
+        box-shadow: 0 4px 16px rgba(124, 58, 237, 0.5);
+    }
+
+    .card-quick-bucket:hover {
+        background: rgba(217, 70, 239, 0.6);
+        border-color: var(--accent-color);
+        box-shadow: 0 4px 16px rgba(217, 70, 239, 0.4);
+    }
+}
+
+.card-quick-bucket.active {
+    background: var(--primary-color);
+    border-color: var(--accent-color);
+}
+
+/* Hide quick buttons on mobile/touch devices */
+@media (max-width: 768px) {
+    .card-quick-btn {
+        display: none !important;
+    }
+}
+
 /* Modal */
 .modal {
     display: none;
