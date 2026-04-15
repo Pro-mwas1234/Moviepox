@@ -19,17 +19,17 @@
     },
     {
       "id": 3,
-      "name": "Server 3 - xpass",
-      "movie_url": "https://play.xpass.top/e/movie/",
-      "tv_url": "https://play.xpass.top/e/tv/",
+      "name": "Server 3 - zxcstream",
+      "movie_url": "https://www.zxcstream.xyz/embed/movie/",
+      "tv_url": "https://www.zxcstream.xyz/embed/tv/",
       "tv_format": "{url}{tmdb_id}/{season}/{episode}"
     },
     
     {
       "id": 4,
-      "name": "Server 4 - zxcstream",
-      "movie_url": "https://www.zxcstream.xyz/embed/movie/",
-      "tv_url": "https://www.zxcstream.xyz/embed/tv/",
+      "name": "Server 4 - xpass",
+      "movie_url": "https://play.xpass.top/e/movie/",
+      "tv_url": "https://play.xpass.top/e/tv/",
       "tv_format": "{url}{tmdb_id}/{season}/{episode}"
     },
     {
