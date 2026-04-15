@@ -10,11 +10,14 @@ class AuthManager {
         this.auth.onAuthStateChanged((user) => {
             this.user = user;
             if (user) {
+                // Sync history
                 if (window.HistoryManager) window.HistoryManager.syncLocalToCloud(user.uid);
-                if (window.WishlistManager) window.WishlistManager.syncLocalToCloud(user.uid);
+                // Attach real-time wishlist listener + merge any local-only items
+                if (window.WishlistManager) window.WishlistManager.syncOnLogin(user.uid);
             } else {
                 if (window.HistoryManager) window.HistoryManager.render();
-                if (window.WishlistManager) window.WishlistManager.render();
+                // Detach listener & clear local cache on logout
+                if (window.WishlistManager) window.WishlistManager.onLogout();
             }
             this.updateUI();
         });
