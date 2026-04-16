@@ -5,16 +5,16 @@
   "servers": [
     {
       "id": 1,
-      "name": "Server 1 - E85🎶",
-      "movie_url": "https://vidnest.fun/movie/",
-      "tv_url": "https://vidnest.fun/tv/",
+      "name": "Server 1 - Core✨",
+      "movie_url": "https://vidcore.net/movie/",
+      "tv_url": "https://vidcore.net/tv/",
       "tv_format": "{url}{tmdb_id}/{season}/{episode}"
     },
     {
       "id": 2,
-      "name": "Server 2 - Core✨",
-      "movie_url": "https://vidcore.net/movie/",
-      "tv_url": "https://vidcore.net/tv/",
+      "name": "Server 2 - E85🎶",
+      "movie_url": "https://vidnest.fun/movie/",
+      "tv_url": "https://vidnest.fun/tv/",
       "tv_format": "{url}{tmdb_id}/{season}/{episode}"
     },
     {
