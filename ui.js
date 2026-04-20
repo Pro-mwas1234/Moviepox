@@ -203,6 +203,8 @@ class UIManager {
 
             this.searchTimeout = setTimeout(async () => {
                 const resultsGrid = document.getElementById('hubResultsGrid');
+                if (!resultsGrid) return;
+
                 resultsGrid.innerHTML = '<div class="loading-mini"></div>';
 
                 try {
@@ -231,6 +233,7 @@ class UIManager {
     setupRealtimeSearch() {
         const searchInput = document.getElementById('searchInput');
         const dropdown = document.getElementById('searchDropdown');
+        if (!searchInput || !dropdown) return;
 
         searchInput.addEventListener('input', () => {
             clearTimeout(this.searchTimeout);

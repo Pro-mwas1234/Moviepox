@@ -88,7 +88,8 @@ class App {
         const regionalMovies = await api.getRegionalMovies();
         if (regionalMovies && regionalMovies.results) {
             ui.renderSlider('regionalMovies', regionalMovies.results, 'movie');
-            document.getElementById('regionalTitle').textContent = `Top Movies in ${api.userCountry}`;
+            const regionalTitle = document.getElementById('regionalTitle');
+            if (regionalTitle) regionalTitle.textContent = `Top Movies in ${api.userCountry}`;
         }
 
         // Anime
