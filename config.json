@@ -12,9 +12,9 @@
     },
     {
       "id": 2,
-      "name": "Server 2 - mafia🐱‍👤",
-      "movie_url": "https://embed.streammafia.to/embed/movie/",
-      "tv_url": "https://embed.streammafia.to/embed/tv/",
+      "name": "Server 2 - mapple 🍁",
+      "movie_url": "https://mapple.uk/watch/movie/",
+      "tv_url": "https://maple.uk/watch/tv/",
       "tv_format": "{url}{tmdb_id}/{season}/{episode}"
     },
     {
@@ -41,14 +41,7 @@
     },
     {
       "id": 5,
-      "name": "Server 5 - autoEmbed",
-      "movie_url": "https://player.autoembed.cc/embed/movie/",
-      "tv_url": "https://player.autoembed.cc/embed/tv/",
-      "tv_format": "{url}{tmdb_id}/{season}/{episode}"
-    },
-    {
-      "id": 6,
-      "name": "Server 6 - 2Embed",
+      "name": "Server 5 - 2Embed",
       "movie_url": "https://www.2embed.stream/embed/",
       "tv_url": "https://www.2embed.stream/embed/",
       "tv_format": "{url}{tmdb_id}&s={season}&e={episode}"
