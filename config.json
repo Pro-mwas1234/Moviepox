@@ -14,7 +14,7 @@
       "id": 2,
       "name": "Server 2 - mapple 🍁",
       "movie_url": "https://mapple.uk/watch/movie/",
-      "tv_url": "https://maple.uk/watch/tv/",
+      "tv_url": "https://mapple.uk/watch/tv/",
       "tv_format": "{url}{tmdb_id}/{season}/{episode}"
     },
     {
