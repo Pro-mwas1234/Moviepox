@@ -12,7 +12,14 @@
     },
     {
       "id": 2,
-      "name": "Server 2 - E85🎶",
+      "name": "Server 2 - mafia🐱‍👤",
+      "movie_url": "https://embed.streammafia.to/embed/movie/",
+      "tv_url": "https://embed.streammafia.to/embed/tv/",
+      "tv_format": "{url}{tmdb_id}/{season}/{episode}"
+    },
+    {
+      "id": 3,
+      "name": "Server 3 - E85🎶",
       "movie_url": "https://vidnest.fun/movie/",
       "tv_url": "https://vidnest.fun/tv/",
       "tv_format": "{url}{tmdb_id}/{season}/{episode}"
