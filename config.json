@@ -6,9 +6,9 @@
     {
       "id": 1,
       "name": "Server 1 - Core✨",
-      "movie_url": "https://vidcore.net/movie/",
-      "tv_url": "https://vidcore.net/tv/",
-      "tv_format": "{url}{tmdb_id}/{season}/{episode}"
+      "movie_url": "https://cinemaos.live/movie/watch/",
+      "tv_url": "https://cinemaos.live/tv/watch/",
+      "tv_format": "{url}{tmdb_id}?season={season}&episode={episode}"
     },
     {
       "id": 2,
