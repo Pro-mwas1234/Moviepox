@@ -20,9 +20,9 @@
     {
       "id": 3,
       "name": "Server 3 - Core✨",
-      "movie_url": "https://cinemaos.live/movie/watch/",
-      "tv_url": "https://cinemaos.live/tv/watch/",
-      "tv_format": "{url}{tmdb_id}?season={season}&episode={episode}"
+      "movie_url": "https://embedmaster.link/clrx5l511lwn6mtd/movie/",
+      "tv_url": "https://embedmaster.link/clrx5l511lwn6mtd/tv/",
+      "tv_format": "{url}{tmdb_id}/{season}/{episode}"
     },
     {
       "id": 4,
