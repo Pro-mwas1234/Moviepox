@@ -3,7 +3,7 @@
   "tmdb_base_url": "https://api.themoviedb.org/3",
   "tmdb_image_base": "https://image.tmdb.org/t/p",
   "servers": [
-        {
+    {
       "id": 1,
       "name": "Server 1 - mapple 🍁",
       "movie_url": "https://apiteniessite.vercel.app/vip?id=",
@@ -12,39 +12,24 @@
     },
     {
       "id": 2,
-      "name": "Server 2 - E85🎶",
-      "movie_url": "https://player.videasy.net/movie/",
-      "tv_url": "https://player.videasy.net/tv/",
-      "tv_format": "{url}{tmdb_id}/{season}/{episode}"
-    },
-    {
-      "id": 3,
-      "name": "Server 3 - Core✨",
+      "name": "Server 2 - Core❄",
       "movie_url": "https://embedmaster.link/clrx5l511lwn6mtd/movie/",
       "tv_url": "https://embedmaster.link/clrx5l511lwn6mtd/tv/",
       "tv_format": "{url}{tmdb_id}/{season}/{episode}"
     },
     {
+      "id": 3,
+      "name": "Server 3 - Taostream⛩",
+      "movie_url": "https://toustream.movietrunk.com/tou/movies/",
+      "tv_url": "https://toustream.movietrunk.com/tou/tv/",
+      "tv_format": "{url}{tmdb_id}/{season}/{episode}"
+    },
+    {
       "id": 4,
-      "name": "Server 4 - zxcstream",
-      "movie_url": "https://www.zxcstream.xyz/embed/movie/",
-      "tv_url": "https://www.zxcstream.xyz/embed/tv/",
+      "name": "Server 4 - vidfast⚡",
+      "movie_url": "https://vidfast.pro/movie/",
+      "tv_url": "https://vidfast.pro/tv/",
       "tv_format": "{url}{tmdb_id}/{season}/{episode}"
-    },
-    
-    {
-      "id": 5,
-      "name": "Server 5 - xpass",
-      "movie_url": "https://play.xpass.top/e/movie/",
-      "tv_url": "https://play.xpass.top/e/tv/",
-      "tv_format": "{url}{tmdb_id}/{season}/{episode}"
-    },
-    {
-      "id": 6,
-      "name": "Server 6 - 2Embed",
-      "movie_url": "https://www.2embed.stream/embed/",
-      "tv_url": "https://www.2embed.stream/embed/",
-      "tv_format": "{url}{tmdb_id}&s={season}&e={episode}"
     }    
   ],
   "geolocation_api": "https://ipapi.co/json/",
