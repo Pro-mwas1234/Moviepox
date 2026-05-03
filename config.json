@@ -6,9 +6,9 @@
     {
       "id": 1,
       "name": "Server 1 - mapple 🍁",
-      "movie_url": "https://vyla.pages.dev/player?type=movie&id=",
-      "tv_url": "https://vyla.pages.dev/player?type=tv&id=",
-      "tv_format": "{url}{tmdb_id}&s={season}&e={episode}"
+      "movie_url": "https://play2.123embed.net/movie/",
+      "tv_url": "https://play2.123embed.net/tv/",
+      "tv_format": "{url}{tmdb_id}/{season}/{episode}"
     },
     {
       "id": 2,
