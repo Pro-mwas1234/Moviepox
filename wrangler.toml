@@ -1,4 +1,4 @@
-name = "moviepox-web"
+name = "moviepox"
 compatibility_date = "2024-04-01"
 pages_build_output_dir = "."
 
