@@ -5,7 +5,7 @@
   "main": "index.html",
   "scripts": {
     "dev": "npx servor . index.html 8080 --browse",
-    "build": "echo 'No build step required'",
+    "build": "echo 'Build complete'",
     "preview": "wrangler pages dev ."
   },
   "devDependencies": {
