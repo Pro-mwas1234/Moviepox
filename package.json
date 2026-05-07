@@ -1,0 +1,14 @@
+{
+  "name": "moviepox",
+  "version": "1.0.0",
+  "description": "Modern streaming web app",
+  "main": "index.html",
+  "scripts": {
+    "dev": "npx servor . index.html 8080 --browse",
+    "build": "echo 'No build step required'",
+    "preview": "wrangler pages dev ."
+  },
+  "devDependencies": {
+    "wrangler": "^3.0.0"
+  }
+}

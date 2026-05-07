@@ -1,0 +1,7 @@
+name = "moviepox"
+compatibility_date = "2024-04-01"
+pages_build_output_dir = "."
+
+[vars]
+# Add any environment variables here
+# TMDB_API_KEY = "your_key"
