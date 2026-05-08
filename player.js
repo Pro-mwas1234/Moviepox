@@ -252,6 +252,13 @@ class PlayerManager {
         }
 
         videoPlayer.src = embedURL;
+
+        if (server.id === 2) {
+            videoPlayer.setAttribute('sandbox', 'allow-scripts allow-same-origin allow-presentation');
+        } else {
+            videoPlayer.removeAttribute('sandbox');
+        }
+
         console.log('Loading:', embedURL);
 
         this.updateDownloadLink(); // Update download link when server changes
