@@ -42,8 +42,8 @@ class DownloadManager {
 
         // Build clean Vidsrc URL (NO extra spaces!)
         const url = mediaType === 'tv'
-            ? `https://dl.streammafia.to/media/tv/${itemId}?season=${season}&episode={${episode}`
-            : `https://dl.streammafia.to/media/movie/${itemId}`;
+            ? `https://02moviedownloader.site/api/download/tv/${itemId}?season=${season}&episode={${episode}`
+            : `https://02moviedownloader.site/api/download/movie/${itemId}`;
 
         // ➤ GOOGLE ANALYTICS: Track download event
         if (typeof gtag === 'function') {
