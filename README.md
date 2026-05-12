@@ -47,6 +47,7 @@ cd Moviepox
 
 # Start a local server (for example, using VSCode Live Server)
 # Or simply open index.html in your browser
+```
 
 #### CONTRIBUTORS
 [CONTRIBUTORS](./CONTRIBUTORS.md)
