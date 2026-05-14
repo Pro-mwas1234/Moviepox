@@ -42,7 +42,7 @@ class DownloadManager {
 
         // Build clean Vidsrc URL (NO extra spaces!)
         const url = mediaType === 'tv'
-            ? `https://02moviedownloader.site/api/download/tv/${itemId}?season=${season}&episode={${episode}`
+            ? `https://02moviedownloader.site/api/download/tv/${itemId}/${season}/${episode}`
             : `https://02moviedownloader.site/api/download/movie/${itemId}`;
 
         // ➤ GOOGLE ANALYTICS: Track download event
