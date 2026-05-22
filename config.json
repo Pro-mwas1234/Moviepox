@@ -5,7 +5,7 @@
   "servers": [
     {
       "id": 1,
-      "name": "Server 1 - mapple 🍁",
+      "name": "Server 1 - Vyla 🥷",
       "movie_url": "https://vyla-player.pages.dev/?type=movie&id=",
       "tv_url": "https://vyla-player.pages.dev/?type=tv&id=",
       "tv_format": "{url}{tmdb_id}&season={season}&episode={episode}"
