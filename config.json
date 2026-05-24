@@ -26,9 +26,9 @@
     },
     {
       "id": 4,
-      "name": "Server 4 - vidfast⚡",
-      "movie_url": "https://vidfast.pro/movie/",
-      "tv_url": "https://vidfast.pro/tv/",
+      "name": "Server 4 - Flax⚡",
+      "movie_url": "https://flaxmovies.xyz/embed/movie/",
+      "tv_url": "https://flaxmovies.xyz/embed/tv/",
       "tv_format": "{url}{tmdb_id}/{season}/{episode}"
     }    
   ],
