@@ -20,8 +20,8 @@
     {
       "id": 3,
       "name": "Server 3 - Vyla 🥷",
-      "movie_url": "https://vyla-player.pages.dev/?type=movie&id=",
-      "tv_url": "https://vyla-player.pages.dev/?type=tv&id=",
+      "movie_url": "https://vyla-player.vercel.app/?type=movie&id=",
+      "tv_url": "https://vyla-player.vercel.app/?type=tv&id=",
       "tv_format": "{url}{tmdb_id}&season={season}&episode={episode}"
     },
     {
