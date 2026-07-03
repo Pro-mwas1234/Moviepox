@@ -6,8 +6,8 @@
     {
       "id": 1,
       "name": "Server 1 - Taostream⛩",
-      "movie_url": "https://toustream.xyz/tou/movies/",
-      "tv_url": "https://bingr.live/watch/tv/",
+      "movie_url": "https://bingr.one/watch/movies/",
+      "tv_url": "https://bingr.one/watch/tv/",
       "tv_format": "{url}{tmdb_id}/{season}/{episode}"
     },
     {
@@ -20,8 +20,8 @@
     {
       "id": 3,
       "name": "Server 3 - Vyla 🥷",
-      "movie_url": "https://vyla-player.vercel.app/?type=movie&id=",
-      "tv_url": "https://vyla-player.vercel.app/?type=tv&id=",
+      "movie_url": "https://player.vyla.cc/?id=",
+      "tv_url": "https://player.vyla.cc/?id=",
       "tv_format": "{url}{tmdb_id}&season={season}&episode={episode}"
     },
     {
