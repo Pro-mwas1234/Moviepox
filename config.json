@@ -6,7 +6,7 @@
     {
       "id": 1,
       "name": "Server 1 - Taostream⛩",
-      "movie_url": "https://bingr.one/watch/movies/",
+      "movie_url": "https://bingr.one/watch/movie/",
       "tv_url": "https://bingr.one/watch/tv/",
       "tv_format": "{url}{tmdb_id}/{season}/{episode}"
     },
