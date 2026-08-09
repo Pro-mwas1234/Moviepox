@@ -5,10 +5,10 @@
   "servers": [
     {
       "id": 5,
-      "name": "Vidsuper⚡ (Main)",
-      "movie_url": "http://localhost:3000/movie/",
+      "name": "chickenpox 🍗",
+      "movie_url": "https://mwask-miruro.hf.space/movie/",
       "movie_format": "{url}{tmdb_id}?color=9333ea",
-      "tv_url": "http://localhost:3000/tv/",
+      "tv_url": "https://mwask-miruro.hf.space/tv/",
       "tv_format": "{url}{tmdb_id}/{season}/{episode}?episodeSelector=true&nextEpisode=true&autoplayNextEpisode=true&color=9333ea"
     },
     {
