@@ -7,6 +7,7 @@ class PlayerManager {
         this.currentType = null;
         this.currentSeason = 1;
         this.currentEpisode = 1;
+        this._openToken = 0; // increments per openPlayer() to supersede stale calls
     }
 
     initialize() {
@@ -20,6 +21,7 @@ class PlayerManager {
 
         document.getElementById('serverSelect').onchange = (e) => {
             this.currentServer = parseInt(e.target.value);
+            this.saveServer(this.currentServer);
             this.loadServer();
         };
 
@@ -42,6 +44,11 @@ class PlayerManager {
     }
 
     async openPlayer(id, mediaType) {
+        // Token guard: if another title is opened while this one is still
+        // resolving (the async pref read below), the stale call bails out
+        // instead of clobbering the newer selection.
+        const token = ++this._openToken;
+
         this.currentId = id;
         this.currentType = mediaType;
         this.currentServer = 0;
@@ -58,10 +65,18 @@ class PlayerManager {
             serverSelect.appendChild(option);
         });
 
+        // Restore the server the user chose last time — synced to their account
+        // when logged in (Firebase), else stored per-device (localStorage).
+        const savedServer = await this.getSavedServer();
+        if (token !== this._openToken) return; // superseded by a newer openPlayer
+        this.currentServer = (savedServer >= 0 && savedServer < this.config.servers.length) ? savedServer : 0;
+        serverSelect.value = this.currentServer;
+
         // Show/hide TV controls based on media type
         if (mediaType === 'tv') {
             document.getElementById('tvControls').style.display = 'flex';
             await this.setupSeasonEpisodeSelector();
+            if (token !== this._openToken) return;
         } else {
             document.getElementById('tvControls').style.display = 'none';
         }
@@ -231,6 +246,77 @@ class PlayerManager {
         }
     }
 
+    /* ── Server preference: Firebase-synced per account, localStorage fallback ── */
+
+    async getSavedServer() {
+        const local = this.getLocalServerPref();
+        const user = window.firebaseAuth?.currentUser;
+
+        // Logged in → cloud is the source of truth (kept in local storage too,
+        // so the choice still works offline / on slow connections).
+        if (user && window.firebaseDb) {
+            try {
+                const snap = await window.firebaseDb.ref(`preferences/${user.uid}/preferredServer`).once('value');
+                const cloud = snap.val();
+                if (cloud !== null && cloud !== undefined) {
+                    this.setLocalServerPref(cloud);
+                    return parseInt(cloud, 10);
+                }
+            } catch (e) {
+                console.warn('Cloud server pref read failed:', e.message);
+            }
+        }
+        return local;
+    }
+
+    async saveServer(index) {
+        this.setLocalServerPref(index);
+        const user = window.firebaseAuth?.currentUser;
+        if (user && window.firebaseDb) {
+            try {
+                await window.firebaseDb.ref(`preferences/${user.uid}/preferredServer`).set(index);
+            } catch (e) {
+                console.warn('Cloud server pref save failed:', e.message);
+            }
+        }
+    }
+
+    /**
+     * Called when a user logs in: upload their device-local preference to the
+     * cloud only if the account doesn't already have one (cloud wins otherwise).
+     */
+    async syncServerPrefOnLogin(uid) {
+        if (!window.firebaseDb) return;
+        try {
+            const snap = await window.firebaseDb.ref(`preferences/${uid}/preferredServer`).once('value');
+            if (snap.val() === null || snap.val() === undefined) {
+                const local = this.getLocalServerPref();
+                if (local >= 0) {
+                    await window.firebaseDb.ref(`preferences/${uid}/preferredServer`).set(local);
+                }
+            }
+        } catch (e) {
+            console.warn('Server pref login sync failed:', e.message);
+        }
+    }
+
+    getLocalServerPref() {
+        try {
+            const idx = parseInt(localStorage.getItem('moviepox_preferred_server'), 10);
+            return Number.isInteger(idx) ? idx : -1;
+        } catch {
+            return -1;
+        }
+    }
+
+    setLocalServerPref(index) {
+        try {
+            localStorage.setItem('moviepox_preferred_server', String(index));
+        } catch {
+            // Storage unavailable — preference just won't persist locally
+        }
+    }
+
     loadServer() {
         const server = this.config.servers[this.currentServer];
         const videoPlayer = document.getElementById('videoPlayer');
@@ -248,7 +334,11 @@ class PlayerManager {
                 embedURL = `${server.tv_url}${this.currentId}/${this.currentSeason}/${this.currentEpisode}`;
             }
         } else {
-            embedURL = server.movie_url + this.currentId;
+            embedURL = server.movie_format
+                ? server.movie_format
+                    .replace('{url}', server.movie_url)
+                    .replace('{tmdb_id}', this.currentId)
+                : server.movie_url + this.currentId;
         }
 
         videoPlayer.src = embedURL;

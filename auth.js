@@ -14,6 +14,8 @@ class AuthManager {
                 if (window.HistoryManager) window.HistoryManager.syncLocalToCloud(user.uid);
                 // Attach real-time wishlist listener + merge any local-only items
                 if (window.WishlistManager) window.WishlistManager.syncOnLogin(user.uid);
+                // Upload device-local server preference if the account has none yet
+                if (window.playerManager) window.playerManager.syncServerPrefOnLogin(user.uid);
             } else {
                 if (window.HistoryManager) window.HistoryManager.render();
                 // Detach listener & clear local cache on logout

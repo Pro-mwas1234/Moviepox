@@ -6,7 +6,7 @@
 
 ## 🚀 Key Features
 
-- 🔁 **Multi-Server Streaming** — Integrated with 7+ embeddable servers (Taostream, Core, Vyla, Flax, etc.) allowing users to switch sources instantly without page reloads.
+- 🔁 **Multi-Server Streaming** — **Vidsuper** ([`./vidsuper`](./vidsuper)) is the main internal player: a self-hosted streaming API that resolves real HLS/DASH/MP4 streams from multiple scrapers and proxies every byte through your own server (quality switching, subtitles, skip-intro). Taostream, Core, Vyla and Flax remain as fallback embed servers.
 - 🌍 **Geolocation-Aware Discovery** — Automatically detects user region to serve relevant "Top Movies in Your Area" and specific categories like **Tollywood**, **Bollywood**, **Hollywood**, and **Anime**.
 - 🔐 **Firebase Integration** — Full Authentication system (Login/Signup/Password Reset) and Realtime Database for persistent user data.
 - 💾 **Bucket List & History** — Save titles to your "Bucket List" and track "Recently Watched" content, with seamless syncing between local storage and the cloud.
@@ -21,6 +21,7 @@
 - **Core:** Vanilla JavaScript (ES6+), HTML5, CSS3
 - **Backend/Auth:** [Firebase](https://firebase.google.com/) (Authentication & Realtime Database)
 - **Metadata API:** [The Movie Database (TMDB) v3](https://developer.themoviedb.org/)
+- **Streaming API/Player:** [Vidsuper](./vidsuper) — self-hosted Next.js player + stream proxy (run on port 3000; the base URL is configured per-server in `config.json`)
 - **Hosting:** [Cloudflare Pages](https://pages.cloudflare.com/) (Wrangler)
 - **Icons:** [Lucide Icons](https://lucide.dev/)
 
