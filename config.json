@@ -13,9 +13,9 @@
     },
     {
       "id": 1,
-      "name": "Server 1 - Taostream⛩",
-      "movie_url": "https://flixer.cx/watch/movie/",
-      "tv_url": "https://flixer.cx/watch/tv/",
+      "name": "Server 1 - X tv⛩",
+      "movie_url": "https://framextv.tech/embed/",
+      "tv_url": "https://framextv.tech/embed/",
       "tv_format": "{url}{tmdb_id}/{season}/{episode}"
     },
     {
