@@ -3,17 +3,17 @@
   "tmdb_base_url": "https://api.themoviedb.org/3",
   "tmdb_image_base": "https://image.tmdb.org/t/p",
   "servers": [
-    {
+   /* {
       "id": 5,
       "name": "chickenpox 🍗",
       "movie_url": "https://mwask-miruro.hf.space/movie/",
       "movie_format": "{url}{tmdb_id}?color=9333ea",
       "tv_url": "https://mwask-miruro.hf.space/tv/",
       "tv_format": "{url}{tmdb_id}/{season}/{episode}?episodeSelector=true&nextEpisode=true&autoplayNextEpisode=true&color=9333ea"
-    },
+    },*/
     {
       "id": 1,
-      "name": "Server 1 - X tv⛩",
+      "name": "Server 1 - vidstuck tv⛩",
       "movie_url": "https://vidstuck.xyz/embed/movie/",
       "tv_url": "https://vidstuck.xyz/embed/tv/",
       "tv_format": "{url}{tmdb_id}/{season}/{episode}"
