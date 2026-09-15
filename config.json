@@ -16,7 +16,7 @@
       "movie_url": "https://flaxmovies.xyz/embed/movie/",
       "tv_url": "https://flaxmovies.xyz/embed/tv/",
       "tv_format": "{url}{tmdb_id}/{season}/{episode}"
-    },
+    }
 
   ],
   "geolocation_api": "https://ipapi.co/json/",
