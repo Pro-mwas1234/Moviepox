@@ -14,8 +14,8 @@
     {
       "id": 1,
       "name": "Server 1 - X tv⛩",
-      "movie_url": "https://framextv.tech/embed/",
-      "tv_url": "https://framextv.tech/embed/",
+      "movie_url": "https://vidstuck.xyz/embed/movie/",
+      "tv_url": "https://vidstuck.xyz/embed/tv/",
       "tv_format": "{url}{tmdb_id}/{season}/{episode}"
     },
     {
