@@ -16,21 +16,8 @@
       "movie_url": "https://flaxmovies.xyz/embed/movie/",
       "tv_url": "https://flaxmovies.xyz/embed/tv/",
       "tv_format": "{url}{tmdb_id}/{season}/{episode}"
-    }
-    {
-      "id": 3,
-      "name": "Server 2 - Core❄",
-      "movie_url": "https://embed.filmu.in/movie/",
-      "tv_url": "https://embed.filmu.in/tv/",
-      "tv_format": "{url}{tmdb_id}/{season}/{episode}"
     },
-    {
-      "id": 4,
-      "name": "Server 4 - Vyla 🥷",
-      "movie_url": "https://player.vyla.cc/?id=",
-      "tv_url": "https://player.vyla.cc/?id=",
-      "tv_format": "{url}{tmdb_id}&season={season}&episode={episode}"
-    }
+
   ],
   "geolocation_api": "https://ipapi.co/json/",
   "genre_mappings": {
